@@ -1,0 +1,281 @@
+Home Strength 
+/* ========================= CSS: Home Strength App ========================= */ :root{ --bg:#05060a; --bg2:#0b0d13; --card:#121622; --card2:#171d2b; --soft:#222a3c; --text:#f6f7fb; --muted:#9aa3b8; --muted2:#697187; --accent:#ff375f; --accent2:#ff9f0a; --green:#32d74b; --blue:#64d2ff; --purple:#bf5af2; --yellow:#ffd60a; --danger:#ff453a; --shadow:0 16px 40px rgba(0,0,0,.35); --radius:22px; --navH:82px; --tap:48px; color-scheme:dark; } [data-theme="midnight"]{ --bg:#020814;--bg2:#07111f;--card:#0d1a2b;--card2:#13243a;--soft:#1d3450;--accent:#64d2ff;--accent2:#bf5af2; } [data-theme="ember"]{ --bg:#100606;--bg2:#180d0b;--card:#211310;--card2:#2b1a15;--soft:#3d261e;--accent:#ff9f0a;--accent2:#ff375f; } *{box-sizing:border-box} html,body{height:100%} body{ margin:0; background: radial-gradient(circle at 20% -10%,rgba(255,55,95,.22),transparent 34%), radial-gradient(circle at 90% 8%,rgba(100,210,255,.16),transparent 30%), linear-gradient(180deg,var(--bg),var(--bg2)); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Arial,sans-serif; overflow:hidden; } button,input,select,textarea{font:inherit} button{ border:0; color:inherit; cursor:pointer; -webkit-tap-highlight-color:transparent; } button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,focus-visible{ outline:3px solid rgba(100,210,255,.75); outline-offset:2px; } .app{ height:100%; max-width:1100px; margin:0 auto; position:relative; display:flex; flex-direction:column; } .topbar{ padding:calc(14px + env(safe-area-inset-top)) 18px 10px; display:flex; align-items:center; justify-content:space-between; gap:12px; } .brand{ display:flex; align-items:center; gap:10px; min-width:0; } .logo{ width:42px;height:42px;border-radius:15px; display:grid;place-items:center; background:linear-gradient(135deg,var(--accent),var(--accent2)); box-shadow:0 10px 28px rgba(255,55,95,.25); } .logo svg{width:25px;height:25px} .titleBlock{min-width:0} .appTitle{font-weight:800;font-size:19px;letter-spacing:.2px;white-space:nowrap} .subTitle{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .levelPill{ display:flex;align-items:center;gap:8px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.08); padding:8px 11px;border-radius:999px; min-height:38px; box-shadow:inset 0 1px 0 rgba(255,255,255,.04); } .levelDot{width:10px;height:10px;border-radius:99px;background:var(--green);box-shadow:0 0 18px var(--green)} .levelText{font-size:12px;font-weight:700;color:#fff} .content{ flex:1; overflow:auto; padding:4px 16px calc(var(--navH) + 22px + env(safe-area-inset-bottom)); scroll-behavior:smooth; } .page{display:none;animation:fadeSlide .22s ease both} .page.active{display:block} @keyframes fadeSlide{from{opacity:.3;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}} .hero{ border-radius:30px; padding:22px; background: linear-gradient(145deg,rgba(255,55,95,.22),rgba(100,210,255,.08)), linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03)); border:1px solid rgba(255,255,255,.1); box-shadow:var(--shadow); overflow:hidden; position:relative; } .hero:after{ content:"";position:absolute;right:-38px;top:-40px;width:170px;height:170px;border-radius:50%; background:radial-gradient(circle,rgba(255,255,255,.18),transparent 62%); } .kicker{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--accent2)} h1,h2,h3,p{margin:0} h1{font-size:31px;line-height:1.02;margin-top:7px;letter-spacing:-.8px} h2{font-size:22px;margin:22px 0 12px;letter-spacing:-.35px} h3{font-size:17px;letter-spacing:-.1px} .muted{color:var(--muted)} .small{font-size:12px;color:var(--muted)} .grid{display:grid;gap:12px} .grid.two{grid-template-columns:repeat(2,minmax(0,1fr))} .grid.three{grid-template-columns:repeat(3,minmax(0,1fr))} .card{ background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035)); border:1px solid rgba(255,255,255,.09); border-radius:var(--radius); padding:16px; box-shadow:0 10px 30px rgba(0,0,0,.18); } .card.compact{padding:13px} .statValue{font-size:26px;font-weight:850;letter-spacing:-.7px} .statLabel{font-size:12px;color:var(--muted);margin-top:2px} .row{display:flex;align-items:center;justify-content:space-between;gap:12px} .stack{display:flex;flex-direction:column;gap:12px} .btn{ min-height:var(--tap); padding:13px 16px; border-radius:17px; background:var(--soft); color:#fff; font-weight:800; display:inline-flex; align-items:center; justify-content:center; gap:9px; transition:transform .15s ease,filter .15s ease,background .15s ease; } .btn:active{transform:scale(.97)} .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 10px 22px rgba(255,55,95,.22)} .btn.green{background:linear-gradient(135deg,#1fbf47,#32d74b);color:#061108} .btn.ghost{background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.08)} .btn.danger{background:rgba(255,69,58,.18);color:#ffb3ad;border:1px solid rgba(255,69,58,.25)} .btn.full{width:100%} .btn.sm{min-height:40px;padding:9px 12px;border-radius:14px;font-size:13px} .pill{ display:inline-flex;align-items:center;gap:7px; padding:7px 10px;border-radius:999px; background:rgba(255,255,255,.07); color:var(--muted); font-size:12px;font-weight:700; } .progressRingWrap{display:flex;align-items:center;gap:16px;margin-top:18px} .ring{ --p:0; width:94px;height:94px;border-radius:50%; background:conic-gradient(var(--green) calc(var(--p)1%),rgba(255,255,255,.1) 0); display:grid;place-items:center; box-shadow:inset 0 0 0 1px rgba(255,255,255,.06); } .ring:before{content:"";width:72px;height:72px;border-radius:50%;background:var(--card);position:absolute} .ring span{position:relative;font-size:21px;font-weight:900} .quote{margin-top:14px;font-size:14px;color:#d9deeb;line-height:1.35} .tabs{display:flex;gap:8px;overflow:auto;padding:3px 0 13px} .chip{ flex:0 0 auto; border-radius:999px; padding:10px 13px; min-height:42px; background:rgba(255,255,255,.06); color:var(--muted); font-weight:800; border:1px solid transparent; } .chip.active{background:rgba(255,55,95,.18);color:#fff;border-color:rgba(255,55,95,.35)} .workoutCard{display:flex;flex-direction:column;gap:10px} .meta{display:flex;gap:8px;flex-wrap:wrap} .exerciseItem{ border-radius:18px; padding:14px; background:rgba(255,255,255,.055); border:1px solid rgba(255,255,255,.07); display:flex; gap:12px; align-items:flex-start; } .check{ width:28px;height:28px;border-radius:10px; border:2px solid rgba(255,255,255,.25); display:grid;place-items:center;flex:0 0 auto;margin-top:1px; } .check.done{background:var(--green);border-color:var(--green);color:#041105} .exerciseText{flex:1;min-width:0} .setGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(54px,1fr));gap:8px;margin-top:10px} .setBtn{ min-height:40px;border-radius:13px;background:rgba(255,255,255,.07); color:var(--muted);font-weight:900;border:1px solid rgba(255,255,255,.06) } .setBtn.done{background:rgba(50,215,75,.2);color:#abffb9;border-color:rgba(50,215,75,.35)} .detail{ max-height:0;overflow:hidden;transition:max-height .25s ease; color:var(--muted);font-size:13px;line-height:1.42 } .exerciseItem.open .detail{max-height:420px;margin-top:9px} .timerPanel{ position:sticky;top:0;z-index:5; margin:-4px -2px 14px; border-radius:22px; background:rgba(8,10,16,.82); backdrop-filter:blur(18px); border:1px solid rgba(255,255,255,.08); padding:12px; } .timeBig{font-weight:900;font-size:30px;letter-spacing:-.8px} .input,select,textarea{ width:100%;background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1); color:#fff;border-radius:16px;padding:13px 14px; min-height:48px; } textarea{min-height:82px;resize:vertical} .searchBar{position:sticky;top:0;z-index:3;background:linear-gradient(180deg,var(--bg2),rgba(11,13,19,.82));padding:6px 0 10px;backdrop-filter:blur(16px)} .libraryList{display:grid;gap:10px} .exName{font-size:15px;font-weight:850} .exMuscles{font-size:12px;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .panel{ position:fixed;inset:auto 0 0 0;z-index:50; max-width:1100px;margin:0 auto; background:linear-gradient(180deg,var(--card2),var(--bg2)); border-radius:28px 28px 0 0; border:1px solid rgba(255,255,255,.1); box-shadow:0 -20px 60px rgba(0,0,0,.5); transform:translateY(110%); transition:transform .28s ease; max-height:88vh; overflow:auto; padding:18px 18px calc(22px + env(safe-area-inset-bottom)); } .panel.open{transform:translateY(0)} .backdrop{ position:fixed;inset:0;background:rgba(0,0,0,.48); opacity:0;pointer-events:none;transition:opacity .2s ease;z-index:49; } .backdrop.open{opacity:1;pointer-events:auto} .canvasCard canvas{width:100%;height:160px;display:block} .nav{ position:absolute;left:0;right:0;bottom:0; height:calc(var(--navH) + env(safe-area-inset-bottom)); padding:9px 10px calc(9px + env(safe-area-inset-bottom)); background:rgba(7,8,13,.88); backdrop-filter:blur(22px); border-top:1px solid rgba(255,255,255,.08); display:grid;grid-template-columns:repeat(5,1fr); gap:4px; z-index:20; } .navBtn{ border-radius:18px; background:transparent; color:var(--muted); min-height:62px; display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px; font-size:10.5px;font-weight:800; } .navBtn svg{width:22px;height:22px;stroke:currentColor} .navBtn.active{background:rgba(255,255,255,.08);color:#fff} .badgeRow{display:flex;gap:9px;flex-wrap:wrap} .badge{ background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:11px; display:flex;align-items:center;gap:8px; color:var(--muted); font-size:12px;font-weight:800; } .badge.earned{color:#fff;background:rgba(255,214,10,.12);border-color:rgba(255,214,10,.25)} .toast{ position:fixed;left:50%;bottom:calc(var(--navH) + 24px + env(safe-area-inset-bottom)); transform:translateX(-50%) translateY(20px); background:rgba(28,34,49,.95); border:1px solid rgba(255,255,255,.1); box-shadow:var(--shadow); color:#fff;border-radius:999px; padding:12px 16px; opacity:0;pointer-events:none; transition:.2s ease;z-index:99; max-width:92vw;text-align:center;font-weight:750;font-size:13px; } .toast.show{opacity:1;transform:translateX(-50%) translateY(0)} dialog{ border:0;border-radius:24px;background:var(--card2);color:#fff; width:min(92vw,420px);padding:0;box-shadow:var(--shadow) } dialog::backdrop{background:rgba(0,0,0,.62)} .dialogInner{padding:18px} .hidden{display:none!important} hr{border:0;border-top:1px solid rgba(255,255,255,.08);margin:14px 0} @media(min-width:760px){ .content{padding-left:26px;padding-right:26px} .dashboard{grid-template-columns:1.2fr .8fr} .wideGrid{grid-template-columns:repeat(2,minmax(0,1fr))} h1{font-size:40px} .bottomSplit{grid-template-columns:1fr 1fr} } @media(max-width:390px){ .grid.two{grid-template-columns:1fr 1fr} .statValue{font-size:22px} .navBtn{font-size:9.5px} } @media(prefers-reduced-motion:reduce){ ,:before,:after{animation:none!important;transition:none!important;scroll-behavior:auto!important} } 
+    Home Strength
+    Offline strength training
+  
+
+
+  Level 1
+
+
+
+
+<!-- Home -->
+
+  
+    Today
+    Suggested workout
+    
+    
+      0%
+      
+        Push
+        4 workouts per week, beginner to intermediate.
+        Week 1🔥 0 day streak
+      
+    
+    
+    
+      Quick Start
+      Continue Last
+    
+  
+
+  Snapshot
+  
+    1Training week
+    0Current streak
+    0Completed workouts
+    0Exercises completed
+  
+
+  Next progression
+  
+    Suggestion0 XP
+    
+  
+
+  Achievements
+  
+
+
+<!-- Workouts -->
+
+  Workouts
+  Four core sessions plus optional conditioning and mobility.
+  
+  
+
+
+<!-- Active Workout -->
+
+  
+    
+      
+        Workout timer
+        00:00
+      
+      
+        Pause
+        Reset
+      
+    
+    
+    
+      
+        Rest timer
+        00:00
+      
+      
+        Start
+        Pause
+        Reset
+      
+    
+  
+  
+    
+      Active workout
+      Workout
+      
+    
+  
+  
+    Notes
+    
+  
+  Warm-up
+  
+  Exercises
+  
+  
+    Back
+    Finish Workout
+  
+
+
+<!-- Progress -->
+
+  Progress
+  Your local training history, consistency and overload trends.
+  
+    0Streak
+    0mTotal training time
+    0Total reps
+    NoneFavourite exercise
+  
+  Charts
+  
+    Weekly completion
+    Monthly completion
+    Consistency graph
+    Volume history
+  
+  Progression history
+  
+
+
+<!-- Exercise Library -->
+
+  Exercise Library
+  
+    
+    
+  
+  
+
+
+<!-- Settings -->
+
+  Settings
+  
+    
+      Training preferences
+      
+        Rest duration
+          
+            30 seconds
+            45 seconds
+            60 seconds
+            75 seconds
+            90 seconds
+            120 seconds
+          
+        
+        Units
+          
+            Metric
+            Imperial
+          
+        
+        Theme
+          
+            Deep Black
+            Midnight Blue
+            Ember
+          
+        
+        Sound notification
+          
+            On
+            Off
+          
+        
+      
+    
+    
+      Workout reminders
+      Stored locally only. This app does not create system notifications.
+      
+        Reminder days
+          
+        
+        Reminder time
+          
+        
+      
+    
+    
+      Data
+      
+        Export JSON
+        Import JSON
+        
+        Reset all data
+        Save settings
+  Home
+
+
+  Workouts
+
+
+  Progress
+
+
+  Library
+
+
+  Settings
+
+
+
+
+
+
+
+Exercise
+Close
+ConfirmCancelConfirm 
+/* ========================= JavaScript: Data ========================= */ const STORAGE_KEY="homeStrength.v1"; const quotes=[ "Small reps, repeated often, become visible strength.", "Train the pattern, not the ego.", "Consistency is the quiet engine of progress.", "Leave one rep in reserve and come back stronger.", "Good technique compounds faster than intensity.", "A short workout done well beats a perfect workout skipped.", "Strength is built by showing up when it is ordinary.", "Controlled reps. Honest effort. Better tomorrow." ]; 
+const exercises=[ ["Wall Push-up","Warm-up Push Bodyweight","Beginner","Chest, shoulders","Triceps, core","Bodyweight","Hands on wall, body straight, lower chest towards wall.","Brace ribs down; keep elbows at 30 to 45 degrees.","Hips sagging; shrugging shoulders.","10-15","2","30s","Move feet further away.","Stand closer to wall."], ["Incline Push-up","Push Bodyweight","Beginner","Chest","Triceps, shoulders, core","Bodyweight","Hands on sturdy surface, perform a controlled push-up.","Full-body plank; chest leads; press floor away.","Flaring elbows; half reps.","8-12","3","60s","Lower the incline.","Use wall push-up."], ["Knee Push-up","Push Bodyweight","Beginner","Chest","Triceps, shoulders","Bodyweight","Push-up from knees with straight line shoulder to knee.","Squeeze glutes; slow lower; strong lockout.","Hips behind shoulders; head dipping.","8-12","3","60s","Full push-up negatives.","Use incline push-up."], ["Full Push-up","Push Bodyweight","Intermediate","Chest","Triceps, shoulders, core","Bodyweight","Classic floor push-up from plank.","Brace; lower under control; lock out without shrugging.","Sagging lower back; bouncing.","6-12","3","75s","Tempo, pause or decline push-up.","Incline or knee push-up."], ["Close Grip Push-up","Push Bodyweight","Intermediate","Triceps","Chest, shoulders","Bodyweight","Hands closer than shoulders to bias triceps.","Elbows track back; keep torso rigid.","Hands too narrow; elbows flaring.","6-10","3","75s","Diamond push-up.","Incline close grip."], ["Pike Push-up","Push Bodyweight","Intermediate","Shoulders","Triceps, upper chest","Bodyweight","Hips high, lower head between hands and press up.","Push head through at top; control range.","Collapsing neck; shallow range.","6-10","3","90s","Feet elevated pike.","Reduce range."], ["Band Chest Press","Push Band","Beginner","Chest","Triceps, shoulders","Gympro resistance band","Anchor band behind upper back and press hands forward.","Wrists straight; squeeze chest; slow return.","Letting band snap back; arching.","10-15","3","60s","Stronger band or slower tempo.","Lighter band."], ["Band Overhead Press","Push Band","Beginner","Shoulders","Triceps, core","Gympro resistance band","Stand on band, press handles overhead.","Ribs down; finish biceps near ears.","Leaning back; shrugging early.","8-12","3","75s","More tension or single-arm.","Seated band press."], ["Band Lateral Raise","Push Band","Beginner","Side delts","Traps, rotator cuff","Gympro resistance band","Stand on band and raise arms to shoulder height.","Soft elbows; lead with elbows; pause briefly.","Swinging; lifting too high.","12-18","2","45s","Slower eccentric.","Shorten range."], ["Band Triceps Pressdown","Push Band","Beginner","Triceps","Shoulders","Gympro resistance band","Anchor band high, extend elbows down.","Upper arms still; lock out smoothly.","Moving shoulders; wrists bent.","12-15","3","45s","More tension.","Step closer to anchor."], ["Chair Dip","Push Bodyweight","Intermediate","Triceps","Chest, shoulders","Bodyweight","Hands on stable chair, lower and press up.","Keep shoulders down; elbows back; small range if needed.","Dropping too deep; shoulders rolling forward.","6-10","2","75s","Feet further away.","Bent knees and small range."], ["Scapular Push-up","Warm-up Push Bodyweight","Beginner","Serratus","Shoulders, core","Bodyweight","In plank, keep elbows straight and move shoulder blades only.","Round upper back at top; ribs tucked.","Bending elbows; sagging hips.","10-15","2","30s","Full plank version.","Do on knees."], 
+["Band Row","Pull Band","Beginner","Lats, mid-back","Biceps, rear delts","Gympro resistance band","Anchor band in front, row elbows back.","Chest tall; squeeze shoulder blades; slow return.","Shrugging; leaning back.","10-15","3","60s","More band tension.","Step closer."], ["Seated Band Row","Pull Band","Beginner","Mid-back","Lats, biceps","Gympro resistance band","Sit with band around feet, pull handles to ribs.","Tall spine; pull elbows to pockets.","Rounded back; jerky pulls.","10-15","3","60s","Pause at squeeze.","Bend knees."], ["Band Lat Pulldown","Pull Band","Beginner","Lats","Biceps, lower traps","Gympro resistance band","Anchor high, pull elbows down to sides.","Drive elbows to ribs; avoid shrugging.","Pulling with wrists; arching.","10-15","3","60s","Kneeling with more tension.","Use lighter tension."], ["Band Face Pull","Pull Band","Beginner","Rear delts","Upper back, rotator cuff","Gympro resistance band","Anchor at face height, pull towards forehead.","Elbows high; rotate thumbs back.","Lower-back arch; pulling too low.","12-18","2","45s","Pause longer.","Reduce tension."], ["Band Pull-apart","Pull Band Warm-up","Beginner","Rear delts","Upper back","Gympro resistance band","Hold band at chest height and pull apart.","Shoulders down; arms long; squeeze gently.","Overarching; rushing.","12-20","2","30s","Narrower grip.","Wider grip."], ["Prone W Raise","Pull Bodyweight","Beginner","Upper back","Rear delts, lower traps","Bodyweight","Lie face down, lift elbows into W shape.","Lift with upper back; keep neck long.","Cranking neck; using momentum.","10-12","2","45s","Add pause.","Smaller lift."], ["Reverse Snow Angel","Pull Bodyweight","Beginner","Upper back","Rear delts, shoulders","Bodyweight","Lie face down and sweep arms from hips overhead.","Slow sweep; thumbs up; neck neutral.","Rushing; low-back arch.","8-12","2","45s","Longer range and pause.","Shorter range."], ["Superman Pull","Pull Bodyweight","Beginner","Back extensors","Lats, glutes","Bodyweight","Lift chest slightly and pull elbows to ribs.","Small lift; squeeze glutes; breathe.","Overextending; holding breath.","8-12","2","45s","Hold each rep.","Keep feet down."], ["Band Biceps Curl","Pull Band","Beginner","Biceps","Forearms","Gympro resistance band","Stand on band and curl handles upward.","Elbows fixed; wrists neutral; slow lower.","Swinging; elbows drifting.","10-15","3","45s","More tension or single-arm.","Less tension."], ["Band Hammer Curl","Pull Band","Beginner","Brachialis","Biceps, forearms","Gympro resistance band","Curl with palms facing each other.","Keep shoulders relaxed; control top.","Leaning back; quick lowering.","10-15","2","45s","Slower negative.","Alternate arms."], ["Towel Isometric Row","Pull Bodyweight","Beginner","Mid-back","Biceps","Towel","Hold towel around feet and pull while resisting with legs.","Tall posture; squeeze back for 5 seconds.","Yanking; rounded spine.","5 x 5s","3","45s","Longer holds.","Lighter leg resistance."], ["Band Straight-arm Pulldown","Pull Band","Beginner","Lats","Triceps, core","Gympro resistance band","Anchor high, pull straight arms to thighs.","Ribs down; arms long; squeeze lats.","Bending elbows too much; shrugging.","10-15","3","60s","More tension.","Step closer."], 
+["Box Squat to Chair","Legs Bodyweight","Beginner","Quads, glutes","Core","Bodyweight","Sit back to chair lightly, stand tall.","Knees track toes; keep chest proud.","Dropping heavily; knees cave.","8-12","3","60s","Lower target or tempo.","Higher chair."], ["Bodyweight Squat","Legs Bodyweight","Beginner","Quads, glutes","Hamstrings, core","Bodyweight","Squat to comfortable depth and stand.","Tripod foot; knees out; brace.","Heels lifting; collapsing knees.","10-15","3","60s","Pause squat or banded squat.","Chair squat."], ["Split Squat","Legs Bodyweight","Beginner","Quads, glutes","Hamstrings, calves","Bodyweight","Staggered stance, lower rear knee towards floor.","Tall torso; front foot flat.","Pushing off back foot; wobbling.","8-12/side","3","75s","Rear-foot elevated on low step.","Hold support."], ["Reverse Lunge","Legs Bodyweight","Beginner","Glutes, quads","Hamstrings, calves","Bodyweight","Step back, lower, then drive through front foot.","Soft landing; torso stacked.","Front knee caving; long unstable step.","8-10/side","3","75s","Add tempo or band resistance.","Static split squat."], ["Glute Bridge","Legs Bodyweight","Beginner","Glutes","Hamstrings, core","Bodyweight","Lie on back, drive hips up.","Posterior tilt; squeeze glutes; pause.","Overarching; pushing through toes.","12-18","3","45s","Single-leg bridge.","Shorter range."], ["Single-leg Glute Bridge","Legs Bodyweight","Intermediate","Glutes","Hamstrings, core","Bodyweight","Bridge with one leg extended.","Keep hips level; slow lower.","Rotating pelvis; arching back.","8-12/side","3","60s","Longer pause.","Two-leg bridge."], ["Band Good Morning","Legs Band","Beginner","Hamstrings, glutes","Back extensors","Gympro resistance band","Band under feet and behind neck, hinge at hips.","Push hips back; spine neutral.","Squatting instead of hinging; rounded back.","10-15","3","60s","More tension.","Bodyweight hinge."], ["Band Romanian Deadlift","Legs Band","Beginner","Hamstrings","Glutes, back","Gympro resistance band","Stand on band, hinge and stand tall.","Hips back; feel hamstrings; lock hips.","Pulling with arms; rounding.","10-15","3","75s","Slower eccentric.","Reduce range."], ["Calf Raise","Legs Bodyweight","Beginner","Calves","Feet, balance","Bodyweight","Rise onto balls of feet and lower slowly.","Full range; pause top and bottom.","Bouncing; ankles rolling.","15-25","3","30s","Single-leg calf raise.","Hold support."], ["Wall Sit","Legs Bodyweight","Beginner","Quads","Glutes, core","Bodyweight","Back against wall, knees bent, hold.","Knees over ankles; breathe steadily.","Hands on thighs; knees caving.","20-45s","3","60s","Longer hold.","Higher position."], ["Lateral Lunge","Legs Bodyweight Mobility","Intermediate","Adductors, glutes","Quads, hamstrings","Bodyweight","Step side, sit into one hip, return.","Keep other leg straight; chest up.","Twisting foot; collapsing knee.","6-10/side","2","60s","Deeper range.","Side weight shift."], ["Band Squat","Legs Band","Beginner","Quads, glutes","Core","Gympro resistance band","Stand on band, hold handles at shoulders, squat.","Push knees out; control bottom.","Losing band position; heels lifting.","8-12","3","75s","More tension or pause.","Bodyweight squat."], 
+["Dead Bug","Core Bodyweight","Beginner","Deep core","Hip flexors","Bodyweight","On back, extend opposite arm and leg while braced.","Lower back gently down; slow movement.","Arching back; rushing.","8-12/side","3","45s","Longer lever.","Heel taps."], ["Plank","Core Bodyweight","Beginner","Core","Shoulders, glutes","Bodyweight","Forearm plank with straight line head to heels.","Squeeze glutes; breathe; push floor away.","Hips high or low; holding breath.","20-45s","3","45s","Longer hold or shoulder taps.","Knee plank."], ["Side Plank","Core Bodyweight","Beginner","Obliques","Shoulders, glutes","Bodyweight","Hold side plank on forearm.","Stack ribs and hips; press floor away.","Rolling forward; shoulder shrug.","15-35s/side","3","45s","Top leg raise.","Knees bent."], ["Bird Dog","Core Bodyweight Warm-up","Beginner","Core stability","Glutes, back","Bodyweight","From all fours, reach opposite arm and leg.","Keep hips level; pause.","Rotating; arching.","8-12/side","2","30s","Longer pause.","Leg only."], ["Mountain Climber","Core Conditioning Bodyweight","Beginner","Core","Hip flexors, shoulders","Bodyweight","From plank, drive knees alternating.","Quiet feet; shoulders over wrists.","Piking hips; bouncing.","20-40s","3","45s","Faster pace.","Slow step-in."], ["Hollow Hold","Core Bodyweight","Intermediate","Abs","Hip flexors","Bodyweight","Hold low-back contact with arms and legs extended.","Ribs down; scale range to keep back down.","Back arching; neck strain.","10-30s","3","60s","Longer lever.","Tuck hold."], ["Reverse Crunch","Core Bodyweight","Beginner","Lower abs","Hip flexors","Bodyweight","Curl hips off floor with knees bent.","Slow curl; exhale; avoid swinging.","Momentum; neck tension.","10-15","3","45s","Straight-leg version.","Smaller curl."], ["Band Pallof Press","Core Band","Beginner","Anti-rotation core","Glutes, shoulders","Gympro resistance band","Anchor to side, press band straight out and resist rotation.","Brace; hips square; slow press.","Leaning; shoulders rising.","8-12/side","3","45s","Step further from anchor.","Step closer."], ["Band Wood Chop","Core Band","Beginner","Obliques","Shoulders, hips","Gympro resistance band","Anchor high or low, rotate through trunk under control.","Rotate ribs and hips together; control return.","Pulling only with arms; twisting knees.","8-12/side","2","60s","More tension.","Smaller range."], ["Bear Crawl Hold","Core Full Body Bodyweight","Intermediate","Core, shoulders","Quads, hips","Bodyweight","All fours, knees hover just above floor.","Back flat; knees low; breathe.","Hips high; shoulders collapsing.","15-30s","3","60s","Shoulder taps.","Knees down resets."], ["Inchworm","Warm-up Full Body Bodyweight","Beginner","Hamstrings, shoulders","Core, calves","Bodyweight","Walk hands out to plank and back.","Move slowly; hips controlled.","Rushing; sagging plank.","5-8","2","30s","Add push-up.","Shorter walkout."], ["Squat Thrust","Conditioning Full Body Bodyweight","Beginner","Full body","Core, shoulders, legs","Bodyweight","Step or jump feet from plank to squat stance.","Land softly; brace shoulders.","Sagging plank; hard landings.","8-15","3","60s","Burpee without push-up.","Step back one leg at a time."], 
+["March in Place","Warm-up Bodyweight","Beginner","Hips","Calves, core","Bodyweight","March with tall posture and active arms.","Light feet; stand tall.","Slouching; tiny range.","45-60s","1","0s","High knees.","Slow march."], ["Arm Circles","Warm-up Mobility Bodyweight","Beginner","Shoulders","Upper back","Bodyweight","Small to large circles forwards and backwards.","Relax neck; smooth circles.","Shrugging; rushing.","30s each","1","0s","Add band pull-aparts.","Smaller circles."], ["Hip Hinge Drill","Warm-up Mobility Bodyweight","Beginner","Hamstrings","Glutes, back","Bodyweight","Hands on hips, push hips back and stand.","Neutral spine; feel hamstrings.","Knee-dominant squat; rounding.","10-12","1","0s","Add band good morning.","Reduce range."], ["World's Greatest Stretch","Mobility Warm-up","Beginner","Hips, thoracic spine","Hamstrings, shoulders","Bodyweight","Lunge position with elbow drop and rotation.","Move gently; breathe into range.","Forcing depth; knee pain.","4-6/side","1","0s","Longer holds.","Hands elevated."], ["Cat Cow","Mobility Warm-up","Beginner","Spine","Core","Bodyweight","Move between spinal flexion and extension on all fours.","Segment spine; breathe.","Forcing neck; rushing.","8-12","1","0s","Add thread the needle.","Smaller range."], ["Child's Pose Lat Reach","Cool-down Mobility","Beginner","Lats","Lower back, hips","Bodyweight","Sit back and walk hands to each side.","Long exhale; reach fingertips.","Shoulder pinch; holding breath.","30s/side","1","0s","Deeper side reach.","Use cushion."], ["Couch-free Quad Stretch","Cool-down Mobility","Beginner","Quads","Hip flexors","Bodyweight","Side-lying quad stretch pulling heel towards glute.","Keep knees close; glute squeeze.","Overarching back; pulling hard.","30s/side","1","0s","Longer hold.","Use towel."], ["Hamstring Sweep","Warm-up Mobility","Beginner","Hamstrings","Calves","Bodyweight","Step heel forward, hinge and sweep hands down leg.","Soft knee; hinge from hips.","Rounding aggressively.","8/side","1","0s","Longer reach.","Smaller sweep."], ["Ankle Rocks","Mobility Warm-up","Beginner","Ankles","Calves","Bodyweight","Half-kneeling, drive knee gently over toes.","Heel down; slow pulses.","Heel lifting; knee collapsing.","10/side","1","0s","Further knee travel.","Move closer to wall."], ["Doorway Pec Stretch","Cool-down Mobility","Beginner","Chest","Shoulders","Bodyweight","Forearm on doorway, rotate away gently.","Keep shoulder down; light stretch.","Forcing shoulder; arching.","30s/side","1","0s","Higher/lower arm angle.","Reduce pressure."], ["Box Breathing","Cool-down Mobility","Beginner","Recovery","Diaphragm","Bodyweight","Breathe in, hold, out, hold for equal counts.","Nasal breathing; relaxed jaw.","Straining; breath too long.","2 min","1","0s","Longer exhale.","Shorter count."], ["Band Dislocates","Mobility Band Warm-up","Beginner","Shoulders","Chest, upper back","Gympro resistance band","Hold band wide and move overhead and behind if comfortable.","Wide grip; pain-free range.","Forcing range; bent wrists.","8-12","1","0s","Narrower grip.","Wider grip."], ["Band Hip Abduction","Legs Band","Beginner","Glute medius","Hips, core","Gympro resistance band","Band around legs if possible, step side to side.","Knees out; hips level.","Feet dragging; knees caving.","10-15/side","2","45s","More tension.","Bodyweight side step."], ["Step Jack","Conditioning Bodyweight","Beginner","Full body","Calves, shoulders","Bodyweight","Low-impact jumping jack stepping side to side.","Rhythmical breathing; soft steps.","Slamming feet; shallow arms.","30-60s","3","30s","Jumping jack.","Slow step jack."], ["Shadow Boxing","Conditioning Bodyweight","Beginner","Shoulders, core","Legs","Bodyweight","Light punches with footwork and rotation.","Loose shoulders; rotate hips; breathe.","Locking elbows; overreaching.","45-90s","3","45s","Add faster rounds.","Slow technical rounds."] ].map((e,i)=>({id:i+1,name:e[0],category:e[1],difficulty:e[2],primary:e[3],secondary:e[4],equipment:e[5],description:e[6],tips:e[7],mistakes:e[8],reps:e[9],sets:e[10],rest:e[11],progression:e[12],regression:e[13]})); 
+const workouts=[ {id:"push",day:"Day 1",title:"Push",duration:36,equipment:"Gympro resistance band, bodyweight",warm:["March in Place","Arm Circles","Scapular Push-up","Band Pull-apart"],main:["Incline Push-up","Band Chest Press","Band Overhead Press","Band Lateral Raise","Band Triceps Pressdown","Close Grip Push-up"]}, {id:"pull",day:"Day 2",title:"Pull",duration:38,equipment:"Gympro resistance band, towel optional",warm:["March in Place","Cat Cow","Band Pull-apart","Hip Hinge Drill"],main:["Band Row","Band Lat Pulldown","Band Face Pull","Band Straight-arm Pulldown","Band Biceps Curl","Prone W Raise"]}, {id:"legs",day:"Day 3",title:"Legs",duration:40,equipment:"Gympro resistance band, bodyweight",warm:["March in Place","Ankle Rocks","Hamstring Sweep","Hip Hinge Drill"],main:["Bodyweight Squat","Reverse Lunge","Band Romanian Deadlift","Glute Bridge","Wall Sit","Calf Raise"]}, {id:"core",day:"Day 4",title:"Core & Full Body",duration:35,equipment:"Gympro resistance band, bodyweight",warm:["Inchworm","World's Greatest Stretch","Bird Dog"],main:["Dead Bug","Plank","Side Plank","Band Pallof Press","Mountain Climber","Squat Thrust"]}, {id:"conditioning",day:"Optional Day 5",title:"Conditioning & Mobility",duration:28,equipment:"Gympro resistance band, bodyweight",warm:["March in Place","Arm Circles","Cat Cow"],main:["Step Jack","Shadow Boxing","Bear Crawl Hold","Band Hip Abduction","World's Greatest Stretch","Box Breathing"]} ]; 
+const achievements=[ {id:"first",name:"First Session",icon:"🏁",test:s=>s.history.length>=1}, {id:"four",name:"Four Done",icon:"💪",test:s=>s.history.length>=4}, {id:"streak3",name:"3-Day Streak",icon:"🔥",test:s=>s.stats.streak>=3}, {id:"ten",name:"10 Workouts",icon:"🏆",test:s=>s.history.length>=10}, {id:"reps1000",name:"1,000 Reps",icon:"⚡",test:s=>s.stats.totalReps>=1000}, {id:"level5",name:"Level 5",icon:"⭐",test:s=>getLevel(s.stats.xp)>=5} ]; 
+/* ========================= JavaScript: State ========================= */ const defaultState=()=>({ settings:{restDuration:60,theme:"default",units:"metric",sound:"on",reminderDays:"Mon, Tue, Thu, Sat",reminderTime:"07:30"}, stats:{streak:0,totalWorkouts:0,totalExercises:0,totalReps:0,totalTime:0,xp:0,lastWorkoutDate:null}, history:[], active:null, personalBests:{}, notes:{} }); let state=loadState(); let activePage="home"; let workoutInterval=null, restInterval=null; let confirmAction=null; 
+function loadState(){ try{ const raw=localStorage.getItem(STORAGE_KEY); if(!raw) return defaultState(); return Object.assign(defaultState(),JSON.parse(raw)); }catch(e){return defaultState()} } function saveState(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state))} function $(id){return document.getElementById(id)} function fmtTime(sec){sec=Math.max(0,Math.floor(sec||0));const m=String(Math.floor(sec/60)).padStart(2,"0");const s=String(sec%60).padStart(2,"0");return m+":"+s} function todayISO(){return new Date().toISOString().slice(0,10)} function daysBetween(a,b){return Math.floor((new Date(b+"T00:00:00")-new Date(a+"T00:00:00"))/86400000)} function getLevel(xp){return Math.max(1,Math.floor(Math.sqrt((xp||0)/120))+1)} function getWeek(){const start=state.history[0]?.date||todayISO();return Math.max(1,Math.floor(daysBetween(start,todayISO())/7)+1)} function byName(name){return exercises.find(e=>e.name===name)} function dailyIndex(len){const d=new Date();return Math.abs(d.getFullYear()*372+(d.getMonth()+1)*31+d.getDate())%len} function weeklyCompleted(){ const now=new Date();const day=(now.getDay()+6)%7;const monday=new Date(now);monday.setDate(now.getDate()-day);monday.setHours(0,0,0,0); return state.history.filter(h=>new Date(h.date+"T12:00:00")>=monday).length; } function suggestedWorkout(){ const count=weeklyCompleted(); return workouts[Math.min(count,3)]||workouts[0]; } function toast(msg){ const t=$("toast");t.textContent=msg;t.classList.add("show"); clearTimeout(t._to);t._to=setTimeout(()=>t.classList.remove("show"),2200); } function beep(){ if(state.settings.sound!=="on")return; try{ const ctx=new (window.AudioContext||window.webkitAudioContext)(); const o=ctx.createOscillator(),g=ctx.createGain(); o.type="sine";o.frequency.value=880;g.gain.value=.05; o.connect(g);g.connect(ctx.destination);o.start(); setTimeout(()=>{o.stop();ctx.close()},180); }catch(e){} } 
+/* ========================= JavaScript: Navigation ========================= */ document.querySelectorAll(".navBtn").forEach(btn=>btn.addEventListener("click",()=>showPage(btn.dataset.page))); function showPage(page){ activePage=page; document.querySelectorAll(".page").forEach(p=>p.classList.remove("active")); const el=$("page-"+page); if(el)el.classList.add("active"); document.querySelectorAll(".navBtn").forEach(b=>b.classList.toggle("active",b.dataset.page===page)); $("content").scrollTop=0; if(page==="progress") setTimeout(drawCharts,60); renderAll(); } 
+/* ========================= JavaScript: Rendering ========================= / function renderAll(){ document.documentElement.dataset.theme=state.settings.theme==="default"?"":state.settings.theme; $("todayLine").textContent=new Date().toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"short"}); $("levelText").textContent="Level "+getLevel(state.stats.xp); renderHome();renderWorkouts();renderLibrary();renderSettings();renderProgress(); if(state.active) renderActiveWorkout(); } function renderHome(){ const sw=suggestedWorkout(); const week=getWeek(), completed=weeklyCompleted(), pct=Math.min(100,Math.round(completed/4100)); $("suggestedName").textContent=sw.day+" - "+sw.title; $("suggestedMeta").textContent=sw.duration+" min · "+sw.equipment; $("suggestedInfo").textContent=sw.main.slice(0,3).join(" · "); $("weekPill").textContent="Week "+week; $("streakPill").textContent="🔥 "+state.stats.streak+" day streak"; $("weeklyRing").style.setProperty("--p",pct); $("weeklyPct").textContent=pct+"%"; $("dailyQuote").textContent="“"+quotes[dailyIndex(quotes.length)]+"”"; $("statWeek").textContent=week; $("statStreak").textContent=state.stats.streak; $("statWorkouts").textContent=state.history.length; $("statExercises").textContent=state.stats.totalExercises; $("xpPill").textContent=state.stats.xp+" XP"; $("progressionSuggestion").textContent=progressionText(); $("homeBadges").innerHTML=achievements.map(a=>
+${a.icon}${a.name}
+).join(""); } function progressionText(){ const last=state.history.at(-1); if(!last)return "Start with smooth, controlled reps. Keep two reps in reserve and build consistency before chasing harder variations."; if(last.effort<=6)return "Last effort was moderate. Next time increase reps by 1-2 per set or reduce rest by 10-15 seconds."; if(last.effort>=9)return "Last effort was high. Keep the same variation and reps, improve control, and avoid rushing progression."; return "Good training zone. Keep form stable and consider slightly more band tension or a harder variation on one exercise."; } function renderWorkouts(){ $("workoutTabs").innerHTML=workouts.map(w=>${w.day}).join(""); const list=$("workoutList"); list.innerHTML=workouts.map(w=>`
+
+  ${w.day}${w.title}${w.duration} min
+  ${w.equipment}
+  ${w.main.length} exercises${w.warm.length} warm-up
+  ${w.main.slice(0,4).join(", ")}${w.main.length>4?", and more.":"."}
+  Start ${w.title}
+`).join("");
+list.querySelectorAll("[data-start]").forEach(b=>b.onclick=()=>startWorkout(b.dataset.start,false)); } function exCard(ex,part){ return ` ✓ 
+  ${ex.name}${ex.primary} · ${ex.equipment}${ex.sets} x ${ex.reps}
+  ${Array.from({length:parseInt(ex.sets)||1},(_,i)=>`<button class="setBtn" data-set="${i}">Set ${i+1}</button>`).join("")}
+  
+    Description: ${ex.description}
+    Tips: ${ex.tips}
+    Common mistakes: ${ex.mistakes}
+    Progression: ${ex.progression}
+    Regression: ${ex.regression}
+; } function renderActiveWorkout(){ const a=state.active;if(!a)return; const w=workouts.find(x=>x.id===a.workoutId);if(!w)return; $("activeWorkoutTitle").textContent=w.day+" - "+w.title; $("activeMeta").textContent=w.duration+" min · "+w.equipment; $("workoutTimer").textContent=fmtTime(a.elapsed); $("restTimer").textContent=fmtTime(a.restRemaining); $("pauseWorkoutBtn").textContent=a.paused?"Resume":"Pause"; $("workoutNotes").value=a.notes||""; $("warmupContainer").innerHTML=w.warm.map(n=>exCard(byName(n),"warmup")).join(""); $("activeExercises").innerHTML=w.main.map(n=>exCard(byName(n),"main")).join(""); document.querySelectorAll("#page-active .exerciseItem").forEach(item=>{ const id=item.dataset.exid; const progress=a.exercises[id]||{sets:[],done:false}; item.querySelector(".check").classList.toggle("done",progress.done); item.querySelectorAll(".setBtn").forEach(btn=>{ btn.classList.toggle("done",!!progress.sets[btn.dataset.set]); btn.onclick=e=>{e.stopPropagation();toggleSet(id,btn.dataset.set)}; }); item.querySelector(".check").onclick=e=>{e.stopPropagation();toggleExercise(id)}; item.onclick=()=>item.classList.toggle("open"); }); } function renderLibrary(){ const filters=["All","Push","Pull","Legs","Core","Warm-up","Mobility","Band","Bodyweight"]; if(!$("filterTabs").children.length){ $("filterTabs").innerHTML=filters.map((f,i)=>${f}).join(""); $("filterTabs").onclick=e=>{ if(!e.target.dataset.filter)return; document.querySelectorAll("#filterTabs .chip").forEach(c=>c.classList.remove("active")); e.target.classList.add("active");renderLibraryList(); }; $("exerciseSearch").addEventListener("input",renderLibraryList); } renderLibraryList(); } function renderLibraryList(){ const q=$("exerciseSearch").value.toLowerCase(); const f=document.querySelector("#filterTabs .chip.active")?.dataset.filter||"All"; const rows=exercises.filter(e=>{ const hay=(e.name+" "+e.category+" "+e.primary+" "+e.secondary+" "+e.equipment).toLowerCase(); return (!q||hay.includes(q))&&(f==="All"||e.category.includes(f)||e.equipment.includes(f)); }); $("libraryList").innerHTML=rows.map(e=> 
+  ${e.difficulty[0]}
+  ${e.name}${e.primary} · ${e.category}${e.equipment.includes("band")||e.equipment.includes("Gympro")?"Band":"Body"}
+`).join("");
+$("libraryList").querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>openExercise(+b.dataset.open)); } function renderSettings(){ $("restDuration").value=state.settings.restDuration; $("units").value=state.settings.units; $("themeSelect").value=state.settings.theme; $("soundSelect").value=state.settings.sound; $("reminderDays").value=state.settings.reminderDays; $("reminderTime").value=state.settings.reminderTime; } function renderProgress(){ $("pStreak").textContent=state.stats.streak; $("pTime").textContent=Math.round(state.stats.totalTime/60)+"m"; $("pReps").textContent=state.stats.totalReps; $("pFavourite").textContent=favouriteExercise(); const hist=state.history.slice(-12).reverse(); $("historyList").innerHTML=hist.length?hist.map(h=>` 
+  ${h.title}${new Date(h.date+"T12:00:00").toLocaleDateString("en-GB",{day:"numeric",month:"short"})}
+  ${Math.round(h.duration/60)} min · ${h.exercisesCompleted} exercises · ${h.totalReps} reps · Effort ${h.effort}/10
+  ${h.suggestion}
+`).join(""):`No completed workouts yet. Start a session to build your history.`;
+} 
+/* ========================= JavaScript: Workout Tracking and Timers ========================= / function startWorkout(id,continueExisting){ if(continueExisting&&state.active){showPage("active");startWorkoutClock();return} const w=workouts.find(x=>x.id===id)||suggestedWorkout(); const all=[...w.warm,...w.main].map(byName); state.active={workoutId:w.id,startedAt:Date.now(),elapsed:0,paused:false,restRemaining:state.settings.restDuration,restRunning:false,notes:"",exercises:{}}; all.forEach(e=>state.active.exercises[e.id]={sets:[],done:false}); saveState();showPage("active");startWorkoutClock();toast("Workout started"); } function startWorkoutClock(){ clearInterval(workoutInterval); workoutInterval=setInterval(()=>{ if(state.active&&!state.active.paused){state.active.elapsed++;$("workoutTimer").textContent=fmtTime(state.active.elapsed);saveState()} },1000); } function toggleSet(id,setIndex){ const p=state.active.exercises[id]||(state.active.exercises[id]={sets:[],done:false}); p.sets[setIndex]=!p.sets[setIndex]; const ex=exercises.find(e=>e.id==id); p.done=p.sets.filter(Boolean).length>=(parseInt(ex.sets)||1); state.active.restRemaining=state.settings.restDuration; saveState();renderActiveWorkout(); } function toggleExercise(id){ const p=state.active.exercises[id]||(state.active.exercises[id]={sets:[],done:false}); p.done=!p.done; const ex=exercises.find(e=>e.id==id), n=parseInt(ex.sets)||1; p.sets=Array.from({length:n},()=>p.done); saveState();renderActiveWorkout(); } $("pauseWorkoutBtn").onclick=()=>{if(!state.active)return;state.active.paused=!state.active.paused;saveState();renderActiveWorkout();toast(state.active.paused?"Workout paused":"Workout resumed")}; $("resetWorkoutBtn").onclick=()=>askConfirm("Reset workout","This clears the current workout progress.",()=>{state.active=null;saveState();showPage("workouts");toast("Workout reset")}); $("backToWorkoutsBtn").onclick=()=>showPage("workouts"); $("workoutNotes").addEventListener("input",()=>{if(state.active){state.active.notes=$("workoutNotes").value;saveState()}}); $("restStartBtn").onclick=()=>startRest(); $("restPauseBtn").onclick=()=>{if(state.active){state.active.restRunning=false;saveState()}}; $("restResetBtn").onclick=()=>{if(state.active){state.active.restRemaining=state.settings.restDuration;state.active.restRunning=false;saveState();renderActiveWorkout()}}; function startRest(){ if(!state.active)return; state.active.restRunning=true; clearInterval(restInterval); restInterval=setInterval(()=>{ if(!state.active||!state.active.restRunning)return; state.active.restRemaining--; $("restTimer").textContent=fmtTime(state.active.restRemaining); if(state.active.restRemaining<=0){state.active.restRunning=false;clearInterval(restInterval);beep();toast("Rest complete")} saveState(); },1000); } $("finishWorkoutBtn").onclick=()=>finishWorkout(); function finishWorkout(){ if(!state.active)return; const a=state.active,w=workouts.find(x=>x.id===a.workoutId); const ids=Object.keys(a.exercises); const doneIds=ids.filter(id=>a.exercises[id].done); const totalReps=doneIds.reduce((sum,id)=>{ const ex=exercises.find(e=>e.id==id), reps=parseInt(ex.reps)||10, sets=parseInt(ex.sets)||1; return sum+repssets; },0); const effort=Math.min(10,Math.max(4,Math.round(5+(doneIds.length/ids.length)3+(a.elapsed/(w.duration60))2))); const date=todayISO(); updateStreak(date); const record={date,title:w.day+" - "+w.title,workoutId:w.id,duration:a.elapsed,exercisesCompleted:doneIds.length,totalReps,effort,notes:a.notes||"",suggestion:completionSuggestion(effort)}; state.history.push(record); state.stats.totalWorkouts=state.history.length; state.stats.totalExercises+=doneIds.length; state.stats.totalReps+=totalReps; state.stats.totalTime+=a.elapsed; state.stats.xp+=50+doneIds.length8+Math.round(a.elapsed/120); doneIds.forEach(id=>{ const name=exercises.find(e=>e.id==id).name; state.personalBests[name]=(state.personalBests[name]||0)+1; }); state.active=null; saveState(); clearInterval(workoutInterval);clearInterval(restInterval); showPage("progress");toast("Workout complete. +" + (50+doneIds.length*8) + " XP"); } function updateStreak(date){ const last=state.stats.lastWorkoutDate; if(!last) state.stats.streak=1; else{ const gap=daysBetween(last,date); if(gap===1)state.stats.streak++; else if(gap>1)state.stats.streak=1; } state.stats.lastWorkoutDate=date; } function completionSuggestion(effort){ if(effort<=6)return "Increase reps next time or reduce rest slightly."; if(effort>=9)return "Repeat the same workload and aim for cleaner form."; return "Move one exercise to a harder variation or add band tension."; } $("quickStartBtn").onclick=()=>startWorkout(suggestedWorkout().id,false); $("continueBtn").onclick=()=>state.active?startWorkout(null,true):(toast("No workout in progress"),startWorkout(suggestedWorkout().id,false)); 
+/* ========================= JavaScript: Exercise Detail Panel ========================= */ function openExercise(id){ const e=exercises.find(x=>x.id===id);if(!e)return; $("panelCategory").textContent=e.category; $("panelTitle").textContent=e.name; $("panelBody").innerHTML=` 
+  ${e.sets}Sets
+  ${e.reps}Reps or time
+
+
+  Difficulty: ${e.difficulty}
+  Primary muscles: ${e.primary}
+  Secondary muscles: ${e.secondary}
+  Equipment: ${e.equipment}
+  
+  Description: ${e.description}
+  Technique tips: ${e.tips}
+  Common mistakes: ${e.mistakes}
+  Rest period: ${e.rest}
+  Progression: ${e.progression}
+  Regression: ${e.regression}
+`;
+$("backdrop").classList.add("open");$("exercisePanel").classList.add("open"); } $("closePanel").onclick=closePanel;$("backdrop").onclick=closePanel; function closePanel(){$("backdrop").classList.remove("open");$("exercisePanel").classList.remove("open")} 
+/* ========================= JavaScript: Progress Charts ========================= / function favouriteExercise(){ const entries=Object.entries(state.personalBests); if(!entries.length)return "None"; return entries.sort((a,b)=>b[1]-a[1])[0][0]; } function drawCharts(){ drawBar("weeklyChart",lastWeeks(6),4,"#32d74b"); drawBar("monthlyChart",lastMonths(6),18,"#64d2ff"); drawLine("consistencyChart",lastDays(21),"#ffd60a"); drawBar("volumeChart",state.history.slice(-8).map((h,i)=>({label:String(i+1),value:h.totalReps})),Math.max(100,...state.history.map(h=>h.totalReps)),"#bf5af2"); } function lastWeeks(n){ const arr=[]; for(let i=n-1;i>=0;i--){ const d=new Date();d.setDate(d.getDate()-i7); const start=new Date(d);start.setDate(d.getDate()-((d.getDay()+6)%7));start.setHours(0,0,0,0); const end=new Date(start);end.setDate(start.getDate()+7); const value=state.history.filter(h=>{const x=new Date(h.date+"T12:00:00");return x>=start&&x=0;i--){ const d=new Date();d.setMonth(d.getMonth()-i); const m=d.getMonth(),y=d.getFullYear(); const value=state.history.filter(h=>{const x=new Date(h.date+"T12:00:00");return x.getMonth()===m&&x.getFullYear()===y}).length; arr.push({label:d.toLocaleDateString("en-GB",{month:"short"}),value}); } return arr; } function lastDays(n){ const arr=[]; for(let i=n-1;i>=0;i--){ const d=new Date();d.setDate(d.getDate()-i); const iso=d.toISOString().slice(0,10); arr.push({label:String(d.getDate()),value:state.history.some(h=>h.date===iso)?1:0}); } return arr; } function prepCanvas(id){ const c=$(id),ctx=c.getContext("2d"),r=window.devicePixelRatio||1; const w=c.clientWidth||640,h=c.clientHeight||300; c.width=wr;c.height=hr;ctx.setTransform(r,0,0,r,0,0); ctx.clearRect(0,0,w,h); return {c,ctx,w,h}; } function drawBar(id,data,max,col){ const {ctx,w,h}=prepCanvas(id),pad=30,gap=8,bw=(w-pad2-gap(data.length-1))/Math.max(1,data.length); ctx.fillStyle="rgba(255,255,255,.08)";ctx.fillRect(pad,h-pad,w-pad2,1); data.forEach((d,i)=>{ const bh=(h-pad2)(d.value/Math.max(max,1)),x=pad+i(bw+gap),y=h-pad-bh; ctx.fillStyle=col;roundRect(ctx,x,y,bw,bh,8);ctx.fill(); ctx.fillStyle="#9aa3b8";ctx.font="12px -apple-system";ctx.textAlign="center";ctx.fillText(d.label,x+bw/2,h-10); ctx.fillStyle="#fff";ctx.fillText(d.value,x+bw/2,Math.max(15,y-6)); }); } function drawLine(id,data,col){ const {ctx,w,h}=prepCanvas(id),pad=28,step=(w-pad2)/(data.length-1||1); ctx.strokeStyle="rgba(255,255,255,.08)";ctx.beginPath();ctx.moveTo(pad,h-pad);ctx.lineTo(w-pad,h-pad);ctx.stroke(); ctx.strokeStyle=col;ctx.lineWidth=3;ctx.beginPath(); data.forEach((d,i)=>{const x=pad+istep,y=h-pad-(h-pad2)d.value;if(i)ctx.lineTo(x,y);else ctx.moveTo(x,y)}); ctx.stroke(); data.forEach((d,i)=>{const x=pad+istep,y=h-pad-(h-pad2)d.value;ctx.fillStyle=d.value?col:"rgba(255,255,255,.18)";ctx.beginPath();ctx.arc(x,y,5,0,Math.PI2);ctx.fill()}); } function roundRect(ctx,x,y,w,h,r){ if(h<0){y+=h;h=Math.abs(h)} r=Math.min(r,w/2,h/2); ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath(); } 
+/* ========================= JavaScript: Settings, Import, Export ========================= */ $("saveSettingsBtn").onclick=saveSettings; ["restDuration","units","themeSelect","soundSelect","reminderDays","reminderTime"].forEach(id=>$(id).addEventListener("change",saveSettings)); function saveSettings(){ state.settings.restDuration=+$("restDuration").value; state.settings.units=$("units").value; state.settings.theme=$("themeSelect").value; state.settings.sound=$("soundSelect").value; state.settings.reminderDays=$("reminderDays").value; state.settings.reminderTime=$("reminderTime").value; if(state.active&&!state.active.restRunning)state.active.restRemaining=state.settings.restDuration; saveState();renderAll();toast("Settings saved"); } $("exportBtn").onclick=()=>{ const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"}); const a=document.createElement("a"); a.href=URL.createObjectURL(blob);a.download="HomeStrength-data.json";a.click(); URL.revokeObjectURL(a.href);toast("Export created"); }; $("importBtn").onclick=()=>$("importFile").click(); $("importFile").onchange=e=>{ const file=e.target.files[0];if(!file)return; const reader=new FileReader(); reader.onload=()=>{try{state=Object.assign(defaultState(),JSON.parse(reader.result));saveState();renderAll();toast("Data imported")}catch(err){toast("Import failed: invalid JSON")}}; reader.readAsText(file); }; $("resetDataBtn").onclick=()=>askConfirm("Reset all data","This permanently removes local progress, history, settings and active workouts.",()=>{localStorage.removeItem(STORAGE_KEY);state=defaultState();saveState();renderAll();showPage("home");toast("All data reset")}); 
+/* ========================= JavaScript: Dialogs and Events ========================= */ function askConfirm(title,text,action){ confirmAction=action;$("confirmTitle").textContent=title;$("confirmText").textContent=text;$("confirmDialog").showModal(); } $("confirmCancel").onclick=()=>$("confirmDialog").close(); $("confirmOk").onclick=()=>{const fn=confirmAction;$("confirmDialog").close();confirmAction=null;if(fn)fn()}; window.addEventListener("keydown",e=>{ if(e.key==="Escape")closePanel(); if(e.key==="r"&&activePage==="active")startRest(); }); window.addEventListener("resize",()=>{if(activePage==="progress")drawCharts()}); 
+/* ========================= JavaScript: Initialise ========================= */ renderAll(); if(state.active)startWorkoutClock();
