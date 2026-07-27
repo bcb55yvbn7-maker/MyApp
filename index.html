@@ -456,10 +456,15 @@
       .detail {
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.25s ease;
+        transition: max-height .25s ease;
         color: var(--muted);
         font-size: 13px;
         line-height: 1.42;
+
+        width: 100%;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        white-space: normal;
       }
       .exerciseItem.open .detail {
         max-height: 520px;
