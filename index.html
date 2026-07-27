@@ -965,32 +965,50 @@
               </div>
             </div>
             <div class="card">
+
                 <h3>About Home Strength</h3>
 
-                <div class="stack" style="margin-top: 12px">
+                <div class="stack" style="margin-top:16px">
+
                     <div class="row">
-                    <span class="muted">Version</span>
-                    <strong id="appVersion"></strong>
+                        <span class="muted">Version</span>
+                        <strong id="appVersion"></strong>
                     </div>
 
                     <div class="row">
-                    <span class="muted">Build date</span>
-                    <strong id="appBuildDate"></strong>
+                        <span class="muted">Build</span>
+                        <strong id="appBuildDate"></strong>
                     </div>
 
                     <div class="row">
-                    <span class="muted">Created by</span>
-                    <strong id="appCreator"></strong>
+                        <span class="muted">Created by</span>
+                        <strong id="appCreator"></strong>
                     </div>
 
-                    <hr />
+                    <div class="row">
+                        <span class="muted">Powered by</span>
+                        <strong id="appPoweredBy"></strong>
+                    </div>
 
-                    <p class="small muted" style="text-align: center">
-                    Home Strength<br />
-                    Offline Strength Training App
-                    </p>
+                    <hr>
+
+                    <p
+                        id="appDescription"
+                        class="small muted"
+                        style="text-align:center;margin:0;"
+                    ></p>
+
+                    <button
+                        class="btn secondary"
+                        style="margin-top:12px"
+                        onclick="showChangelog()"
+                    >
+                        What's New
+                    </button>
+
                 </div>
-                </div>
+
+            </div>
           </div>
         </section>
       </main>
@@ -1072,10 +1090,18 @@
     <script>
       const STORAGE_KEY = "homeStrength.v1";
       const APP_INFO = {
+        name: "Home Strength",
         version: "0.2.0",
         buildDate: "27 July 2026",
         creator: "Mark",
+        poweredBy: "HTML • CSS • JavaScript",
+        description: "Personal offline calisthenics training companion."
       };
+      const CHANGELOG = [
+        "Added About section",
+        "Introduced app versioning",
+        "Added build information"
+      ];
       const quotes = [
         "Small reps, repeated often, become visible strength.",
         "Train the pattern, not the ego.",
@@ -2563,6 +2589,8 @@
         $("appVersion").textContent = APP_INFO.version;
         $("appBuildDate").textContent = APP_INFO.buildDate;
         $("appCreator").textContent = APP_INFO.creator;
+        $("appPoweredBy").textContent = APP_INFO.poweredBy;
+        $("appDescription").textContent = APP_INFO.description;
       }
       function favouriteExercise() {
         const e = Object.entries(state.personalBests);
@@ -2618,6 +2646,12 @@
             saveState();
           }
         }, 1000);
+      }
+      function showChangelog() {
+        alert(
+            `Home Strength ${APP_INFO.version}\n\n` +
+            CHANGELOG.map(item => `• ${item}`).join("\n")
+        );
       }
       function toggleSet(id, i) {
         const p =
