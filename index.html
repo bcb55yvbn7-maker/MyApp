@@ -268,10 +268,19 @@
       }
       .row {
         display: flex;
-        align-items: center;
         justify-content: space-between;
-        gap: 12px;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
       }
+      .exName,
+        .exMuscles {
+        overflow-wrap: anywhere;
+     }
+      .row > div {
+        min-width: 0;
+        flex: 1;
+    }
       .stack {
         display: flex;
         flex-direction: column;
@@ -408,11 +417,16 @@
       .exerciseItem {
         border-radius: 18px;
         padding: 14px;
-        background: rgba(255, 255, 255, 0.055);
-        border: 1px solid rgba(255, 255, 255, 0.07);
+        background: rgba(255,255,255,.055);
+        border: 1px solid rgba(255,255,255,.07);
+
         display: flex;
+        align-items: center;
         gap: 12px;
-        align-items: flex-start;
+
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
       }
       .check {
         width: 28px;
@@ -1111,7 +1125,7 @@
       const STORAGE_KEY = "homeStrength.v1";
       const APP_INFO = {
         name: "Home Strength",
-        version: "0.2.2",
+        version: "0.2.3",
         buildDate: "27 July 2026",
         creator: "Mark Taylor",
         poweredBy: "HTML • CSS • JavaScript",
@@ -1121,7 +1135,8 @@
         "Added About section",
         "Introduced app versioning",
         "Added build information",
-        "Added update function"
+        "Added update function",
+        "Fixed horizontal scrolling on small screens"
       ];
       const quotes = [
         "Small reps, repeated often, become visible strength.",
