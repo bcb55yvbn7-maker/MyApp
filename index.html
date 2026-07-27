@@ -972,9 +972,6 @@
                   Reset all data</button
                 ><button class="btn ghost full" id="saveSettingsBtn">
                   Save settings
-                </button
-                ><button class="btn secondary" onclick="refreshApp()">
-                 Check for Updates
                 </button>
                 <div id="updateStatus"></div>
               </div>
@@ -1020,7 +1017,15 @@
                     >
                         What's New
                     </button>
+                    <button
+                        class="btn secondary"
+                        style="margin-top:12px"
+                        onclick="refreshApp()"
+                    >
+                        Check for Updates
+                    </button>
 
+<div id="updateStatus"></div>
                 </div>
 
             </div>
@@ -1106,7 +1111,7 @@
       const STORAGE_KEY = "homeStrength.v1";
       const APP_INFO = {
         name: "Home Strength",
-        version: "0.2.1",
+        version: "0.2.2",
         buildDate: "27 July 2026",
         creator: "Mark Taylor",
         poweredBy: "HTML • CSS • JavaScript",
