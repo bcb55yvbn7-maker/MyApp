@@ -964,6 +964,33 @@
                 </button>
               </div>
             </div>
+            <div class="card">
+                <h3>About Home Strength</h3>
+
+                <div class="stack" style="margin-top: 12px">
+                    <div class="row">
+                    <span class="muted">Version</span>
+                    <strong id="appVersion"></strong>
+                    </div>
+
+                    <div class="row">
+                    <span class="muted">Build date</span>
+                    <strong id="appBuildDate"></strong>
+                    </div>
+
+                    <div class="row">
+                    <span class="muted">Created by</span>
+                    <strong id="appCreator"></strong>
+                    </div>
+
+                    <hr />
+
+                    <p class="small muted" style="text-align: center">
+                    Home Strength<br />
+                    Offline Strength Training App
+                    </p>
+                </div>
+                </div>
           </div>
         </section>
       </main>
@@ -1044,6 +1071,11 @@
     </dialog>
     <script>
       const STORAGE_KEY = "homeStrength.v1";
+      const APP_INFO = {
+        version: "0.2.0",
+        buildDate: "27 July 2026",
+        creator: "Mark",
+      };
       const quotes = [
         "Small reps, repeated often, become visible strength.",
         "Train the pattern, not the ego.",
@@ -2527,6 +2559,10 @@
         $("soundSelect").value = state.settings.sound;
         $("reminderDays").value = state.settings.reminderDays;
         $("reminderTime").value = state.settings.reminderTime;
+
+        $("appVersion").textContent = APP_INFO.version;
+        $("appBuildDate").textContent = APP_INFO.buildDate;
+        $("appCreator").textContent = APP_INFO.creator;
       }
       function favouriteExercise() {
         const e = Object.entries(state.personalBests);
