@@ -693,6 +693,12 @@
           scroll-behavior: auto !important;
         }
       }
+      #updateStatus {
+        margin-top: 8px;
+        font-size: 14px;
+        text-align: center;
+        opacity: 0.7;
+    }
     </style>
   </head>
   <body>
@@ -970,6 +976,7 @@
                 ><button class="btn secondary" onclick="refreshApp()">
                  Check for Updates
                 </button>
+                <div id="updateStatus"></div>
               </div>
             </div>
             <div class="card">
@@ -2315,11 +2322,41 @@
         return document.getElementById(id);
       }
       async function refreshApp() {
-        if ("caches" in window) {
-        const names = await caches.keys();
-        await Promise.all(
-            names.map(name => caches.delete(name))
-        );
+        const status = document.getElementById("updateStatus");
+        const setStatus = (text) => {
+            if (status) status.textContent = text;
+        };
+        setStatus("Checking for updates...");
+        try {
+            if (!("serviceWorker" in navigator)) {
+            setStatus("Updates not supported");
+            return;
+            }
+            const registration = await navigator.serviceWorker.getRegistration();
+            if (!registration) {
+            setStatus("No update service installed");
+            return;
+            }
+            setStatus("Downloading latest version...");
+            await registration.update();
+            if (registration.waiting) {
+            setStatus("Installing update...");
+            registration.waiting.postMessage({
+                action: "skipWaiting"
+            });
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+            } else {
+            setStatus("App is already up to date");
+            setTimeout(() => {
+                setStatus("");
+            }, 3000);
+            }
+        } catch (err) {
+            console.error(err);
+            setStatus("Update failed");
+        }
       }
 
     location.href =
@@ -3069,6 +3106,23 @@
       });
       renderAll();
       if (state.active) startClock();
+      if ("serviceWorker" in navigator) {
+
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register(
+      "service-worker.js"
+    )
+    .then(() => {
+      console.log("Service worker active");
+    })
+    .catch(err => {
+      console.error(
+        "Service worker error:",
+        err
+      );
+    });
+  });
+  }
     </script>
   </body>
 </html>
