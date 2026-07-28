@@ -55,12 +55,12 @@
         width: 100%;
         height: 100%;
         min-height: 100%;
+        margin: 0;
         background: var(--bg);
+        overflow: hidden;
         overscroll-behavior: none;
       }
       body {
-        position: fixed;
-        inset: 0;
         width: 100%;
         height: 100%;
         min-height: 100%;
@@ -73,6 +73,13 @@
           sans-serif;
         overscroll-behavior: none;
         -webkit-text-size-adjust: 100%;
+      }
+      @supports (height: 100lvh) {
+        html,
+        body {
+          height: 100lvh;
+          min-height: 100lvh;
+        }
       }
 body::before {
         content: "";
@@ -113,7 +120,8 @@ body::before {
         outline-offset: 2px;
       }
       .app {
-        position: relative;
+        position: fixed;
+        inset: 0;
         z-index: 1;
         width: 100%;
         height: 100%;
@@ -137,6 +145,11 @@ body::before {
             transparent 30%
           ),
           linear-gradient(180deg, var(--bg), var(--bg2));
+      }
+      @supports (height: 100lvh) {
+        .app {
+          height: 100lvh;
+        }
       }
       .topbar {
         position: relative;
@@ -641,12 +654,12 @@ body::before {
         display: block;
       }
       .nav {
-        position: fixed;
-        left: 50%;
+        position: absolute;
+        left: 0;
+        right: 0;
         bottom: 0;
-        width: min(100%, 1100px);
-        height: var(--navH);
-        transform: translateX(-50%);
+        width: 100%;
+        height: 56px;
         padding: 3px 10px 2px;
         margin: 0;
         box-sizing: border-box;
@@ -663,7 +676,7 @@ body::before {
       .navBtn {
         height: 50px;
         min-height: 0;
-        padding: 2px;
+        padding: 3px 2px;
         margin: 0;
         border-radius: 16px;
         background: transparent;
@@ -711,7 +724,7 @@ body::before {
       .toast {
         position: fixed;
         left: 50%;
-        bottom: calc(var(--navH) + 24px);
+        bottom: calc(var(--navH) + 18px);
         transform: translateX(-50%) translateY(20px);
         background: rgba(28, 34, 49, 0.95);
         border: 1px solid rgba(255, 255, 255, 0.1);
