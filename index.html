@@ -2,10 +2,7 @@
 <html lang="en-GB">
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1,viewport-fit=cover"
-    />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
     <meta id="themeColorMeta" name="theme-color" content="#05060a" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -119,6 +116,33 @@ body::before {
         outline: 3px solid rgba(100, 210, 255, 0.75);
         outline-offset: 2px;
       }
+
+      /* Native app touch behaviour */
+      body,
+      button,
+      .card,
+      .nav,
+      .navBtn {
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+      }
+
+      input,
+      textarea,
+      select,
+      [contenteditable="true"] {
+        -webkit-user-select: text;
+        user-select: text;
+        -webkit-touch-callout: default;
+      }
+
+      button,
+      .navBtn,
+      [role="button"] {
+        touch-action: manipulation;
+      }
+
       .app {
         position: fixed;
         inset: 0;
@@ -1241,10 +1265,34 @@ body::before {
       </div>
     </dialog>
     <script>
+
+      // Prevent iOS pinch and gesture zooming in the installed PWA.
+      ["gesturestart", "gesturechange", "gestureend"].forEach((eventName) => {
+        document.addEventListener(
+          eventName,
+          (event) => event.preventDefault(),
+          { passive: false },
+        );
+      });
+
+      // Prevent accidental double-tap zoom while preserving ordinary taps.
+      let lastTouchEnd = 0;
+      document.addEventListener(
+        "touchend",
+        (event) => {
+          const now = Date.now();
+          if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+          }
+          lastTouchEnd = now;
+        },
+        { passive: false },
+      );
+
       const STORAGE_KEY = "homeStrength.v1";
       const APP_INFO = {
         name: "Home Strength",
-        version: "0.2.5",
+        version: "0.2.6",
         buildDate: "28 July 2026",
         creator: "Mark Taylor",
         poweredBy: "HTML • CSS • JavaScript",
