@@ -1174,7 +1174,6 @@ body::before {
                 </div>
               </div>
             </div>
-            <p class="quote" id="dailyQuote"></p>
             <div class="grid two" style="margin-top: 16px">
               <button class="btn primary full" id="quickStartBtn">
                 Quick Start</button
@@ -3007,12 +3006,6 @@ body::before {
           "🔥 " + state.stats.streak + " day streak";
         $("weeklyRing").style.setProperty("--p", pct);
         $("weeklyPct").textContent = pct + "%";
-        const d = new Date(),
-          idx =
-            Math.abs(
-              d.getFullYear() * 372 + (d.getMonth() + 1) * 31 + d.getDate(),
-            ) % quotes.length;
-        $("dailyQuote").textContent = "“" + quotes[idx] + "”";
         $("statWeek").textContent = week;
         $("statStreak").textContent = state.stats.streak;
         $("statWorkouts").textContent = state.history.length;
