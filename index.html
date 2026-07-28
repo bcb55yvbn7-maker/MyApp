@@ -26,7 +26,8 @@
         --purple: #bf5af2;
         --yellow: #ffd60a;
         --danger: #ff453a;
-        --navH: 64px;
+        --navH: 58px;
+        --safeBottom: env(safe-area-inset-bottom, 0px);
         --tap: 48px;
         color-scheme: dark;
       }
@@ -74,7 +75,7 @@
         overscroll-behavior: none;
         -webkit-text-size-adjust: 100%;
       }
-      body::before {
+body::before {
         content: "";
         position: fixed;
         inset: 0;
@@ -211,13 +212,7 @@
         min-height: 0;
         overflow-x: hidden;
         overflow-y: auto;
-        padding:
-          4px
-          16px
-          calc(
-            var(--navH) + 16px +
-              max(6px, calc(env(safe-area-inset-bottom) - 20px))
-          );
+        padding: 4px 16px calc(var(--navH) + 18px);
         scroll-behavior: smooth;
         overscroll-behavior-y: contain;
         -webkit-overflow-scrolling: touch;
@@ -649,36 +644,38 @@
       .nav {
         position: fixed;
         left: 50%;
-        right: auto;
-        bottom: 0;
+        bottom: calc(-1 * var(--safeBottom));
         width: min(100%, 1100px);
+        height: calc(var(--navH) + var(--safeBottom));
         transform: translateX(-50%);
-        min-width: 0;
+        padding: 4px 10px var(--safeBottom);
+        margin: 0;
         box-sizing: border-box;
-        padding:
-          5px
-          10px
-          max(6px, calc(env(safe-area-inset-bottom) - 20px));
-        background: rgba(7, 8, 13, 0.88);
+        background: rgba(7, 8, 13, 0.94);
         backdrop-filter: blur(22px);
         -webkit-backdrop-filter: blur(22px);
         border-top: 1px solid rgba(255, 255, 255, 0.08);
         display: grid;
         grid-template-columns: repeat(5, minmax(0, 1fr));
+        align-items: stretch;
         gap: 4px;
         z-index: 20;
       }
       .navBtn {
-        border-radius: 18px;
+        height: 50px;
+        min-height: 0;
+        padding: 3px 2px;
+        margin: 0;
+        border-radius: 16px;
         background: transparent;
         color: var(--muted);
-        min-height: 50px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 4px;
+        gap: 3px;
         font-size: 10.5px;
+        line-height: 1;
         font-weight: 850;
       }
       .navBtn svg {
@@ -715,7 +712,7 @@
       .toast {
         position: fixed;
         left: 50%;
-        bottom: calc(var(--navH) + 24px + env(safe-area-inset-bottom));
+        bottom: calc(var(--navH) + 24px);
         transform: translateX(-50%) translateY(20px);
         background: rgba(28, 34, 49, 0.95);
         border: 1px solid rgba(255, 255, 255, 0.1);
@@ -758,6 +755,12 @@
         border: 0;
         border-top: 1px solid rgba(255, 255, 255, 0.08);
         margin: 14px 0;
+      }
+
+      @supports not (padding: env(safe-area-inset-bottom)) {
+        :root {
+          --safeBottom: 0px;
+        }
       }
       @media (min-width: 760px) {
         .content {
