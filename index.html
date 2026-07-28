@@ -42,6 +42,12 @@
         --soft: #1d3450;
         --text: #f6f7fb;
         --muted: #9aa3b8;
+        --heading: #ffffff;
+        --control-text: #f6f7fb;
+        --button-text: #ffffff;
+        --inverse-text: #08111f;
+        --divider: rgba(255, 255, 255, 0.10);
+        --nav-bg: rgba(7, 17, 31, 0.96);
         color-scheme: dark;
       }
 
@@ -53,6 +59,12 @@
         --soft: #e2e9f2;
         --text: #172033;
         --muted: #657188;
+        --heading: #111827;
+        --control-text: #172033;
+        --button-text: #ffffff;
+        --inverse-text: #ffffff;
+        --divider: rgba(23, 32, 51, 0.12);
+        --nav-bg: rgba(248, 250, 253, 0.97);
         color-scheme: light;
       }
 
@@ -456,7 +468,7 @@ body::before {
         padding: 13px 16px;
         border-radius: 17px;
         background: var(--soft);
-        color: #fff;
+        color: var(--heading);
         font-weight: 850;
         display: inline-flex;
         align-items: center;
@@ -581,7 +593,7 @@ body::before {
       }
       .chip.active {
         background: rgba(255, 55, 95, 0.18);
-        color: #fff;
+        color: var(--heading);
         border-color: rgba(255, 55, 95, 0.35);
       }
       .exerciseItem {
@@ -676,7 +688,7 @@ body::before {
         width: 100%;
         background: rgba(255, 255, 255, 0.07);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        color: #fff;
+        color: var(--heading);
         border-radius: 16px;
         padding: 13px 14px;
         min-height: 48px;
@@ -804,7 +816,7 @@ body::before {
       }
       .navBtn.active {
         background: rgba(255, 255, 255, 0.08);
-        color: #fff;
+        color: var(--heading);
       }
       .badgeRow {
         display: flex;
@@ -824,7 +836,7 @@ body::before {
         font-weight: 850;
       }
       .badge.earned {
-        color: #fff;
+        color: var(--heading);
         background: rgba(255, 214, 10, 0.12);
         border-color: rgba(255, 214, 10, 0.25);
       }
@@ -836,7 +848,7 @@ body::before {
         background: rgba(28, 34, 49, 0.95);
         border: 1px solid rgba(255, 255, 255, 0.1);
         box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
-        color: #fff;
+        color: var(--heading);
         border-radius: 999px;
         padding: 12px 16px;
         opacity: 0;
@@ -856,7 +868,7 @@ body::before {
         border: 0;
         border-radius: 24px;
         background: var(--card2);
-        color: #fff;
+        color: var(--heading);
         width: min(92vw, 420px);
         padding: 0;
         box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
@@ -933,7 +945,197 @@ body::before {
         text-align: center;
         opacity: 0.7;
     }
-    </style>
+    
+      /* Theme-aware global text rules */
+
+      html,
+      body {
+        color: var(--text);
+      }
+
+      body,
+      input,
+      select,
+      textarea,
+      button {
+        color: var(--text);
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      .title,
+      .sectionTitle,
+      .cardTitle,
+      strong {
+        color: var(--heading);
+      }
+
+      p,
+      span,
+      label,
+      li,
+      td,
+      th,
+      .row,
+      .value,
+      .stat,
+      .exerciseName,
+      .workoutName {
+        color: inherit;
+      }
+
+      .muted,
+      .small.muted,
+      .sub,
+      .hint,
+      .meta,
+      .secondaryText {
+        color: var(--muted) !important;
+      }
+
+      input,
+      select,
+      textarea {
+        background: var(--card2);
+        color: var(--control-text);
+        border-color: var(--divider);
+      }
+
+      input::placeholder,
+      textarea::placeholder {
+        color: var(--muted);
+        opacity: 1;
+      }
+
+      option {
+        background: var(--card);
+        color: var(--control-text);
+      }
+
+      hr,
+      .divider {
+        border-color: var(--divider);
+      }
+
+      .card,
+      .panel,
+      .sheet,
+      .modal,
+      .dataCard {
+        color: var(--text);
+      }
+
+      .nav {
+        background: var(--nav-bg) !important;
+        border-top-color: var(--divider) !important;
+        color: var(--text);
+      }
+
+      .nav::after {
+        background: var(--bg) !important;
+      }
+
+      .nav button,
+      .nav .navItem {
+        color: var(--muted) !important;
+      }
+
+      .nav button.active,
+      .nav .navItem.active,
+      .nav button[aria-current="page"] {
+        color: var(--accent) !important;
+      }
+
+      button,
+      .button,
+      .btn {
+        color: var(--text);
+      }
+
+      .primary,
+      .primaryButton,
+      .btnPrimary,
+      button.primary {
+        color: var(--button-text) !important;
+      }
+
+      html[data-mode="light"] .icon,
+      html[data-mode="light"] svg {
+        color: currentColor;
+      }
+
+
+
+      /* Light-mode surface visibility: Library and Settings */
+      html[data-mode="light"] #page-library .exerciseItem {
+        background: var(--card);
+        border-color: rgba(23, 32, 51, 0.14);
+        box-shadow: 0 6px 18px rgba(28, 42, 68, 0.08);
+      }
+
+      html[data-mode="light"] #page-library .exerciseItem:active {
+        background: var(--card2);
+      }
+
+      html[data-mode="light"] #page-library .check {
+        border-color: rgba(23, 32, 51, 0.24);
+        color: var(--text);
+      }
+
+      html[data-mode="light"] #page-library .searchBar {
+        background: linear-gradient(
+          180deg,
+          rgba(248, 250, 253, 0.98),
+          rgba(238, 243, 249, 0.92)
+        );
+      }
+
+      html[data-mode="light"] #page-library .input,
+      html[data-mode="light"] #page-library input {
+        background: var(--card);
+        border-color: rgba(23, 32, 51, 0.16);
+        box-shadow: 0 4px 14px rgba(28, 42, 68, 0.06);
+      }
+
+      html[data-mode="light"] #page-settings .card {
+        background: var(--card);
+        border-color: rgba(23, 32, 51, 0.14);
+        box-shadow: 0 8px 22px rgba(28, 42, 68, 0.08);
+      }
+
+      html[data-mode="light"] #page-settings select,
+      html[data-mode="light"] #page-settings input,
+      html[data-mode="light"] #page-settings textarea {
+        background: var(--card2);
+        border-color: rgba(23, 32, 51, 0.16);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      }
+
+      html[data-mode="light"] #page-settings .btn:not(.primary) {
+        background: var(--card2);
+        border: 1px solid rgba(23, 32, 51, 0.14);
+        color: var(--text);
+      }
+
+      html[data-mode="light"] #page-settings hr {
+        border-color: rgba(23, 32, 51, 0.12);
+      }
+
+      html[data-mode="light"] #page-settings .row {
+        border-color: rgba(23, 32, 51, 0.10);
+      }
+
+      html[data-mode="light"] #exercisePanel {
+        background: linear-gradient(180deg, var(--card), var(--bg2));
+        border-color: rgba(23, 32, 51, 0.14);
+        box-shadow: 0 -20px 60px rgba(28, 42, 68, 0.18);
+      }
+
+</style>
   </head>
   <body>
     <div class="app" id="app">
@@ -1378,7 +1580,7 @@ body::before {
       const STORAGE_KEY = "homeStrength.v1";
       const APP_INFO = {
         name: "MOMNTUM",
-        version: "0.3.1.1",
+        version: "0.3.1.3",
         buildDate: "28 July 2026",
         creator: "Mark Taylor",
         poweredBy: "Offline PWA • HTML • CSS • JavaScript",
