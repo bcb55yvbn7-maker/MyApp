@@ -132,11 +132,28 @@
         overflow: hidden;
       }
       .topbar {
+        position: relative;
         padding: calc(14px + env(safe-area-inset-top)) 18px 10px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 12px;
+      }
+      .topbar::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: calc(-1 * env(safe-area-inset-top));
+        height: env(safe-area-inset-top);
+        background:
+          radial-gradient(
+            circle at 20% -10%,
+            rgba(255, 55, 95, 0.22),
+            transparent 34%
+          ),
+          linear-gradient(180deg, var(--bg), var(--bg2));
+        pointer-events: none;
       }
       .brand {
         display: flex;
@@ -400,6 +417,10 @@
         --p: 0;
         width: 94px;
         height: 94px;
+        min-width: 94px;
+        min-height: 94px;
+        flex: 0 0 94px;
+        aspect-ratio: 1 / 1;
         border-radius: 50%;
         background: conic-gradient(
           var(--green) calc(var(--p) * 1%),
@@ -414,6 +435,7 @@
         content: "";
         width: 72px;
         height: 72px;
+        aspect-ratio: 1 / 1;
         border-radius: 50%;
         background: var(--card);
         position: absolute;
@@ -629,6 +651,16 @@
         gap: 4px;
         z-index: 20;
       }
+      .nav::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: calc(-1 * env(safe-area-inset-bottom));
+        height: env(safe-area-inset-bottom);
+        background: rgba(7, 8, 13, 0.88);
+        pointer-events: none;
+      }
       .navBtn {
         border-radius: 18px;
         background: transparent;
@@ -745,6 +777,32 @@
           scroll-behavior: auto !important;
         }
       }
+      .settingsCardControls {
+        margin-top: 20px;
+      }
+      .settingsCardControls > label {
+        min-width: 0;
+      }
+      #reminderTime {
+        min-width: 0;
+        max-width: 100%;
+        width: 100%;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+      .aboutActions {
+        margin-top: 20px;
+        gap: 8px;
+      }
+      .aboutActions .btn {
+        margin-top: 0 !important;
+      }
+      @media (max-width: 480px) {
+        .settingsCardControls {
+          grid-template-columns: 1fr;
+        }
+      }
+
       #updateStatus {
         margin-top: 8px;
         font-size: 14px;
@@ -994,7 +1052,7 @@
                 Stored locally only. This app does not create system
                 notifications.
               </p>
-              <div class="grid two" style="margin-top: 12px">
+              <div class="grid two settingsCardControls">
                 <label
                   >Reminder days<input
                     id="reminderDays"
