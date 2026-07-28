@@ -6,7 +6,13 @@
     <meta id="themeColorMeta" name="theme-color" content="#05060a" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <title>Home Strength</title>
+    <meta name="apple-mobile-web-app-title" content="MOMNTUM" />
+    <meta name="application-name" content="MOMNTUM" />
+    <meta name="description" content="Personal offline calisthenics training companion." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%3E%0A%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22112%22%20fill%3D%22%2305060a%22%2F%3E%0A%3Cpath%20d%3D%22M150%20370V142h62l88%20137V142h62v228h-62l-88-137v137z%22%0Afill%3D%22none%22%20stroke%3D%22%23ff9f0a%22%20stroke-width%3D%2224%22%20stroke-linejoin%3D%22miter%22%2F%3E%0A%3C%2Fsvg%3E" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%3E%0A%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22112%22%20fill%3D%22%2305060a%22%2F%3E%0A%3Cpath%20d%3D%22M150%20370V142h62l88%20137V142h62v228h-62l-88-137v137z%22%0Afill%3D%22none%22%20stroke%3D%22%23ff9f0a%22%20stroke-width%3D%2224%22%20stroke-linejoin%3D%22miter%22%2F%3E%0A%3C%2Fsvg%3E" />
+    <link rel="manifest" href="data:application/manifest+json,%7B%0A%20%20%22name%22%3A%20%22MOMNTUM%22%2C%0A%20%20%22short_name%22%3A%20%22MOMNTUM%22%2C%0A%20%20%22description%22%3A%20%22Engineered%20for%20consistent%20strength.%22%2C%0A%20%20%22start_url%22%3A%20%22.%22%2C%0A%20%20%22display%22%3A%20%22standalone%22%2C%0A%20%20%22background_color%22%3A%20%22%2305060a%22%2C%0A%20%20%22theme_color%22%3A%20%22%2305060a%22%2C%0A%20%20%22icons%22%3A%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%22src%22%3A%20%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D%2522http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%2522%2520viewBox%253D%25220%25200%2520512%2520512%2522%253E%250A%253Crect%2520width%253D%2522512%2522%2520height%253D%2522512%2522%2520rx%253D%2522112%2522%2520fill%253D%2522%252305060a%2522%252F%253E%250A%253Cpath%2520d%253D%2522M150%2520370V142h62l88%2520137V142h62v228h-62l-88-137v137z%2522%250Afill%253D%2522none%2522%2520stroke%253D%2522%2523ff9f0a%2522%2520stroke-width%253D%252224%2522%2520stroke-linejoin%253D%2522miter%2522%252F%253E%250A%253C%252Fsvg%253E%22%2C%0A%20%20%20%20%20%20%22sizes%22%3A%20%22512x512%22%2C%0A%20%20%20%20%20%20%22type%22%3A%20%22image%2Fsvg%2Bxml%22%2C%0A%20%20%20%20%20%20%22purpose%22%3A%20%22any%20maskable%22%0A%20%20%20%20%7D%0A%20%20%5D%0A%7D" />
+    <title>MOMNTUM</title>
     <style>
       :root {
         --bg: #05060a;
@@ -201,6 +207,42 @@ body::before {
         gap: 10px;
         min-width: 0;
       }
+
+      .aboutPromise {
+        margin: 12px 0 16px;
+        text-align: center;
+        font-weight: 600;
+        line-height: 1.4;
+        color: var(--text);
+      }
+
+      .momntumWordmark {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 0.04em;
+        font-weight: 900;
+        letter-spacing: 0.09em;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+      .momntumWordmark .momntumN {
+        color: transparent;
+        -webkit-text-stroke: 1.25px var(--accent2);
+        text-shadow: 0 0 8px rgba(255, 159, 10, 0.4);
+      }
+      .brandMarkN {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        place-items: center;
+        color: transparent;
+        -webkit-text-stroke: 1.4px var(--accent2);
+        font-size: 22px;
+        font-weight: 950;
+        line-height: 1;
+        text-shadow: 0 0 8px rgba(255, 159, 10, 0.42);
+      }
+
       .logo {
         width: 42px;
         height: 42px;
@@ -868,18 +910,13 @@ body::before {
       <header class="topbar">
         <div class="brand">
           <div class="logo" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path
-                d="M7 12h10M4 9v6M20 9v6M9 7v10M15 7v10"
-                stroke="white"
-                stroke-width="2.3"
-                stroke-linecap="round"
-              />
-            </svg>
+            <span class="brandMarkN">N</span>
           </div>
           <div>
-            <div class="title">Home Strength</div>
-            <div class="sub" id="todayLine">Offline strength training</div>
+            <div class="title momntumWordmark" aria-label="MOMNTUM">
+              <span>MOM</span><span class="momntumN">N</span><span>TUM</span>
+            </div>
+            <div class="sub" id="todayLine">Personal offline calisthenics training companion.</div>
           </div>
         </div>
         <div class="level" aria-label="Current level">
@@ -1139,12 +1176,15 @@ body::before {
             </div>
             <div class="card">
 
-                <h3>About Home Strength</h3>
+                <h3>About MOMNTUM</h3>
                     <p
                         id="appDescription"
                         class="small muted"
                         style="text-align:left;margin:0;"
                     ></p>
+                    <div class="aboutPromise">
+                        No Ads • No Subscriptions • Yours Forever
+                    </div>
                     <hr>
                    <div class="stack" style="margin-top:16px">
 
@@ -1159,12 +1199,12 @@ body::before {
                     </div>
 
                     <div class="row">
-                        <span class="muted">Created by</span>
+                        <span class="muted">Design &amp; engineering</span>
                         <strong id="appCreator"></strong>
                     </div>
 
                     <div class="row">
-                        <span class="muted">Powered by</span>
+                        <span class="muted">Platform</span>
                         <strong id="appPoweredBy"></strong>
                     </div>
 
@@ -1289,21 +1329,30 @@ body::before {
         { passive: false },
       );
 
+
+      /*
+       * MOMNTUM brand principles:
+       * Consistency over hype.
+       * Discipline over extremes.
+       * Measurable progress, one session at a time.
+       */
+
       const STORAGE_KEY = "homeStrength.v1";
       const APP_INFO = {
-        name: "Home Strength",
-        version: "0.2.6",
+        name: "MOMNTUM",
+        version: "0.3.1",
         buildDate: "28 July 2026",
         creator: "Mark Taylor",
-        poweredBy: "HTML • CSS • JavaScript",
+        poweredBy: "Offline PWA • HTML • CSS • JavaScript",
         description: "Personal offline calisthenics training companion."
       };
       const CHANGELOG = [
-        "Added About section",
-        "Introduced app versioning",
-        "Added build information",
-        "Added update function",
-        "Fixed horizontal scrolling on small screens"
+        "Renamed Home Strength to MOMNTUM",
+        "Introduced the MOMNTUM wordmark and signature orange N",
+        "Updated app, browser and PWA identity",
+        "Added the new MOMNTUM app icon",
+        "Rewritten About and product credits",
+        "Preserved the existing layout, data and workout behaviour"
       ];
       const quotes = [
         "Small reps, repeated often, become visible strength.",
@@ -2902,7 +2951,7 @@ body::before {
       }
       function showChangelog() {
         alert(
-            `Home Strength ${APP_INFO.version}\n\n` +
+            `${APP_INFO.name} ${APP_INFO.version}\n\n` +
             CHANGELOG.map(item => `• ${item}`).join("\n")
         );
       }
