@@ -51,10 +51,12 @@
       }
       html,
       body {
-        height: 100%;
+        width: 100%;
+        min-height: 100%;
       }
       body {
         margin: 0;
+        min-height: 100dvh;
         background:
           radial-gradient(
             circle at 20% -10%,
@@ -93,6 +95,7 @@
         outline-offset: 2px;
       }
       .app {
+        min-height: 100dvh;
         height: 100%;
         max-width: 1100px;
         margin: 0 auto;
@@ -364,6 +367,10 @@
         --p: 0;
         width: 94px;
         height: 94px;
+        min-width: 94px;
+        min-height: 94px;
+        flex: 0 0 94px;
+        aspect-ratio: 1 / 1;
         border-radius: 50%;
         background: conic-gradient(
           var(--green) calc(var(--p) * 1%),
@@ -378,6 +385,7 @@
         content: "";
         width: 72px;
         height: 72px;
+        aspect-ratio: 1 / 1;
         border-radius: 50%;
         background: var(--card);
         position: absolute;
@@ -707,6 +715,32 @@
           scroll-behavior: auto !important;
         }
       }
+
+      .settingsCardControls {
+        margin-top: 20px;
+      }
+      .settingsCardControls > label {
+        min-width: 0;
+      }
+      #reminderTime {
+        min-width: 0;
+        max-width: 100%;
+        width: 100%;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+      .aboutActions {
+        margin-top: 20px;
+        gap: 8px;
+      }
+      .aboutActions .btn {
+        margin-top: 0 !important;
+      }
+      @media (max-width: 480px) {
+        .settingsCardControls {
+          grid-template-columns: 1fr;
+        }
+      }
       #updateStatus {
         margin-top: 8px;
         font-size: 14px;
@@ -956,7 +990,7 @@
                 Stored locally only. This app does not create system
                 notifications.
               </p>
-              <div class="grid two" style="margin-top: 12px">
+              <div class="grid two settingsCardControls">
                 <label
                   >Reminder days<input
                     id="reminderDays"
@@ -998,7 +1032,7 @@
                         style="text-align:left;margin:0;"
                     ></p>
                     <hr>
-                   <div class="stack" style="margin-top:16px">
+                   <div class="stack aboutActions">
 
                     <div class="row">
                         <span class="muted">Version</span>
@@ -1022,14 +1056,12 @@
 
                     <button
                         class="btn secondary"
-                        style="margin-top:12px"
                         onclick="showChangelog()"
                     >
                         What's New
                     </button>
                     <button
                         class="btn secondary"
-                        style="margin-top:12px"
                         onclick="refreshApp()"
                     >
                         Check for Updates
@@ -1120,18 +1152,18 @@
       const STORAGE_KEY = "homeStrength.v1";
       const APP_INFO = {
         name: "Home Strength",
-        version: "0.2.3",
-        buildDate: "27 July 2026",
+        version: "0.2.1",
+        buildDate: "28 July 2026",
         creator: "Mark Taylor",
         poweredBy: "HTML • CSS • JavaScript",
         description: "Personal offline calisthenics training companion."
       };
       const CHANGELOG = [
-        "Added About section",
-        "Introduced app versioning",
-        "Added build information",
-        "Added update function",
-        "Fixed horizontal scrolling on small screens"
+        "Fixed the Home weekly percentage ring rendering as an oval on iPhone",
+        "Fixed the workout reminder time field overflowing its card",
+        "Improved spacing for reminder controls",
+        "Tightened and lowered the About card action buttons",
+        "Improved edge-to-edge and safe-area layout support"
       ];
       const quotes = [
         "Small reps, repeated often, become visible strength.",
