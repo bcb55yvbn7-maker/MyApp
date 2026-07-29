@@ -1,3 +1,10 @@
+MOMNTUM 0.3.3.10 — Activity/Progress card cleanup
+
+- Removed the decorative icon from the Activity and Progress cards.
+- Removed the non-functional expansion chevron.
+- Kept the existing card layout, colours and metric styling.
+- Version remains 0.3.3.10.
+
 MOMNTUM 0.3.3.10 — repaired build
 
 Fix:

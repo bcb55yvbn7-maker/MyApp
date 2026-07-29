@@ -1746,6 +1746,21 @@ body::before {
         outline: 1px solid rgba(23, 32, 51, 0.035);
       }
 
+
+      /* Clean Activity and Progress card headers */
+      .healthCardHeader {
+        justify-content: flex-start;
+      }
+
+      .healthCardTitle {
+        gap: 0;
+      }
+
+      .healthCardIcon,
+      .healthCardChevron {
+        display: none !important;
+      }
+
 </style>
     <link rel="icon" href="favicon.ico?v=0.3.3.10" sizes="any" />
     <link rel="icon" href="momntum-mark.svg?v=0.3.3.10" type="image/svg+xml" />
@@ -1818,11 +1833,7 @@ body::before {
           <h2>Snapshot</h2>
           <div class="healthSummary healthActivityCard card" aria-label="Training snapshot">
             <div class="healthCardHeader">
-              <div class="healthCardTitle">
-                <span class="healthCardIcon" aria-hidden="true">●</span>
-                Activity
-              </div>
-              <span class="healthCardChevron" aria-hidden="true">›</span>
+              <div class="healthCardTitle">Activity</div>
             </div>
 
             <div class="healthMetricGrid">
@@ -1912,11 +1923,7 @@ body::before {
           </p>
           <div class="healthSummary healthActivityCard card" aria-label="Progress summary">
             <div class="healthCardHeader">
-              <div class="healthCardTitle">
-                <span class="healthCardIcon" aria-hidden="true">●</span>
-                Progress
-              </div>
-              <span class="healthCardChevron" aria-hidden="true">›</span>
+              <div class="healthCardTitle">Progress</div>
             </div>
 
             <div class="healthMetricGrid">
