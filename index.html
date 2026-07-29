@@ -2185,6 +2185,94 @@ body::before {
         border: 1px solid rgba(23, 32, 51, 0.22);
         box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78);
       }
+
+      /* v0.5 equipment intelligence */
+      .equipmentOptions {
+        display: grid;
+        gap: 10px;
+        margin-top: 14px;
+      }
+      .equipmentOption {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-height: 52px;
+        padding: 12px 14px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--card2);
+        cursor: pointer;
+      }
+      .equipmentOption input {
+        width: 20px;
+        height: 20px;
+        flex: 0 0 auto;
+        accent-color: var(--accent);
+      }
+      .equipmentOptionText { min-width: 0; }
+      .equipmentOptionText strong { display: block; }
+      .equipmentOptionText small { color: var(--muted); }
+      .equipmentProfileSummary {
+        margin-top: 12px;
+        padding: 11px 13px;
+        border-radius: 14px;
+        background: color-mix(in srgb, var(--accent) 10%, transparent);
+        border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
+      }
+      .workoutEquipmentControl {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 12px 0 2px;
+        border-top: 1px solid var(--line);
+      }
+      .homeEquipmentControl {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 13px 14px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--card2);
+      }
+      .workoutEquipmentCopy { min-width: 0; }
+      .workoutEquipmentCopy strong { display: block; }
+      .workoutEquipmentCopy small { display: block; color: var(--muted); margin-top: 2px; }
+      .switchControl {
+        position: relative;
+        width: 52px;
+        height: 31px;
+        flex: 0 0 auto;
+      }
+      .switchControl input { position: absolute; opacity: 0; pointer-events: none; }
+      .switchTrack {
+        position: absolute;
+        inset: 0;
+        border-radius: 999px;
+        background: var(--line);
+        transition: background .18s ease;
+        cursor: pointer;
+      }
+      .switchTrack::after {
+        content: "";
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        left: 3px;
+        top: 3px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(0,0,0,.25);
+        transition: transform .18s ease;
+      }
+      .switchControl input:checked + .switchTrack { background: var(--accent); }
+      .switchControl input:checked + .switchTrack::after { transform: translateX(21px); }
+      .switchControl input:focus-visible + .switchTrack { outline: 3px solid color-mix(in srgb, var(--accent) 35%, transparent); outline-offset: 2px; }
+      .switchControl input:disabled + .switchTrack { opacity: .45; cursor: not-allowed; }
+      .resolvedExerciseList { line-height: 1.55; }
+
 </style>
     <link rel="icon" href="favicon.ico?v=0.3.3.10" sizes="any" />
     <link rel="icon" href="momntum-mark.svg?v=0.3.3.10" type="image/svg+xml" />
@@ -2283,7 +2371,7 @@ body::before {
 
     <div id="launchSplash" class="launchSplash" aria-hidden="true">
       <div id="launchLogo" class="launchLogo"><img src="momntum-mark.svg?v=0.3.3.10" alt="" draggable="false" /></div>
-      <div class="launchVersion">v0.4.0.2</div>
+      <div class="launchVersion">v0.5.0</div>
     </div>
 
     <div class="app" id="app">
@@ -2333,13 +2421,19 @@ body::before {
                 </div>
               </div>
             </div>
-            <div class="grid two" style="margin-top: 16px">
-              <button class="btn primary full" id="quickStartBtn">
-                Quick Start</button
-              ><button class="btn ghost full" id="continueBtn">
-                Continue Last
-              </button>
+            <div class="homeEquipmentControl" style="margin-top: 16px">
+              <div class="workoutEquipmentCopy">
+                <strong>Use equipment</strong>
+                <small id="homeEquipmentSummary">Bodyweight only</small>
+              </div>
+              <label class="switchControl" aria-label="Use equipment for suggested workout">
+                <input type="checkbox" id="homeEquipmentToggle">
+                <span class="switchTrack"></span>
+              </label>
             </div>
+            <button class="btn primary full" id="quickStartBtn" style="margin-top: 12px">
+              Quick Start
+            </button>
           </div>
           <h2>Snapshot</h2>
           <div class="healthSummary healthActivityCard card" aria-label="Training snapshot">
@@ -2536,6 +2630,18 @@ body::before {
                   </select></label
                 >
               </div>
+            </div>
+            <div class="card" id="equipmentSettingsCard">
+              <h3>My equipment</h3>
+              <p class="small" style="margin-top:6px">Choose everything available to you. “No equipment” is exclusive and cannot be combined with another choice.</p>
+              <div class="equipmentOptions" id="equipmentOptions">
+                <label class="equipmentOption"><input type="checkbox" value="none" data-equipment-choice><span class="equipmentOptionText"><strong>No equipment</strong><small>Bodyweight-only workout variations</small></span></label>
+                <label class="equipmentOption"><input type="checkbox" value="bands" data-equipment-choice><span class="equipmentOptionText"><strong>Resistance bands</strong><small>GymPro or equivalent resistance bands</small></span></label>
+                <label class="equipmentOption"><input type="checkbox" value="dumbbells" data-equipment-choice><span class="equipmentOptionText"><strong>Dumbbells</strong><small>One or two adjustable or fixed dumbbells</small></span></label>
+                <label class="equipmentOption"><input type="checkbox" value="kettlebell" data-equipment-choice><span class="equipmentOptionText"><strong>Kettlebell</strong><small>Single kettlebell movements</small></span></label>
+                <label class="equipmentOption"><input type="checkbox" value="pullup" data-equipment-choice><span class="equipmentOptionText"><strong>Pull-up bar</strong><small>Pull-ups, chin-ups and supported hangs</small></span></label>
+              </div>
+              <div class="equipmentProfileSummary small" id="equipmentProfileSummary"></div>
             </div>
             <div class="card">
               <h3>Workout reminders</h3>
@@ -2769,13 +2875,15 @@ body::before {
       const STORAGE_KEY = "homeStrength.v1";
       const APP_INFO = {
         name: "MOMNTUM",
-        version: "0.4.0.2",
+        version: "0.5.0",
         buildDate: "29 July 2026",
         creator: "Mark Taylor",
         poweredBy: "Offline PWA • HTML • CSS • JavaScript",
         description: "Personal offline calisthenics training companion."
       };
       const CHANGELOG = [
+        "Added equipment profiles and deterministic equipment-aware workouts",
+        "Added per-workout equipment on/off controls",
         "Added expandable exercise cards with animated accent-aware chevrons",
         "Limited exercise details to one open card at a time",
         "Introduced the redesigned accent-aware workout and rest timer",
@@ -3825,6 +3933,109 @@ body::before {
         progression: e[12],
         regression: e[13],
       }));
+
+      const supplementalExercises = [
+        ["Push-up", "Push", "Beginner", "Chest", "Triceps, shoulders", "Bodyweight", "From a strong plank, lower the chest under control and press away.", "Keep ribs and hips connected; use a comfortable hand width.", "Flaring elbows; dropping hips; shortening the range.", "8-15", "3", "60s", "Feet-elevated push-up.", "Incline push-up."],
+        ["Pike Push-up", "Push", "Intermediate", "Shoulders", "Triceps, upper chest", "Bodyweight", "From a pike position, lower the head between the hands and press back up.", "Keep hips high and move the head forward and down.", "Turning it into a shallow push-up; collapsing through the neck.", "6-10", "3", "75s", "Feet-elevated pike push-up.", "Shorter range pike push-up."],
+        ["Diamond Push-up", "Push", "Intermediate", "Triceps", "Chest, shoulders", "Bodyweight", "Perform a close-hand push-up with hands beneath the chest.", "Keep elbows tracking back and the body rigid.", "Hands too high; elbows flaring; hips sagging.", "6-12", "3", "60s", "Feet-elevated diamond push-up.", "Close-grip incline push-up."],
+        ["Dumbbell Floor Press", "Push Dumbbell", "Beginner", "Chest", "Triceps, shoulders", "Dumbbells", "Lie on the floor and press dumbbells vertically from bent elbows.", "Pause the upper arms softly on the floor and keep wrists stacked.", "Bouncing elbows; over-arching; uneven pressing.", "8-12", "3", "75s", "Heavier dumbbells or slower lowering.", "Single dumbbell floor press."],
+        ["Dumbbell Shoulder Press", "Push Dumbbell", "Beginner", "Shoulders", "Triceps, core", "Dumbbells", "Press dumbbells overhead from shoulder height while standing or seated.", "Brace the trunk and finish with arms overhead without leaning back.", "Rib flare; shrugging early; uneven lockout.", "8-12", "3", "75s", "Heavier dumbbells or alternating press.", "Single-arm seated press."],
+        ["Dumbbell Lateral Raise", "Push Dumbbell", "Beginner", "Side delts", "Traps", "Dumbbells", "Raise light dumbbells out to shoulder height with soft elbows.", "Lead with elbows and lower slowly.", "Swinging; shrugging; lifting above shoulder height.", "12-18", "2", "45s", "Longer pauses or heavier weight.", "Bent-arm lateral raise."],
+        ["Dumbbell Overhead Triceps Extension", "Push Dumbbell", "Beginner", "Triceps", "Shoulders", "Dumbbell", "Hold one dumbbell overhead, bend the elbows and extend it upward.", "Keep elbows pointing forward and ribs down.", "Elbows drifting wide; arching; rushing the lowering phase.", "10-15", "3", "60s", "Heavier dumbbell.", "Two-hand lighter extension."],
+        ["Doorframe Row", "Pull", "Beginner", "Upper back", "Biceps, rear delts", "Bodyweight", "Hold a secure doorframe, lean back and row the chest toward the hands.", "Keep the body long and squeeze shoulder blades together.", "Pulling only with arms; shrugging; unstable grip.", "8-15", "3", "60s", "Lean further back.", "More upright stance."],
+        ["Prone Lat Pull", "Pull", "Beginner", "Lats", "Upper back", "Bodyweight", "Lie face down, reach arms overhead, then pull elbows toward the ribs.", "Lift hands lightly and keep the neck long.", "Overarching lower back; rushing; shrugging.", "10-15", "3", "45s", "Longer pauses.", "Keep hands closer to floor."],
+        ["Prone Reverse Fly", "Pull", "Beginner", "Rear delts", "Upper back", "Bodyweight", "Lie face down and sweep straight arms out wide, lifting them slightly.", "Reach long through fingertips and squeeze the upper back.", "Shrugging; excessive lower-back arch.", "10-15", "3", "45s", "Add light weights.", "Bent-elbow W raise."],
+        ["Reverse Snow Angel", "Pull", "Beginner", "Upper back", "Rear delts, lats", "Bodyweight", "Lie face down and sweep arms from overhead toward the hips.", "Move slowly and keep hands hovering.", "Using momentum; craning the neck.", "8-12", "3", "45s", "Longer pauses.", "Reduce the sweep range."],
+        ["Self-resisted Biceps Curl", "Pull", "Beginner", "Biceps", "Forearms", "Bodyweight", "Curl one arm while the opposite hand provides steady resistance.", "Maintain continuous tension in both directions.", "Inconsistent resistance; moving the shoulder.", "10-15", "3", "45s", "Increase resistance and lowering time.", "Use lighter hand pressure."],
+        ["One-arm Dumbbell Row", "Pull Dumbbell", "Beginner", "Upper back", "Lats, biceps", "Dumbbell", "Support one hand and row a dumbbell toward the hip.", "Keep shoulders square and lead with the elbow.", "Twisting; shrugging; pulling toward the shoulder.", "8-12", "3", "75s", "Heavier dumbbell or longer pause.", "Lighter supported row."],
+        ["Dumbbell Pullover", "Pull Dumbbell", "Intermediate", "Lats", "Chest, triceps", "Dumbbell", "Lie on the floor and lower one dumbbell behind the head before pulling it back over the chest.", "Keep ribs controlled and elbows softly bent.", "Overarching; bending elbows excessively; lowering too far.", "8-12", "3", "75s", "Heavier dumbbell or slower tempo.", "Shorter range."],
+        ["Dumbbell Reverse Fly", "Pull Dumbbell", "Beginner", "Rear delts", "Upper back", "Dumbbells", "Hinge forward and open light dumbbells out to the sides.", "Keep the spine long and move from the shoulders.", "Swinging; shrugging; standing up during reps.", "10-15", "3", "60s", "Longer pause or heavier weights.", "Alternating reverse fly."],
+        ["Dumbbell Biceps Curl", "Pull Dumbbell", "Beginner", "Biceps", "Forearms", "Dumbbells", "Curl dumbbells without moving the upper arms.", "Keep wrists neutral and lower fully under control.", "Swinging; elbows drifting forward; shortened range.", "8-15", "3", "60s", "Heavier dumbbells or slower eccentric.", "Alternating curls."],
+        ["Pull-up", "Pull Bar", "Intermediate", "Lats", "Biceps, upper back", "Pull-up bar", "Hang from the bar and pull until the chin clears it.", "Start by setting the shoulder blades and keep the body controlled.", "Kipping; craning the neck; partial range.", "3-8", "3", "90s", "Add reps or load.", "Foot-assisted pull-up or eccentric."],
+        ["Chin-up", "Pull Bar", "Intermediate", "Biceps", "Lats, upper back", "Pull-up bar", "Use an underhand grip and pull the chest toward the bar.", "Keep elbows drawing down and avoid swinging.", "Kipping; shrugging; incomplete lowering.", "3-8", "3", "90s", "Add reps or load.", "Foot-assisted chin-up."],
+        ["Goblet Squat", "Legs Dumbbell", "Beginner", "Quads", "Glutes, core", "Dumbbell or kettlebell", "Hold a weight at the chest and squat between the hips.", "Keep the whole foot grounded and knees tracking over toes.", "Heels lifting; collapsing knees; losing trunk position.", "8-15", "3", "75s", "Heavier load or pause squat.", "Bodyweight squat."],
+        ["Dumbbell Reverse Lunge", "Legs Dumbbell", "Beginner", "Quads", "Glutes, hamstrings", "Dumbbells", "Hold dumbbells and step back into a controlled lunge.", "Stay tall and push through the front foot.", "Narrow stance; front knee collapsing; rushing.", "8-12 each", "3", "75s", "Heavier dumbbells.", "Bodyweight reverse lunge."],
+        ["Dumbbell Romanian Deadlift", "Legs Dumbbell", "Beginner", "Hamstrings", "Glutes, back", "Dumbbells", "Hinge at the hips while lowering dumbbells close to the legs.", "Push hips back and keep a neutral spine.", "Squatting; rounding; weights drifting forward.", "8-12", "3", "75s", "Heavier dumbbells or slower lowering.", "Bodyweight hip hinge."],
+        ["Kettlebell Goblet Squat", "Legs Kettlebell", "Beginner", "Quads", "Glutes, core", "Kettlebell", "Hold the kettlebell by the horns at chest height and squat.", "Brace and keep the bell close to the body.", "Heels lifting; knees collapsing; elbows forcing depth.", "8-15", "3", "75s", "Heavier bell or pause.", "Bodyweight squat."],
+        ["Kettlebell Deadlift", "Legs Kettlebell", "Beginner", "Hamstrings", "Glutes, back", "Kettlebell", "Hinge to grasp the kettlebell and stand by driving the floor away.", "Keep the bell close and finish tall without leaning back.", "Squatting too low; rounding; pulling with arms.", "8-15", "3", "75s", "Heavier bell or slower lowering.", "Elevated kettlebell deadlift."],
+        ["Kettlebell Swing", "Conditioning Kettlebell", "Intermediate", "Glutes", "Hamstrings, core", "Kettlebell", "Hike the bell back and drive the hips forward to float it to chest height.", "Use a crisp hip hinge; arms guide rather than lift.", "Squatting; lifting with shoulders; overextending.", "12-20", "3", "60s", "Heavier bell or denser intervals.", "Kettlebell deadlift."],
+        ["Suitcase March", "Core Weight", "Beginner", "Core", "Grip, hips", "Dumbbell or kettlebell", "Hold one weight at the side and march slowly without leaning.", "Stay tall and resist side bending.", "Leaning toward or away from the load; rushing.", "30-45s each", "3", "45s", "Heavier load or slower march.", "Shorter holds."],
+        ["Dumbbell Thruster", "Full Body Dumbbell", "Intermediate", "Quads", "Shoulders, glutes", "Dumbbells", "Squat with dumbbells at the shoulders, then stand and press overhead.", "Drive smoothly from legs into the press.", "Pressing too early; arching; losing squat form.", "8-12", "3", "75s", "Heavier dumbbells.", "Goblet squat to press."],
+        ["Kettlebell Clean and Press", "Full Body Kettlebell", "Intermediate", "Shoulders", "Glutes, core", "Kettlebell", "Clean the kettlebell to the rack and press overhead.", "Keep the bell close and brace before pressing.", "Bell crashing; overextending; loose wrist.", "6-10 each", "3", "75s", "Heavier bell.", "Kettlebell strict press."],
+        ["Band Squat to Press", "Full Body Band", "Beginner", "Quads", "Shoulders, glutes", "Gympro resistance band", "Stand on the band with handles at shoulder height, squat, then stand and press overhead.", "Keep knees tracking over toes and transfer smoothly from the squat into the press.", "Pressing before standing; leaning back; losing band control.", "8-12", "3", "75s", "Use a stronger band or slower tempo.", "Band squat without the press."],
+      ];
+      supplementalExercises.forEach((e) => exercises.push({
+        id: exercises.length + 1,
+        name: e[0], category: e[1], difficulty: e[2], primary: e[3], secondary: e[4],
+        equipment: e[5], description: e[6], tips: e[7], mistakes: e[8], reps: e[9],
+        sets: e[10], rest: e[11], progression: e[12], regression: e[13],
+      }));
+
+      const equipmentLabels = {
+        none: "No equipment",
+        bands: "Resistance bands",
+        dumbbells: "Dumbbells",
+        kettlebell: "Kettlebell",
+        pullup: "Pull-up bar",
+      };
+
+      const workoutBlueprints = {
+        push: {
+          warm: [
+            { none: "March in Place" }, { none: "Arm Circles" }, { none: "Scapular Push-up" },
+            { bands: "Band Pull-apart", none: "Prone W Raise" },
+          ],
+          main: [
+            { bands: "Band Chest Press", dumbbells: "Dumbbell Floor Press", none: "Incline Push-up" },
+            { bands: "Band Overhead Press", dumbbells: "Dumbbell Shoulder Press", kettlebell: "Kettlebell Clean and Press", none: "Pike Push-up" },
+            { bands: "Band Lateral Raise", dumbbells: "Dumbbell Lateral Raise", none: "Scapular Push-up" },
+            { bands: "Band Triceps Pressdown", dumbbells: "Dumbbell Overhead Triceps Extension", none: "Diamond Push-up" },
+            { bands: "Band Chest Press", dumbbells: "Dumbbell Floor Press", none: "Push-up" },
+            { none: "Close Grip Push-up" },
+          ],
+        },
+        pull: {
+          warm: [
+            { none: "March in Place" }, { none: "Cat Cow" }, { bands: "Band Pull-apart", none: "Prone W Raise" }, { none: "Hip Hinge Drill" },
+          ],
+          main: [
+            { pullup: "Pull-up", bands: "Band Row", dumbbells: "One-arm Dumbbell Row", none: "Doorframe Row" },
+            { pullup: "Chin-up", bands: "Band Lat Pulldown", dumbbells: "Dumbbell Pullover", none: "Prone Lat Pull" },
+            { bands: "Band Face Pull", dumbbells: "Dumbbell Reverse Fly", none: "Prone Reverse Fly" },
+            { bands: "Band Straight-arm Pulldown", dumbbells: "Dumbbell Pullover", none: "Reverse Snow Angel" },
+            { pullup: "Chin-up", bands: "Band Biceps Curl", dumbbells: "Dumbbell Biceps Curl", none: "Self-resisted Biceps Curl" },
+            { none: "Prone W Raise" },
+          ],
+        },
+        legs: {
+          warm: [{ none: "March in Place" }, { none: "Ankle Rocks" }, { none: "Hamstring Sweep" }, { none: "Hip Hinge Drill" }],
+          main: [
+            { kettlebell: "Kettlebell Goblet Squat", dumbbells: "Goblet Squat", bands: "Band Squat", none: "Bodyweight Squat" },
+            { dumbbells: "Dumbbell Reverse Lunge", none: "Reverse Lunge" },
+            { kettlebell: "Kettlebell Deadlift", dumbbells: "Dumbbell Romanian Deadlift", bands: "Band Romanian Deadlift", none: "Hip Hinge Drill" },
+            { none: "Glute Bridge" }, { none: "Wall Sit" }, { none: "Calf Raise" },
+          ],
+        },
+        core: {
+          warm: [{ none: "Inchworm" }, { none: "World's Greatest Stretch" }, { none: "Bird Dog" }],
+          main: [
+            { none: "Dead Bug" }, { none: "Plank" }, { none: "Side Plank" },
+            { bands: "Band Pallof Press", dumbbells: "Suitcase March", kettlebell: "Suitcase March", none: "Bird Dog" },
+            { none: "Mountain Climber" },
+            { dumbbells: "Dumbbell Thruster", kettlebell: "Kettlebell Clean and Press", bands: "Band Squat to Press", none: "Squat Thrust" },
+          ],
+        },
+        conditioning: {
+          warm: [{ none: "March in Place" }, { none: "Arm Circles" }, { none: "Cat Cow" }],
+          main: [
+            { kettlebell: "Kettlebell Swing", dumbbells: "Dumbbell Thruster", none: "Step Jack" },
+            { none: "Shadow Boxing" }, { none: "Bear Crawl Hold" },
+            { bands: "Band Hip Abduction", kettlebell: "Suitcase March", dumbbells: "Suitcase March", none: "Glute Bridge" },
+            { none: "World's Greatest Stretch" }, { none: "Box Breathing" },
+          ],
+        },
+      };
+
       const workouts = [
         {
           id: "push",
@@ -3969,6 +4180,8 @@ body::before {
           sound: "on",
           reminderDays: "Mon, Tue, Thu, Sat",
           reminderTime: "07:30",
+          equipmentProfile: ["bands"],
+          workoutEquipmentEnabled: { push: true, pull: true, legs: true, core: true, conditioning: true },
         },
         stats: {
           streak: 0,
@@ -4050,6 +4263,16 @@ body::before {
           }
 
           delete loaded.settings.theme;
+          if (!Array.isArray(loaded.settings.equipmentProfile) || !loaded.settings.equipmentProfile.length) {
+            loaded.settings.equipmentProfile = ["bands"];
+          }
+          if (loaded.settings.equipmentProfile.includes("none") && loaded.settings.equipmentProfile.length > 1) {
+            loaded.settings.equipmentProfile = loaded.settings.equipmentProfile.filter((x) => x !== "none");
+          }
+          loaded.settings.workoutEquipmentEnabled = Object.assign(
+            { push: true, pull: true, legs: true, core: true, conditioning: true },
+            loaded.settings.workoutEquipmentEnabled || {},
+          );
           return loaded;
         } catch (e) {
           return defaultState();
@@ -4084,6 +4307,39 @@ body::before {
       function byName(n) {
         return exercises.find((e) => e.name === n);
       }
+
+      function selectedEquipment() {
+        const profile = Array.isArray(state.settings.equipmentProfile)
+          ? state.settings.equipmentProfile
+          : ["none"];
+        return profile.includes("none") ? [] : profile;
+      }
+      function equipmentEnabledFor(workoutId) {
+        return !!state.settings.workoutEquipmentEnabled?.[workoutId] && selectedEquipment().length > 0;
+      }
+      function resolveSlot(slot, available) {
+        const priority = ["pullup", "bands", "dumbbells", "kettlebell"];
+        for (const type of priority) {
+          if (available.includes(type) && slot[type] && byName(slot[type])) return slot[type];
+        }
+        return slot.none;
+      }
+      function resolveWorkout(workout) {
+        const blueprint = workoutBlueprints[workout.id];
+        if (!blueprint) return { ...workout, activeEquipment: "Bodyweight only" };
+        const available = equipmentEnabledFor(workout.id) ? selectedEquipment() : [];
+        const resolve = (slots) => slots.map((slot) => resolveSlot(slot, available)).filter(Boolean);
+        const activeEquipment = available.length
+          ? available.map((x) => equipmentLabels[x]).join(" • ")
+          : "Bodyweight only";
+        return { ...workout, warm: resolve(blueprint.warm), main: resolve(blueprint.main), activeEquipment };
+      }
+      function equipmentProfileLabel() {
+        const selected = state.settings.equipmentProfile || ["none"];
+        if (selected.includes("none")) return "No equipment · bodyweight workouts";
+        return selected.map((x) => equipmentLabels[x]).filter(Boolean).join(" • ");
+      }
+
       function weeklyCompleted() {
         const now = new Date(),
           day = (now.getDay() + 6) % 7,
@@ -4198,11 +4454,24 @@ body::before {
       }
       function renderHome() {
         const sw = suggestedWorkout(),
+          rw = resolveWorkout(sw),
           week = getWeek(),
           pct = Math.min(100, Math.round((weeklyCompleted() / 4) * 100));
         $("suggestedName").textContent = sw.day + " - " + sw.title;
-        $("suggestedMeta").textContent = sw.duration + " min · " + sw.equipment;
-        $("suggestedInfo").textContent = sw.main.slice(0, 3).join(" · ");
+        $("suggestedMeta").textContent = sw.duration + " min · " + rw.activeEquipment;
+        $("suggestedInfo").textContent = rw.main.slice(0, 3).join(" · ");
+        const profileAvailable = selectedEquipment().length > 0;
+        const homeEquipmentToggle = $("homeEquipmentToggle");
+        if (homeEquipmentToggle) {
+          homeEquipmentToggle.checked = equipmentEnabledFor(sw.id);
+          homeEquipmentToggle.disabled = !profileAvailable;
+        }
+        const homeEquipmentSummary = $("homeEquipmentSummary");
+        if (homeEquipmentSummary) {
+          homeEquipmentSummary.textContent = profileAvailable
+            ? (equipmentEnabledFor(sw.id) ? rw.activeEquipment : "Bodyweight only")
+            : "Add equipment in Settings";
+        }
         $("weekPill").textContent = "Week " + week;
         $("streakPill").textContent =
           "🔥 " + state.stats.streak + " day streak";
@@ -4215,16 +4484,24 @@ body::before {
       }
       function renderWorkouts() {
         $("workoutList").innerHTML = workouts
-          .map(
-            (w) =>
-              `<article class="card stack"><div class="row"><div><span class="kicker">${w.day}</span><h3>${w.title}</h3></div><span class="pill">${w.duration} min</span></div><p class="small">${w.equipment}</p><div class="meta"><span class="pill">${w.main.length} exercises</span><span class="pill">${w.warm.length} warm-up</span></div><p class="muted">${w.main.slice(0, 4).join(", ")}${w.main.length > 4 ? ", and more." : "."}</p><button class="btn primary full" data-start="${w.id}">Start ${w.title}</button></article>`,
-          )
+          .map((w) => {
+            const rw = resolveWorkout(w);
+            const profileAvailable = selectedEquipment().length > 0;
+            const enabled = equipmentEnabledFor(w.id);
+            const switchLabel = enabled ? rw.activeEquipment : "Bodyweight only";
+            return `<article class="card stack"><div class="row"><div><span class="kicker">${w.day}</span><h3>${w.title}</h3></div><span class="pill">${w.duration} min</span></div><div class="meta"><span class="pill">${rw.main.length} exercises</span><span class="pill">${rw.warm.length} warm-up</span></div><p class="muted resolvedExerciseList">${rw.main.slice(0, 4).join(", ")}${rw.main.length > 4 ? ", and more." : "."}</p><div class="workoutEquipmentControl"><div class="workoutEquipmentCopy"><strong>Use equipment</strong><small>${switchLabel}${profileAvailable ? "" : " · Add equipment in Settings"}</small></div><label class="switchControl" aria-label="Use equipment for ${w.title}"><input type="checkbox" data-equipment-toggle="${w.id}" ${enabled ? "checked" : ""} ${profileAvailable ? "" : "disabled"}><span class="switchTrack"></span></label></div><button class="btn primary full" data-start="${w.id}">Start ${w.title}</button></article>`;
+          })
           .join("");
-        document
-          .querySelectorAll("[data-start]")
-          .forEach(
-            (b) => (b.onclick = () => startWorkout(b.dataset.start, false)),
-          );
+        document.querySelectorAll("[data-equipment-toggle]").forEach((toggle) => {
+          toggle.onchange = () => {
+            state.settings.workoutEquipmentEnabled[toggle.dataset.equipmentToggle] = toggle.checked;
+            saveState();
+            renderAll();
+          };
+        });
+        document.querySelectorAll("[data-start]").forEach(
+          (b) => (b.onclick = () => startWorkout(b.dataset.start, false)),
+        );
       }
       function exerciseChevronMarkup() {
         return `<span class="exerciseChevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
@@ -4235,9 +4512,10 @@ body::before {
       function renderActiveWorkout() {
         const a = state.active;
         if (!a) return;
-        const w = workouts.find((x) => x.id === a.workoutId);
+        const baseWorkout = workouts.find((x) => x.id === a.workoutId);
+        const w = a.resolvedWorkout || resolveWorkout(baseWorkout);
         $("activeWorkoutTitle").textContent = w.day + " - " + w.title;
-        $("activeMeta").textContent = w.duration + " min · " + w.equipment;
+        $("activeMeta").textContent = w.duration + " min · " + (w.activeEquipment || "Bodyweight only");
         $("workoutTimer").textContent = fmtTime(a.elapsed);
         $("restTimer").textContent = fmtTime(Math.max(0, a.restRemaining));
         $("pauseWorkoutBtn").textContent = a.paused ? "Resume" : "Pause";
@@ -4334,6 +4612,14 @@ body::before {
         }
         renderLibraryList();
       }
+      function equipmentBadge(equipment) {
+        const value = equipment.toLowerCase();
+        if (value.includes("band")) return "Band";
+        if (value.includes("dumbbell")) return "Dumbbell";
+        if (value.includes("kettlebell")) return "Kettlebell";
+        if (value.includes("pull-up")) return "Bar";
+        return "Body";
+      }
       function renderLibraryList() {
         const q = $("exerciseSearch").value.toLowerCase(),
           f =
@@ -4359,7 +4645,7 @@ body::before {
         $("libraryList").innerHTML = rows
           .map(
             (e) =>
-              `<div class="exerciseItem" data-library-exid="${e.id}" data-expandable="true" role="button" tabindex="0" aria-expanded="false" style="text-align:left;width:100%"><div class="check done" aria-hidden="true">${e.difficulty[0]}</div><div class="exerciseText"><div class="row"><div><div class="exName">${e.name}</div><div class="exMuscles">${e.primary} · ${e.category}</div></div><span class="exerciseSummaryActions"><span class="pill">${e.equipment.includes("Gympro") ? "Band" : "Body"}</span>${exerciseChevronMarkup()}</span></div><div class="detail"><p><strong>Description:</strong> ${e.description}</p><p><strong>Technique tips:</strong> ${e.tips}</p><p><strong>Common mistakes:</strong> ${e.mistakes}</p><p><strong>Rest period:</strong> ${e.rest}</p><p><strong>Progression:</strong> ${e.progression}</p><p><strong>Regression:</strong> ${e.regression}</p></div></div></div>`,
+              `<div class="exerciseItem" data-library-exid="${e.id}" data-expandable="true" role="button" tabindex="0" aria-expanded="false" style="text-align:left;width:100%"><div class="check done" aria-hidden="true">${e.difficulty[0]}</div><div class="exerciseText"><div class="row"><div><div class="exName">${e.name}</div><div class="exMuscles">${e.primary} · ${e.category}</div></div><span class="exerciseSummaryActions"><span class="pill">${equipmentBadge(e.equipment)}</span>${exerciseChevronMarkup()}</span></div><div class="detail"><p><strong>Description:</strong> ${e.description}</p><p><strong>Technique tips:</strong> ${e.tips}</p><p><strong>Common mistakes:</strong> ${e.mistakes}</p><p><strong>Rest period:</strong> ${e.rest}</p><p><strong>Progression:</strong> ${e.progression}</p><p><strong>Regression:</strong> ${e.regression}</p></div></div></div>`,
           )
           .join("");
 
@@ -4407,6 +4693,10 @@ body::before {
         $("soundSelect").value = state.settings.sound;
         $("reminderDays").value = state.settings.reminderDays;
         $("reminderTime").value = state.settings.reminderTime;
+        document.querySelectorAll("[data-equipment-choice]").forEach((input) => {
+          input.checked = (state.settings.equipmentProfile || ["none"]).includes(input.value);
+        });
+        $("equipmentProfileSummary").textContent = "Active profile: " + equipmentProfileLabel();
 
         $("appVersion").textContent = APP_INFO.version;
         $("appBuildDate").textContent = APP_INFO.buildDate;
@@ -4439,10 +4729,12 @@ body::before {
           startClock();
           return;
         }
-        const w = workouts.find((x) => x.id === id) || suggestedWorkout(),
-          all = [...w.warm, ...w.main].map(byName);
+        const baseWorkout = workouts.find((x) => x.id === id) || suggestedWorkout(),
+          w = resolveWorkout(baseWorkout),
+          all = [...w.warm, ...w.main].map(byName).filter(Boolean);
         state.active = {
           workoutId: w.id,
+          resolvedWorkout: w,
           startedAt: Date.now(),
           elapsed: 0,
           paused: false,
@@ -4484,7 +4776,7 @@ body::before {
           if ($("workoutTimer")) {
             $("workoutTimer").textContent = fmtTime(a.elapsed);
             $("restTimer").textContent = fmtTime(Math.max(0, a.restRemaining));
-            const w = workouts.find((x) => x.id === a.workoutId);
+            const w = a.resolvedWorkout || resolveWorkout(workouts.find((x) => x.id === a.workoutId));
             const targetSeconds = Math.max(1, ((w && w.duration) || 30) * 60);
             $("timerProgressFill").style.width = Math.min(100, (a.elapsed / targetSeconds) * 100) + "%";
             $("timerStatus").textContent = a.paused ? "Paused" : a.restRunning ? "Resting" : "Training";
@@ -4668,11 +4960,13 @@ body::before {
       }
       $("quickStartBtn").onclick = () =>
         startWorkout(suggestedWorkout().id, false);
-      $("continueBtn").onclick = () =>
-        state.active
-          ? startWorkout(null, true)
-          : (toast("No workout in progress"),
-            startWorkout(suggestedWorkout().id, false));
+      $("homeEquipmentToggle").onchange = (event) => {
+        const workout = suggestedWorkout();
+        state.settings.workoutEquipmentEnabled[workout.id] = event.target.checked;
+        saveState();
+        renderAll();
+        toast(event.target.checked ? "Equipment enabled" : "Bodyweight only");
+      };
       function openExercise(id) {
         const e = exercises.find((x) => x.id === id);
         $("panelCategory").textContent = e.category;
@@ -4828,6 +5122,27 @@ body::before {
         ctx.arcTo(x, y, x + w, y, r);
         ctx.closePath();
       }
+
+      function updateEquipmentProfile(changedInput) {
+        let selected = Array.from(document.querySelectorAll("[data-equipment-choice]:checked")).map((x) => x.value);
+        if (changedInput.value === "none" && changedInput.checked) {
+          selected = ["none"];
+        } else if (changedInput.value !== "none" && changedInput.checked) {
+          selected = selected.filter((x) => x !== "none");
+        }
+        if (!selected.length) selected = ["none"];
+        state.settings.equipmentProfile = selected;
+        document.querySelectorAll("[data-equipment-choice]").forEach((input) => {
+          input.checked = selected.includes(input.value);
+        });
+        saveState();
+        renderAll();
+        toast(selected.includes("none") ? "Bodyweight profile selected" : "Equipment profile updated");
+      }
+      document.querySelectorAll("[data-equipment-choice]").forEach((input) => {
+        input.addEventListener("change", () => updateEquipmentProfile(input));
+      });
+
       function saveSettings() {
         state.settings.restDuration = +$("restDuration").value;
         state.settings.units = $("units").value;
