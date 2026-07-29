@@ -1327,86 +1327,173 @@ body::before {
           0 0 12px rgba(255, 59, 48, 0.48) !important;
       }
 
+
+      /* MOMNTUM copper identity */
+      :root {
+        --brand-copper: #c65a1e;
+        --brand-copper-hi: #d46b27;
+      }
+
+      .momntumCopperMark {
+        fill: var(--brand-copper);
+      }
+
+      .logo.momntumAppIcon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        background: #050505;
+        box-shadow: none;
+        overflow: hidden;
+        flex: 0 0 42px;
+      }
+
+      .logo.momntumAppIcon img {
+        width: 34px;
+        height: 34px;
+        display: block;
+        object-fit: contain;
+      }
+
+      .momntumWordmark {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.025em;
+      }
+
+      .momntumNLogo {
+        width: 0.82em;
+        height: 0.88em;
+        display: inline-grid;
+        place-items: center;
+        margin: 0 0.005em;
+        transform: translateY(0);
+        flex: 0 0 auto;
+      }
+
+      .momntumNLogo img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: contain;
+        object-position: center;
+      }
+
+      .launchSplash {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        overflow: hidden;
+        background: #000;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+
+      .launchLogo {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        width: min(56vw, 310px);
+        height: min(56vw, 310px);
+        transform: translate(-50%, -50%) rotate(0deg) scale(1);
+        transform-origin: center;
+        will-change: left, top, width, height, transform, opacity;
+        display: grid;
+        place-items: center;
+      }
+
+      .launchLogo img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: contain;
+      }
+
+      .launchVersion {
+        position: absolute;
+        right: max(18px, env(safe-area-inset-right));
+        bottom: max(16px, env(safe-area-inset-bottom));
+        color: rgba(255,255,255,.34);
+        font-size: .72rem;
+        letter-spacing: .08em;
+        transition: opacity .25s ease;
+      }
+
+      body.launchPending > :not(#launchSplash) {
+        opacity: 0;
+      }
+
+      body.launchReady > :not(#launchSplash) {
+        opacity: 1;
+        transition: opacity .48s ease;
+      }
+
+      .launchSplash.isLeaving {
+        pointer-events: none;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .launchLogo {
+          transition: none !important;
+        }
+      }
+
+
+      .momntumWordmark img {
+        display: block;
+        width: auto;
+        height: 1.05em;
+        max-width: min(42vw, 190px);
+        object-fit: contain;
+      }
+
+
+      .title.momntumWordmark {
+        display: flex;
+        align-items: center;
+        line-height: 1;
+        min-width: 0;
+      }
+
+      .title.momntumWordmark > img {
+        display: block;
+        width: min(42vw, 190px);
+        height: auto;
+        max-height: 25px;
+        object-fit: contain;
+        object-position: left center;
+      }
+
 </style>
-  
-    <link rel="icon" href="momntum-icon.svg" type="image/svg+xml" />
-    <link rel="icon" href="momntum-icon-192.png" type="image/png" sizes="192x192" />
-    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-    <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22MOMNTUM%22%2C%22short_name%22%3A%22MOMNTUM%22%2C%22description%22%3A%22Personal%20offline%20calisthenics%20training%20companion.%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23000000%22%2C%22theme_color%22%3A%22%23000000%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22momntum-icon-192.png%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image/png%22%2C%22purpose%22%3A%22any%20maskable%22%7D%2C%7B%22src%22%3A%22momntum-icon-512.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image/png%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D" />
+    <link rel="icon" href="favicon.ico?v=0.3.3.5" sizes="any" />
+    <link rel="icon" href="momntum-mark.svg?v=0.3.3.5" type="image/svg+xml" />
+    <link rel="icon" href="favicon-32x32.png?v=0.3.3.5" type="image/png" sizes="32x32" />
+    <link rel="icon" href="favicon-16x16.png?v=0.3.3.5" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=0.3.3.5" sizes="180x180" />
+    <link rel="manifest" href="site.webmanifest?v=0.3.3.5" />
   </head>
   <body class="launchPending">
     <div id="launchSplash" class="launchSplash" aria-hidden="true">
-      <main class="cncSplash" aria-label="MOMNTUM laser-cut splash screen">
-        <svg id="logo" viewBox="0 0 1120 350" role="img" aria-labelledby="title desc">
-      <title id="title">MOMNTUM particle laser-cut animation</title>
-      <desc id="desc">Two white-hot cutting points trace the wordmark from both sides, shedding molten sparks downward before converging on the N.</desc>
-
-      <defs>
-        <linearGradient id="steelGradient" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#bdbdbd"/>
-          <stop offset="46%" stop-color="#858585"/>
-          <stop offset="100%" stop-color="#555"/>
-        </linearGradient>
-      </defs>
-
-      <g id="metalWord">
-        <path class="metal" d="M76 245V85H102L136 142L170 85H196V245H166V142L138 188H134L106 142V245Z"/>
-        <path class="metal" fill-rule="evenodd" d="M214 85H324V245H214ZM244 115V215H294V115Z"/>
-        <path class="metal" d="M342 245V85H368L402 142L436 85H462V245H432V142L404 188H400L372 142V245Z"/>
-        <path class="metal" d="M480 245V85H510L570 183V85H600V245H570L510 147V245Z"/>
-        <path class="metal" d="M618 85H748V115H698V245H668V115H618Z"/>
-        <path class="metal" fill-rule="evenodd" d="M766 85H796V205Q796 215 806 215H846Q856 215 856 205V85H886V208Q886 245 849 245H803Q766 245 766 208Z"/>
-        <path class="metal" d="M904 245V85H930L964 142L998 85H1024V245H994V142L966 188H962L934 142V245Z"/>
-      </g>
-
-      <g id="cuts">
-        <path class="cut left-cut" d="M76 245V85H102L136 142L170 85H196V245H166V142L138 188H134L106 142V245Z"/>
-        <path class="cut left-cut" fill-rule="evenodd" d="M214 85H324V245H214ZM244 115V215H294V115Z"/>
-        <path class="cut left-cut" d="M342 245V85H368L402 142L436 85H462V245H432V142L404 188H400L372 142V245Z"/>
-
-        <path class="cut right-cut" d="M904 245V85H930L964 142L998 85H1024V245H994V142L966 188H962L934 142V245Z"/>
-        <path class="cut right-cut" fill-rule="evenodd" d="M766 85H796V205Q796 215 806 215H846Q856 215 856 205V85H886V208Q886 245 849 245H803Q766 245 766 208Z"/>
-        <path class="cut right-cut" d="M618 85H748V115H698V245H668V115H618Z"/>
-
-        <path class="cut n-cut" d="M480 245V85H510L570 183V85H600V245H570L510 147V245Z"/>
-      </g>
-
-      <path class="n-final" id="nFinal"
-            d="M480 245V85H510L570 183V85H600V245H570L510 147V245Z"/>
-    </svg>
-        <canvas id="heatTrail" width="1120" height="350" aria-hidden="true"></canvas>
-        <canvas id="fx" width="1120" height="350" aria-hidden="true"></canvas>
-      </main>
-      <div class="launchPromise">No Ads, No Subscriptions, Yours forever</div>
-      <div class="launchVersion">v0.3.2.1</div>
+      <div id="launchLogo" class="launchLogo"><img src="momntum-mark.svg?v=0.3.3.5" alt="" draggable="false" /></div>
+      <div class="launchVersion">v0.3.3.5</div>
     </div>
 
     <div class="app" id="app">
       <header class="topbar">
         <div class="brand">
-          <div class="logo momntumAppIcon" aria-hidden="true">
-            <svg viewBox="0 0 64 64" focusable="false">
-              <defs>
-                <filter id="headerNGlow" x="-60%" y="-60%" width="220%" height="220%">
-                  <feGaussianBlur stdDeviation="2.5" result="wide" />
-                  <feGaussianBlur in="SourceGraphic" stdDeviation="0.8" result="tight" />
-                  <feMerge>
-                    <feMergeNode in="wide" />
-                    <feMergeNode in="tight" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-              <rect class="momntumIconPlate" x="1.5" y="1.5" width="61" height="61" rx="14" />
-              <path class="momntumIconGlow"
-                    d="M17 48V16h9l13 20V16h8v32h-9L25 28v20z" />
-              <path class="momntumIconEdge"
-                    d="M17 48V16h9l13 20V16h8v32h-9L25 28v20z" />
-            </svg>
+          <div class="logo momntumAppIcon" id="headerBrandLogo" aria-hidden="true">
+            <img src="momntum-mark.svg?v=0.3.3.5" alt="" draggable="false" />
           </div>
           <div>
-            <div class="title momntumWordmark" aria-label="MOMNTUM">
-              <span>MOM</span><span class="momntumN">N</span><span>TUM</span>
+            <div class="title momntumWordmark">
+              <img
+                src="momntum-wordmark-dark.svg?v=0.3.3.5"
+                alt="MOMNTUM"
+                draggable="false"
+              />
             </div>
             <div class="sub" id="todayLine">Personal offline calisthenics training companion.</div>
           </div>
@@ -1839,19 +1926,19 @@ body::before {
       const STORAGE_KEY = "homeStrength.v1";
       const APP_INFO = {
         name: "MOMNTUM",
-        version: "0.3.2.1",
-        buildDate: "28 July 2026",
+        version: "0.3.3.5",
+        buildDate: "29 July 2026",
         creator: "Mark Taylor",
         poweredBy: "Offline PWA • HTML • CSS • JavaScript",
         description: "Personal offline calisthenics training companion."
       };
       const CHANGELOG = [
         "Renamed Home Strength to MOMNTUM",
-        "Introduced the MOMNTUM wordmark and signature orange N",
+        "Introduced the new burnt-copper N>> brand identity",
         "Updated app, browser and PWA identity",
-        "Added the new MOMNTUM app icon",
+        "Added a complete new app icon and favicon set",
         "Rewritten About and product credits",
-        "Preserved the existing layout, data and workout behaviour"
+        "Replaced the laser-cut splash with the new animated logo transition"
       ];
       const quotes = [
         "Small reps, repeated often, become visible strength.",
@@ -3900,450 +3987,81 @@ body::before {
         systemThemeQuery.addListener(handleSystemThemeChange);
       }
 
-
-
-      function runLaunchExperience() {
-        return (async () => {
-      const canvas = document.getElementById('fx');
-      const ctx = canvas.getContext('2d');
-      const trailCanvas = document.getElementById('heatTrail');
-      const trailCtx = trailCanvas.getContext('2d');
-
-      const leftPaths = [...document.querySelectorAll('.left-cut')];
-      const rightPaths = [...document.querySelectorAll('.right-cut')];
-      const nPath = document.querySelector('.n-cut');
-      const metal = [...document.querySelectorAll('.metal')];
-      const nFinal = document.getElementById('nFinal');
-
-      let runToken = 0;
-      let particles = [];
-      let emitters = [];
-      let heatMarks = [];
-      let animationFrame = 0;
-
-      const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-
-      function resetPath(path) {
-        const length = path.getTotalLength();
-        path.style.strokeDasharray = `${length} ${length}`;
-        path.style.strokeDashoffset = `${length}`;
-        path.style.opacity = '0';
-        return length;
-      }
-
-      function clearFx() {
-        cancelAnimationFrame(animationFrame);
-        particles = [];
-        emitters = [];
-        heatMarks = [];
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        trailCtx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
-      }
-
-      function spawnSpark(emitter) {
-        const longShot = Math.random() < 0.055;
-        const bright = longShot || Math.random() < 0.26;
-        const spread = longShot ? 1.25 : 0.72;
-        const angle = Math.PI / 2 + (Math.random() - 0.5) * spread;
-        const speed = longShot
-          ? 300 + Math.random() * 170
-          : bright
-            ? 205 + Math.random() * 120
-            : 100 + Math.random() * 135;
-
-        particles.push({
-          x: emitter.x + (Math.random() - 0.5) * 2.5,
-          y: emitter.y + 2,
-          vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed,
-          life: longShot
-            ? 0.48 + Math.random() * 0.22
-            : bright
-              ? 0.34 + Math.random() * 0.22
-              : 0.20 + Math.random() * 0.22,
-          age: 0,
-          length: longShot
-            ? 24 + Math.random() * 24
-            : bright
-              ? 16 + Math.random() * 17
-              : 7 + Math.random() * 13,
-          width: longShot ? 2.0 : bright ? 1.75 : 1.0 + Math.random() * 0.65,
-          bright,
-          longShot
-        });
-
-        if (Math.random() < 0.12) {
-          particles.push({
-            x: emitter.x + (Math.random() - 0.5) * 3,
-            y: emitter.y + 3,
-            vx: (Math.random() - 0.5) * 90,
-            vy: 55 + Math.random() * 70,
-            life: 0.12 + Math.random() * 0.12,
-            age: 0,
-            length: 3 + Math.random() * 4,
-            width: 0.7,
-            bright: false,
-            longShot: false
-          });
-        }
-      }
-
-      function drawEmitter(emitter, time) {
-        const flicker = 0.90 + Math.random() * 0.20;
-        const pulse = 0.96 + Math.sin(time * 0.04 + emitter.phase) * 0.04;
-
-        const outerRadius = 15 + (Math.random() - 0.5) * 1.2;
-        const midRadius = 7.5 + (Math.random() - 0.5) * 0.8;
-        const coreRadius = 1.7 + Math.random() * 0.35;
-
-        // A very short directional heat smear trailing behind travel.
-        const dragLength = 5.5;
-        const dragX = -Math.cos(emitter.heading || 0) * dragLength;
-        const dragY = -Math.sin(emitter.heading || 0) * dragLength;
-
-        const smear = ctx.createLinearGradient(
-          emitter.x,
-          emitter.y,
-          emitter.x + dragX,
-          emitter.y + dragY
-        );
-        smear.addColorStop(0, `rgba(255,246,220,${0.42 * flicker})`);
-        smear.addColorStop(0.3, `rgba(255,202,116,${0.30 * flicker})`);
-        smear.addColorStop(0.72, `rgba(255,130,26,${0.16 * flicker})`);
-        smear.addColorStop(1, 'rgba(140,35,0,0)');
-
-        ctx.strokeStyle = smear;
-        ctx.lineWidth = 4.2;
-        ctx.lineCap = 'round';
-        ctx.beginPath();
-        ctx.moveTo(emitter.x, emitter.y);
-        ctx.lineTo(emitter.x + dragX, emitter.y + dragY);
-        ctx.stroke();
-
-        // Small, low-opacity outer heat bloom.
-        const outer = ctx.createRadialGradient(
-          emitter.x, emitter.y, 0,
-          emitter.x, emitter.y, outerRadius
-        );
-        outer.addColorStop(0, `rgba(255,255,246,${0.26 * flicker})`);
-        outer.addColorStop(0.16, `rgba(255,232,184,${0.28 * flicker})`);
-        outer.addColorStop(0.42, `rgba(255,178,76,${0.21 * flicker})`);
-        outer.addColorStop(0.72, `rgba(255,103,10,${0.10 * flicker})`);
-        outer.addColorStop(1, 'rgba(120,20,0,0)');
-
-        ctx.fillStyle = outer;
-        ctx.beginPath();
-        ctx.arc(emitter.x, emitter.y, outerRadius, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Intense incandescent inner halo.
-        const mid = ctx.createRadialGradient(
-          emitter.x, emitter.y, 0,
-          emitter.x, emitter.y, midRadius
-        );
-        mid.addColorStop(0, `rgba(255,255,255,${1.0 * flicker})`);
-        mid.addColorStop(0.22, `rgba(255,251,228,${0.98 * flicker})`);
-        mid.addColorStop(0.50, `rgba(255,221,146,${0.86 * flicker})`);
-        mid.addColorStop(0.78, `rgba(255,158,48,${0.50 * flicker})`);
-        mid.addColorStop(1, 'rgba(255,92,0,0)');
-
-        ctx.fillStyle = mid;
-        ctx.beginPath();
-        ctx.arc(emitter.x, emitter.y, midRadius, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Tiny, violently bright cutting arc.
-        ctx.fillStyle = `rgba(255,255,255,${Math.min(1, flicker * pulse)})`;
-        ctx.beginPath();
-        ctx.arc(emitter.x, emitter.y, coreRadius, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      function addHeatMark(x, y) {
-        heatMarks.push({
-          x,
-          y,
-          age: 0,
-          life: 0.42,
-          radius: 3.4 + Math.random() * 1.0
-        });
-      }
-
-      function drawHeatTrail(dt) {
-        trailCtx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
-        trailCtx.globalCompositeOperation = 'lighter';
-
-        heatMarks = heatMarks.filter(mark => {
-          mark.age += dt;
-          if (mark.age >= mark.life) return false;
-
-          const t = mark.age / mark.life;
-          const alpha = 1 - t;
-          const radius = mark.radius + t * 2.5;
-
-          const gradient = trailCtx.createRadialGradient(
-            mark.x, mark.y, 0,
-            mark.x, mark.y, radius
-          );
-
-          if (t < 0.18) {
-            gradient.addColorStop(0, `rgba(255,255,248,${0.82 * alpha})`);
-            gradient.addColorStop(0.32, `rgba(255,232,178,${0.72 * alpha})`);
-            gradient.addColorStop(0.70, `rgba(255,130,18,${0.52 * alpha})`);
-          } else if (t < 0.55) {
-            gradient.addColorStop(0, `rgba(255,204,108,${0.68 * alpha})`);
-            gradient.addColorStop(0.42, `rgba(255,118,10,${0.52 * alpha})`);
-            gradient.addColorStop(0.82, `rgba(180,45,0,${0.24 * alpha})`);
-          } else {
-            gradient.addColorStop(0, `rgba(255,106,8,${0.52 * alpha})`);
-            gradient.addColorStop(0.55, `rgba(164,39,0,${0.36 * alpha})`);
-            gradient.addColorStop(1, 'rgba(90,15,0,0)');
-          }
-
-          gradient.addColorStop(1, 'rgba(255,60,0,0)');
-          trailCtx.fillStyle = gradient;
-          trailCtx.beginPath();
-          trailCtx.arc(mark.x, mark.y, radius, 0, Math.PI * 2);
-          trailCtx.fill();
-
-          return true;
-        });
-
-        trailCtx.globalCompositeOperation = 'source-over';
-      }
-
-      function animateFx(token, last = performance.now()) {
-        const now = performance.now();
-        const dt = Math.min((now - last) / 1000, 0.033);
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        drawHeatTrail(dt);
-        ctx.globalCompositeOperation = 'lighter';
-
-        emitters.forEach(emitter => {
-          if (!emitter.active) return;
-          drawEmitter(emitter, now);
-
-          emitter.accumulator += dt * 82;
-          while (emitter.accumulator >= 1) {
-            spawnSpark(emitter);
-            emitter.accumulator -= 1;
-          }
-        });
-
-        const gravity = 320;
-
-        particles = particles.filter(p => {
-          p.age += dt;
-          if (p.age >= p.life) return false;
-
-          p.vy += gravity * dt;
-          p.x += p.vx * dt;
-          p.y += p.vy * dt;
-
-          const alpha = 1 - p.age / p.life;
-          const speed = Math.hypot(p.vx, p.vy) || 1;
-          const tx = p.x - (p.vx / speed) * p.length;
-          const ty = p.y - (p.vy / speed) * p.length;
-
-          ctx.strokeStyle = p.bright
-            ? `rgba(255,245,225,${alpha})`
-            : `rgba(255,116,20,${alpha * 0.95})`;
-          ctx.lineWidth = p.width;
-          ctx.lineCap = 'round';
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(tx, ty);
-          ctx.stroke();
-
-          return true;
-        });
-
-        ctx.globalCompositeOperation = 'source-over';
-
-        if (token === runToken) {
-          animationFrame = requestAnimationFrame(() => animateFx(token, now));
-        }
-      }
-
-      function createEmitter() {
-        return {
-          x: 0,
-          y: 0,
-          active: false,
-          accumulator: 0,
-          phase: Math.random() * Math.PI * 2,
-          heading: 0,
-          lastX: null,
-          lastY: null
-        };
-      }
-
-      function tracePath(path, emitter, duration, token, reverse = false) {
-        const length = resetPath(path);
-        path.style.opacity = '1';
-        emitter.active = true;
-
-        const started = performance.now();
-
-        return new Promise(resolve => {
-          function frame(now) {
-            if (token !== runToken) {
-              resolve();
-              return;
-            }
-
-            const progress = Math.min((now - started) / duration, 1);
-            path.style.strokeDashoffset = `${length * (1 - progress)}`;
-
-            const distance = reverse
-              ? length * (1 - progress)
-              : length * progress;
-
-            const point = path.getPointAtLength(distance);
-
-            // Tiny machine vibration so the hot spot feels less like a cursor.
-            const jitterX = (Math.random() - 0.5) * 0.75;
-            const jitterY = (Math.random() - 0.5) * 0.75;
-
-            let nextX = point.x + jitterX;
-            let nextY = point.y + jitterY;
-
-            if (emitter.lastX !== null && emitter.lastY !== null) {
-              emitter.heading = Math.atan2(nextY - emitter.lastY, nextX - emitter.lastX);
-
-              // Place the arc just ahead of the visible hot trail.
-              nextX += Math.cos(emitter.heading) * 0.9;
-              nextY += Math.sin(emitter.heading) * 0.9;
-            }
-
-            emitter.x = nextX;
-            emitter.y = nextY;
-            emitter.lastX = nextX;
-            emitter.lastY = nextY;
-
-            if (Math.random() < 0.74) {
-              addHeatMark(
-                emitter.x - Math.cos(emitter.heading) * 1.6,
-                emitter.y - Math.sin(emitter.heading) * 1.6
-              );
-            }
-
-            if (progress < 1) {
-              requestAnimationFrame(frame);
-            } else {
-              resolve();
-            }
-          }
-
-          requestAnimationFrame(frame);
-        });
-      }
-
-      async function runToolpath(paths, emitter, token, reverse = false) {
-        for (const path of paths) {
-          if (token !== runToken) return;
-          await tracePath(path, emitter, 280, token, reverse);
-          await sleep(28);
-        }
-      }
-
-      async function play() {
-        runToken += 1;
-        const token = runToken;
-
-        document.getAnimations().forEach(animation => animation.cancel());
-        clearFx();
-
-        [...leftPaths, ...rightPaths, nPath].forEach(resetPath);
-        metal.forEach(path => path.style.opacity = '0.12');
-        nFinal.style.opacity = '0';
-
-        const leftEmitter = createEmitter();
-        const rightEmitter = createEmitter();
-        emitters = [leftEmitter, rightEmitter];
-        animationFrame = requestAnimationFrame(() => animateFx(token));
-
-        await sleep(100);
-        if (token !== runToken) return;
-
-        await Promise.all([
-          runToolpath(leftPaths, leftEmitter, token, false),
-          runToolpath(rightPaths, rightEmitter, token, true)
-        ]);
-
-        if (token !== runToken) return;
-
-        await Promise.all([
-          tracePath(nPath, leftEmitter, 420, token, false),
-          tracePath(nPath, rightEmitter, 420, token, true)
-        ]);
-
-        leftEmitter.active = false;
-        rightEmitter.active = false;
-
-        await sleep(120);
-        if (token !== runToken) return;
-
-        [...leftPaths, ...rightPaths, nPath].forEach(path => {
-          path.animate(
-            [
-              { opacity: 1, stroke: '#ff6500' },
-              { opacity: .8, stroke: '#e75300', offset: .5 },
-              { opacity: 0, stroke: '#9b3400' }
-            ],
-            { duration: 180, fill: 'forwards', easing: 'ease-out' }
-          );
-        });
-
-        metal.forEach(path => {
-          path.animate(
-            [{ opacity: 0.12 }, { opacity: 0.48, offset: 0.45 }, { opacity: 1 }],
-            { duration: 260, fill: 'forwards', easing: 'ease-out' }
-          );
-        });
-
-        nFinal.animate(
-          [
-            { opacity: 0 },
-            { opacity: 1, offset: .55 },
-            { opacity: .95 }
-          ],
-          { duration: 240, fill: 'forwards', easing: 'ease-out' }
-        );
-
-        await sleep(520);
-        return true;
-      }
-
-          return play();
-        })();
-      }
-
-      async function completeLaunchExperience() {
+      function completeLaunchExperience() {
         const splash = document.getElementById("launchSplash");
+        const launchLogo = document.getElementById("launchLogo");
+        const headerLogo = document.getElementById("headerBrandLogo");
+        const version = splash?.querySelector(".launchVersion");
 
-        try {
-          await runLaunchExperience();
-        } catch (error) {
-          console.warn("Launch animation skipped:", error);
+        if (!splash || !launchLogo || !headerLogo) {
+          document.body.classList.remove("launchPending");
+          return;
         }
 
-        document.body.classList.remove("launchPending");
-        document.body.classList.add("launchReady");
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const settle = () => {
+          const target = headerLogo.getBoundingClientRect();
+          const source = launchLogo.getBoundingClientRect();
+          const targetSize = Math.max(target.width, target.height);
+          const targetCentreX = target.left + target.width / 2;
+          const targetCentreY = target.top + target.height / 2;
 
-        if (!splash) return;
+          document.body.classList.remove("launchPending");
+          document.body.classList.add("launchReady");
 
-        requestAnimationFrame(() => {
-          splash.classList.add("isLeaving");
-        });
+          if (reduceMotion) {
+            splash.remove();
+            document.body.classList.remove("launchReady");
+            return;
+          }
 
-        window.setTimeout(() => {
-          splash.remove();
-          document.body.classList.remove("launchReady");
-          document.body.style.removeProperty("overflow");
-          document.documentElement.style.removeProperty("overflow");
-        }, 780);
+          version?.animate([{ opacity: 1 }, { opacity: 0 }], {
+            duration: 220,
+            fill: "forwards",
+            easing: "ease-out"
+          });
+
+          const dx = targetCentreX - (source.left + source.width / 2);
+          const dy = targetCentreY - (source.top + source.height / 2);
+          const scale = targetSize / source.width;
+
+          launchLogo.animate(
+            [
+              {
+                transform: "translate(-50%, -50%) rotate(0deg) scale(1)",
+                opacity: 1,
+                offset: 0
+              },
+              {
+                transform: "translate(calc(-50% + " + (dx * 1.045) + "px), calc(-50% + " + (dy * 1.045) + "px)) rotate(-3deg) scale(" + (scale * 0.96) + ")",
+                opacity: 1,
+                offset: 0.82
+              },
+              {
+                transform: "translate(calc(-50% + " + dx + "px), calc(-50% + " + dy + "px)) rotate(0deg) scale(" + scale + ")",
+                opacity: 1,
+                offset: 1
+              }
+            ],
+            {
+              duration: 1120,
+              delay: 420,
+              fill: "forwards",
+              easing: "cubic-bezier(.22,1,.36,1)"
+            }
+          ).finished.then(() => {
+            splash.animate([{ opacity: 1 }, { opacity: 0 }], {
+              duration: 180,
+              fill: "forwards",
+              easing: "ease-out"
+            }).finished.then(() => {
+              splash.remove();
+              document.body.classList.remove("launchReady");
+            });
+          });
+        };
+
+        requestAnimationFrame(() => requestAnimationFrame(settle));
       }
 
       if (document.readyState === "complete") {
@@ -4352,16 +4070,14 @@ body::before {
         window.addEventListener("load", completeLaunchExperience, { once: true });
       }
 
-
-
       window.setTimeout(() => {
         const splash = document.getElementById("launchSplash");
         if (!splash) return;
         document.body.classList.remove("launchPending");
         document.body.classList.add("launchReady");
-        splash.classList.add("isLeaving");
-        window.setTimeout(() => splash.remove(), 800);
-      }, 7000);
+        splash.remove();
+        document.body.classList.remove("launchReady");
+      }, 5000);
 
 </script>
   </body>

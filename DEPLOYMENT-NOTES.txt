@@ -1,0 +1,5 @@
+MOMNTUM retraced deployment — version 0.3.3.5
+
+The HTML header now uses momntum-wordmark-dark.svg directly.
+The splash and standalone header icon use the retraced momntum-mark.svg.
+Upload all files together so the relative asset references continue to work.
