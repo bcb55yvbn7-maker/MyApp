@@ -1279,6 +1279,13 @@ body::before {
         color: var(--muted);
       }
 
+      html[data-mode="light"] #page-active > .card {
+        background: var(--card);
+        border-color: rgba(23, 32, 51, 0.14);
+        outline: none;
+        box-shadow: none;
+      }
+
       html[data-mode="light"] #page-settings .card {
         background: var(--card);
         border-color: rgba(23, 32, 51, 0.14);
@@ -2167,6 +2174,17 @@ body::before {
         }
       }
 
+
+.dayScroller{display:none!important;}
+.workoutDaysScroller{display:none!important;}
+.daysScroller{display:none!important;}
+.horizontalDays{display:none!important;}
+
+      html[data-mode="light"] #page-active #workoutNotes {
+        background: var(--card2);
+        border: 1px solid rgba(23, 32, 51, 0.22);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78);
+      }
 </style>
     <link rel="icon" href="favicon.ico?v=0.3.3.10" sizes="any" />
     <link rel="icon" href="momntum-mark.svg?v=0.3.3.10" type="image/svg+xml" />
@@ -2265,7 +2283,7 @@ body::before {
 
     <div id="launchSplash" class="launchSplash" aria-hidden="true">
       <div id="launchLogo" class="launchLogo"><img src="momntum-mark.svg?v=0.3.3.10" alt="" draggable="false" /></div>
-      <div class="launchVersion">v0.4.0.1</div>
+      <div class="launchVersion">v0.4.0.2</div>
     </div>
 
     <div class="app" id="app">
@@ -2355,10 +2373,9 @@ body::before {
         <section class="page" id="page-workouts">
           <h1>Workouts</h1>
           <p class="muted" style="margin: 8px 0 14px">
-            Four core sessions plus optional conditioning and mobility.
+            Four focussed sessions plus general conditioning and mobility.
           </p>
-          <div class="tabs" id="workoutTabs"></div>
-          <div id="workoutList" class="grid wideGrid"></div>
+                    <div id="workoutList" class="grid wideGrid"></div>
         </section>
         <section class="page" id="page-active">
           <div class="timerPanel" aria-label="Workout timer">
@@ -2752,7 +2769,7 @@ body::before {
       const STORAGE_KEY = "homeStrength.v1";
       const APP_INFO = {
         name: "MOMNTUM",
-        version: "0.4.0.1",
+        version: "0.4.0.2",
         buildDate: "29 July 2026",
         creator: "Mark Taylor",
         poweredBy: "Offline PWA • HTML • CSS • JavaScript",
@@ -3890,7 +3907,7 @@ body::before {
         },
         {
           id: "conditioning",
-          day: "Optional Day 5",
+          day: "Day 5",
           title: "Conditioning & Mobility",
           duration: 28,
           equipment: "Gympro resistance band, bodyweight",
@@ -4197,13 +4214,6 @@ body::before {
         $("statExercises").textContent = state.stats.totalExercises;
       }
       function renderWorkouts() {
-        if (!$("workoutTabs").children.length)
-          $("workoutTabs").innerHTML = workouts
-            .map(
-              (w) =>
-                `<button class="chip" data-wtab="${w.id}">${w.day}</button>`,
-            )
-            .join("");
         $("workoutList").innerHTML = workouts
           .map(
             (w) =>
