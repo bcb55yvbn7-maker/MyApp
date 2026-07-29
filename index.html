@@ -1775,6 +1775,219 @@ body::before {
         box-shadow: none !important;
       }
 
+
+      /* Modular tester install gate
+         Disable by setting TESTER_INSTALL_GATE.enabled to false. */
+      .testerInstallGate {
+        position: fixed;
+        inset: 0;
+        z-index: 100000;
+        display: none;
+        overflow-y: auto;
+        padding:
+          max(28px, env(safe-area-inset-top))
+          22px
+          max(30px, env(safe-area-inset-bottom));
+        background:
+          radial-gradient(circle at 50% 4%, rgba(198, 90, 30, 0.16), transparent 34%),
+          #050505;
+        color: #f7f7f8;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      body.installGateActive {
+        background: #050505;
+      }
+
+      body.installGateActive .testerInstallGate {
+        display: grid;
+        place-items: center;
+      }
+
+      body.installGateActive > :not(#testerInstallGate) {
+        display: none !important;
+      }
+
+      .testerInstallCard {
+        width: min(100%, 440px);
+        text-align: center;
+      }
+
+      .testerInstallMark {
+        width: 96px;
+        height: 96px;
+        margin: 0 auto 20px;
+        display: grid;
+        place-items: center;
+        border-radius: 24px;
+        background: #000;
+        border: 1px solid rgba(255, 255, 255, 0.10);
+      }
+
+      .testerInstallMark img {
+        width: 76px;
+        height: 76px;
+        display: block;
+        object-fit: contain;
+      }
+
+      .testerInstallWordmark {
+        width: min(76vw, 250px);
+        height: auto;
+        display: block;
+        margin: 0 auto 14px;
+      }
+
+      .testerInstallTitle {
+        margin: 0;
+        color: #fff;
+        font-size: clamp(27px, 7vw, 34px);
+        line-height: 1.08;
+        letter-spacing: -0.7px;
+      }
+
+      .testerInstallSteps {
+        margin: 28px 0 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 12px;
+        text-align: left;
+      }
+
+      .testerInstallStep {
+        display: grid;
+        grid-template-columns: 74px minmax(0, 1fr);
+        align-items: center;
+        gap: 14px;
+        min-height: 88px;
+        padding: 12px 15px 12px 12px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.055);
+        border: 1px solid rgba(255, 255, 255, 0.09);
+      }
+
+      .testerInstallStepIcon {
+        width: 64px;
+        min-width: 64px;
+        height: 64px;
+        display: grid;
+        place-items: center;
+        color: #f7f7f8;
+      }
+
+      .testerInstallStepIcon svg {
+        width: 48px;
+        height: 48px;
+        display: block;
+        overflow: visible;
+        stroke: currentColor;
+      }
+
+      .testerInstallStepText {
+        color: #fff;
+        font-size: 16px;
+        line-height: 1.35;
+        font-weight: 700;
+      }
+
+      .testerInstallAddButton {
+        min-width: 62px;
+        height: 38px;
+        padding: 0 15px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 11px;
+        background: #0a84ff;
+        color: #fff;
+        font-size: 17px;
+        line-height: 1;
+        font-weight: 700;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+      }
+
+      .testerInstallInstalled {
+        margin: 24px auto 0;
+        max-width: 32ch;
+        color: rgba(255, 255, 255, 0.68);
+        font-size: 15px;
+        line-height: 1.45;
+      }
+
+      .testerInstallOpenPrompt {
+        margin: 22px 0 0;
+        padding-top: 22px;
+        border-top: 1px solid rgba(255, 255, 255, 0.09);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        color: #fff;
+        font-size: 16px;
+        line-height: 1.35;
+        font-weight: 750;
+        text-align: left;
+      }
+
+      .testerInstallOpenPrompt img {
+        width: 52px;
+        height: 52px;
+        flex: 0 0 52px;
+        display: block;
+        object-fit: contain;
+        border-radius: 13px;
+        background: #000;
+        border: 1px solid rgba(255, 255, 255, 0.10);
+      }
+
+      .testerInstallBrowserNote {
+        display: none;
+        margin: 16px auto 0;
+        max-width: 34ch;
+        color: rgba(255, 255, 255, 0.56);
+        font-size: 13px;
+        line-height: 1.45;
+      }
+
+      .testerBrowserPreview {
+        display: none;
+        width: 100%;
+        min-height: 48px;
+        margin-top: 18px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.10);
+        color: #fff;
+        font-weight: 800;
+      }
+
+      body.installGatePreviewAllowed .testerBrowserPreview {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      body.installGateNonSafari .testerInstallBrowserNote {
+        display: block;
+      }
+
+      @media (max-width: 380px) {
+        .testerInstallStep {
+          grid-template-columns: 60px minmax(0, 1fr);
+        }
+
+        .testerInstallStepIcon {
+          width: 54px;
+          min-width: 54px;
+        }
+
+        .testerInstallStepIcon svg {
+          width: 42px;
+          height: 42px;
+        }
+      }
+
 </style>
     <link rel="icon" href="favicon.ico?v=0.3.3.10" sizes="any" />
     <link rel="icon" href="momntum-mark.svg?v=0.3.3.10" type="image/svg+xml" />
@@ -1783,7 +1996,89 @@ body::before {
     <link rel="apple-touch-icon" href="apple-touch-icon.png?v=0.3.3.10" sizes="180x180" />
     <link rel="manifest" href="site.webmanifest?v=0.3.3.10" />
   </head>
+
   <body class="launchPending">
+    <script>
+      /* Tester install gate configuration.
+         Set enabled to false when this temporary web-testing phase ends. */
+      window.TESTER_INSTALL_GATE = Object.freeze({
+        enabled: true,
+        allowBrowserPreview: false
+      });
+
+      (function initialiseTesterInstallGate() {
+        const standalone =
+          window.matchMedia("(display-mode: standalone)").matches ||
+          window.navigator.standalone === true;
+        const config = window.TESTER_INSTALL_GATE;
+
+        if (config.enabled && !standalone) {
+          document.body.classList.add("installGateActive");
+          if (config.allowBrowserPreview) {
+            document.body.classList.add("installGatePreviewAllowed");
+          }
+        }
+      })();
+    </script>
+
+    <section id="testerInstallGate" class="testerInstallGate" aria-labelledby="testerInstallTitle">
+      <div class="testerInstallCard">
+        <div class="testerInstallMark" aria-hidden="true">
+          <img src="momntum-mark.svg?v=0.3.3.10" alt="" draggable="false" />
+        </div>
+        <img
+          class="testerInstallWordmark"
+          src="momntum-wordmark-dark.svg?v=0.3.3.10"
+          alt="MOMNTUM"
+          draggable="false"
+        />
+        <h1 id="testerInstallTitle" class="testerInstallTitle">Install MOMNTUM</h1>
+
+        <ol id="testerInstallSteps" class="testerInstallSteps">
+          <li class="testerInstallStep">
+            <span class="testerInstallStepIcon" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none">
+                <path d="M32 6v32" stroke-width="4" stroke-linecap="round" />
+                <path d="M22 16 32 6l10 10" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M22 24H15a6 6 0 0 0-6 6v21a6 6 0 0 0 6 6h34a6 6 0 0 0 6-6V30a6 6 0 0 0-6-6h-7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <div class="testerInstallStepText">Open the share sheet.</div>
+          </li>
+          <li class="testerInstallStep">
+            <span class="testerInstallStepIcon" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none">
+                <rect x="9" y="9" width="46" height="46" rx="11" stroke-width="3.5" />
+                <path d="M32 20v24M20 32h24" stroke-width="4" stroke-linecap="round" />
+              </svg>
+            </span>
+            <div class="testerInstallStepText">Tap Add to Home Screen</div>
+          </li>
+          <li class="testerInstallStep">
+            <span class="testerInstallStepIcon" aria-hidden="true">
+              <span class="testerInstallAddButton">Add</span>
+            </span>
+            <div class="testerInstallStepText">Tap Add.</div>
+          </li>
+        </ol>
+
+        <p class="testerInstallInstalled">MOMNTUM will now be installed to your device.</p>
+
+        <p class="testerInstallOpenPrompt">
+          <img src="momntum-mark.svg?v=0.3.3.10" alt="" draggable="false" />
+          <span>Now open MOMNTUM from your home screen</span>
+        </p>
+
+        <p id="testerInstallBrowserNote" class="testerInstallBrowserNote">
+          On iPhone and iPad, open this page in Safari before following these steps.
+        </p>
+
+        <button id="testerBrowserPreview" class="testerBrowserPreview" type="button">
+          Continue in browser
+        </button>
+      </div>
+    </section>
+
     <div id="launchSplash" class="launchSplash" aria-hidden="true">
       <div id="launchLogo" class="launchLogo"><img src="momntum-mark.svg?v=0.3.3.10" alt="" draggable="false" /></div>
       <div class="launchVersion">v0.3.3.10</div>
@@ -2210,6 +2505,33 @@ body::before {
       </div>
     </dialog>
     <script>
+
+      function configureTesterInstallGate() {
+        const gate = document.getElementById("testerInstallGate");
+        if (!gate || !document.body.classList.contains("installGateActive")) return;
+
+        const ua = navigator.userAgent;
+        const isIOS = /iPad|iPhone|iPod/.test(ua) ||
+          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+        const isSafari = /Safari/.test(ua) && !/CriOS|FxiOS|EdgiOS|OPiOS/.test(ua);
+        const preview = document.getElementById("testerBrowserPreview");
+
+        document.body.classList.toggle("installGateNonSafari", isIOS && !isSafari);
+
+        preview?.addEventListener("click", () => {
+          document.body.classList.remove(
+            "installGateActive",
+            "installGatePreviewAllowed",
+            "installGateNonSafari",
+            "launchPending"
+          );
+          document.body.classList.add("launchReady");
+          document.getElementById("launchSplash")?.remove();
+          window.setTimeout(() => document.body.classList.remove("launchReady"), 500);
+        });
+      }
+
+      configureTesterInstallGate();
 
       // Prevent iOS pinch and gesture zooming in the installed PWA.
       ["gesturestart", "gesturechange", "gestureend"].forEach((eventName) => {
@@ -4299,6 +4621,12 @@ body::before {
       }
 
       function completeLaunchExperience() {
+        if (document.body.classList.contains("installGateActive")) {
+          document.getElementById("launchSplash")?.remove();
+          document.body.classList.remove("launchPending", "launchReady");
+          return;
+        }
+
         const splash = document.getElementById("launchSplash");
         const launchLogo = document.getElementById("launchLogo");
         const headerLogo = document.getElementById("headerBrandLogo");
