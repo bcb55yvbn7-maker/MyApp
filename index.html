@@ -2273,6 +2273,10 @@ body::before {
       .switchControl input:disabled + .switchTrack { opacity: .45; cursor: not-allowed; }
       .resolvedExerciseList { line-height: 1.55; }
 
+
+      [data-mode="light"] .toast {
+        color: #fff !important;
+      }
 </style>
     <link rel="icon" href="favicon.ico?v=0.3.3.10" sizes="any" />
     <link rel="icon" href="momntum-mark.svg?v=0.3.3.10" type="image/svg+xml" />
@@ -2371,7 +2375,7 @@ body::before {
 
     <div id="launchSplash" class="launchSplash" aria-hidden="true">
       <div id="launchLogo" class="launchLogo"><img src="momntum-mark.svg?v=0.3.3.10" alt="" draggable="false" /></div>
-      <div class="launchVersion">v0.5.0</div>
+      <div class="launchVersion">v0.5.1</div>
     </div>
 
     <div class="app" id="app">
@@ -2593,7 +2597,7 @@ body::before {
           <h1>Settings</h1>
           <div class="stack" style="margin-top: 14px">
             <div class="card">
-              <h3>Training preferences</h3>
+              <h3>Preferences</h3>
               <div class="grid two" style="margin-top: 12px">
                 <label
                   >Rest duration<select id="restDuration">
@@ -2633,10 +2637,11 @@ body::before {
             </div>
             <div class="card" id="equipmentSettingsCard">
               <h3>My equipment</h3>
-              <p class="small" style="margin-top:6px">Choose everything available to you. “No equipment” is exclusive and cannot be combined with another choice.</p>
+              <p class="small" style="margin-top:6px">Choose everything available to you. Bodyweight is exclusive and cannot be combined with equipment.</p>
               <div class="equipmentOptions" id="equipmentOptions">
-                <label class="equipmentOption"><input type="checkbox" value="none" data-equipment-choice><span class="equipmentOptionText"><strong>No equipment</strong><small>Bodyweight-only workout variations</small></span></label>
-                <label class="equipmentOption"><input type="checkbox" value="bands" data-equipment-choice><span class="equipmentOptionText"><strong>Resistance bands</strong><small>GymPro or equivalent resistance bands</small></span></label>
+                <label class="equipmentOption"><input type="checkbox" value="none" data-equipment-choice><span class="equipmentOptionText"><strong>Bodyweight</strong><small>Bodyweight required</small></span></label>
+                <label class="equipmentOption"><input type="checkbox" value="bandsFixed" data-equipment-choice><span class="equipmentOptionText"><strong>Resistance Bands (Fixed)</strong><small>Exercises using a door, wall or other secure anchor point</small></span></label>
+                <label class="equipmentOption"><input type="checkbox" value="bandsFree" data-equipment-choice><span class="equipmentOptionText"><strong>Resistance Bands (Free)</strong><small>Exercises performed by holding or standing on the bands</small></span></label>
                 <label class="equipmentOption"><input type="checkbox" value="dumbbells" data-equipment-choice><span class="equipmentOptionText"><strong>Dumbbells</strong><small>One or two adjustable or fixed dumbbells</small></span></label>
                 <label class="equipmentOption"><input type="checkbox" value="kettlebell" data-equipment-choice><span class="equipmentOptionText"><strong>Kettlebell</strong><small>Single kettlebell movements</small></span></label>
                 <label class="equipmentOption"><input type="checkbox" value="pullup" data-equipment-choice><span class="equipmentOptionText"><strong>Pull-up bar</strong><small>Pull-ups, chin-ups and supported hangs</small></span></label>
@@ -2664,75 +2669,32 @@ body::before {
               </div>
             </div>
             <div class="card">
-              <h3>Data</h3>
-              <div class="grid two" style="margin-top: 12px">
-                <button class="btn ghost full" id="exportBtn">
-                  Export JSON</button
-                ><button class="btn ghost full" id="importBtn">
-                  Import JSON</button
-                ><input
-                  id="importFile"
-                  class="hidden"
-                  type="file"
-                  accept="application/json"
-                /><button class="btn danger full" id="resetDataBtn">
-                  Reset all data</button
-                ><button class="btn ghost full" id="saveSettingsBtn">
-                  Save settings
+              <h3>MOMNTUM</h3>
+              <p
+                id="appDescription"
+                class="small muted"
+                style="text-align:left;margin:6px 0 0;"
+              ></p>
+              <div class="aboutPromise">
+                No Ads • No Subscriptions • Yours Forever
+              </div>
+              <div class="row" style="margin-top:14px">
+                <span class="muted">Version</span>
+                <strong id="appVersion"></strong>
+              </div>
+              <div class="grid two" style="margin-top:14px">
+                <button class="btn secondary full" id="aboutBtn">About</button>
+                <button class="btn secondary full" onclick="showChangelog()">
+                  What's New
+                </button>
+                <button class="btn secondary full" onclick="refreshApp()">
+                  Check for Updates
+                </button>
+                <button class="btn danger full" id="resetSettingsBtn">
+                  Reset all settings
                 </button>
               </div>
-            </div>
-            <div class="card">
-
-                <h3>About MOMNTUM</h3>
-                    <p
-                        id="appDescription"
-                        class="small muted"
-                        style="text-align:left;margin:0;"
-                    ></p>
-                    <div class="aboutPromise">
-                        No Ads • No Subscriptions • Yours Forever
-                    </div>
-                    <hr>
-                   <div class="stack" style="margin-top:16px">
-
-                    <div class="row">
-                        <span class="muted">Version</span>
-                        <strong id="appVersion"></strong>
-                    </div>
-
-                    <div class="row">
-                        <span class="muted">Build</span>
-                        <strong id="appBuildDate"></strong>
-                    </div>
-
-                    <div class="row">
-                        <span class="muted">Design &amp; engineering</span>
-                        <strong id="appCreator"></strong>
-                    </div>
-
-                    <div class="row">
-                        <span class="muted">Platform</span>
-                        <strong id="appPoweredBy"></strong>
-                    </div>
-
-                    <button
-                        class="btn secondary"
-                        style="margin-top:12px"
-                        onclick="showChangelog()"
-                    >
-                        What's New
-                    </button>
-                    <button
-                        class="btn secondary"
-                        style="margin-top:12px"
-                        onclick="refreshApp()"
-                    >
-                        Check for Updates
-                    </button>
-                    <div id="updateStatus"></div>
-                </div>
-
+              <div id="updateStatus"></div>
             </div>
           </div>
         </section>
@@ -2802,6 +2764,35 @@ body::before {
       <div id="panelBody" style="margin-top: 14px"></div>
     </section>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <dialog id="aboutDialog">
+      <div class="dialogInner">
+        <div class="row">
+          <div>
+            <div class="kicker">MOMNTUM</div>
+            <h3 style="margin-top:4px">About</h3>
+          </div>
+          <button class="btn sm ghost" id="aboutCloseBtn">Close</button>
+        </div>
+        <div class="stack" style="margin-top:16px">
+          <div class="row">
+            <span class="muted">Version</span>
+            <strong id="aboutAppVersion"></strong>
+          </div>
+          <div class="row">
+            <span class="muted">Build</span>
+            <strong id="aboutAppBuildDate"></strong>
+          </div>
+          <div class="row">
+            <span class="muted">Design &amp; engineering</span>
+            <strong id="aboutAppCreator"></strong>
+          </div>
+          <div class="row">
+            <span class="muted">Platform</span>
+            <strong id="aboutAppPoweredBy"></strong>
+          </div>
+        </div>
+      </div>
+    </dialog>
     <dialog id="confirmDialog">
       <div class="dialogInner">
         <h3 id="confirmTitle">Confirm</h3>
@@ -2875,13 +2866,15 @@ body::before {
       const STORAGE_KEY = "homeStrength.v1";
       const APP_INFO = {
         name: "MOMNTUM",
-        version: "0.5.0",
+        version: "0.5.1",
         buildDate: "29 July 2026",
         creator: "Mark Taylor",
         poweredBy: "Offline PWA • HTML • CSS • JavaScript",
         description: "Personal offline calisthenics training companion."
       };
       const CHANGELOG = [
+        "Defaulted equipment to Bodyweight and separated fixed/free resistance bands",
+        "Simplified Settings and added a dedicated About panel",
         "Added equipment profiles and deterministic equipment-aware workouts",
         "Added per-workout equipment on/off controls",
         "Added expandable exercise cards with animated accent-aware chevrons",
@@ -3009,7 +3002,7 @@ body::before {
           "Beginner",
           "Chest",
           "Triceps, shoulders",
-          "Gympro resistance band",
+          "resistance resistance band",
           "Anchor band behind upper back and press hands forward.",
           "Wrists straight; squeeze chest; slow return.",
           "Letting band snap back; arching.",
@@ -3025,7 +3018,7 @@ body::before {
           "Beginner",
           "Shoulders",
           "Triceps, core",
-          "Gympro resistance band",
+          "resistance resistance band",
           "Stand on band, press handles overhead.",
           "Ribs down; finish biceps near ears.",
           "Leaning back; shrugging early.",
@@ -3041,7 +3034,7 @@ body::before {
           "Beginner",
           "Side delts",
           "Traps, rotator cuff",
-          "Gympro resistance band",
+          "resistance resistance band",
           "Stand on band and raise arms to shoulder height.",
           "Soft elbows; lead with elbows; pause briefly.",
           "Swinging; lifting too high.",
@@ -3057,7 +3050,7 @@ body::before {
           "Beginner",
           "Triceps",
           "Shoulders",
-          "Gympro resistance band",
+          "resistance resistance band",
           "Anchor band high, extend elbows down.",
           "Upper arms still; lock out smoothly.",
           "Moving shoulders; wrists bent.",
@@ -3105,7 +3098,7 @@ body::before {
           "Beginner",
           "Lats, mid-back",
           "Biceps, rear delts",
-          "Gympro resistance band",
+          "resistance resistance band",
           "Anchor band in front, row elbows back.",
           "Chest tall; squeeze shoulder blades; slow return.",
           "Shrugging; leaning back.",
@@ -3121,7 +3114,7 @@ body::before {
           "Beginner",
           "Mid-back",
           "Lats, biceps",
-          "Gympro resistance band",
+          "resistance resistance band",
           "Sit with band around feet, pull handles to ribs.",
           "Tall spine; pull elbows to pockets.",
           "Rounded back; jerky pulls.",
@@ -3137,7 +3130,7 @@ body::before {
           "Beginner",
           "Lats",
           "Biceps, lower traps",
-          "Gympro resistance band",
+          "resistance resistance band",
           "Anchor high, pull elbows down to sides.",
           "Drive elbows to ribs; avoid shrugging.",
           "Pulling with wrists; arching.",
@@ -3153,7 +3146,7 @@ body::before {
           "Beginner",
           "Rear delts",
           "Upper back, rotator cuff",
-          "Gympro resistance band",
+          "resistance resistance band",
           "Anchor at face height, pull towards forehead.",
           "Elbows high; rotate thumbs back.",
           "Lower-back arch; pulling too low.",
@@ -3169,7 +3162,7 @@ body::before {
           "Beginner",
           "Rear delts",
           "Upper back",
-          "Gympro resistance band",
+          "resistance resistance band",
           "Hold band at chest height and pull apart.",
           "Shoulders down; arms long; squeeze gently.",
           "Overarching; rushing.",
@@ -3233,7 +3226,7 @@ body::before {
           "Beginner",
           "Biceps",
           "Forearms",
-          "Gympro resistance band",
+          "resistance resistance band",
           "Stand on band and curl handles upward.",
           "Elbows fixed; wrists neutral; slow lower.",
           "Swinging; elbows drifting.",
@@ -3249,7 +3242,7 @@ body::before {
           "Beginner",
           "Brachialis",
           "Biceps, forearms",
-          "Gympro resistance band",
+          "resistance resistance band",
           "Curl with palms facing each other.",
           "Keep shoulders relaxed; control top.",
           "Leaning back; quick lowering.",
@@ -3281,7 +3274,7 @@ body::before {
           "Beginner",
           "Lats",
           "Triceps, core",
-          "Gympro resistance band",
+          "resistance resistance band",
           "Anchor high, pull straight arms to thighs.",
           "Ribs down; arms long; squeeze lats.",
           "Bending elbows too much; shrugging.",
@@ -3393,7 +3386,7 @@ body::before {
           "Beginner",
           "Hamstrings, glutes",
           "Back extensors",
-          "Gympro resistance band",
+          "resistance resistance band",
           "Band under feet and behind neck, hinge at hips.",
           "Push hips back; spine neutral.",
           "Squatting instead of hinging; rounded back.",
@@ -3409,7 +3402,7 @@ body::before {
           "Beginner",
           "Hamstrings",
           "Glutes, back",
-          "Gympro resistance band",
+          "resistance resistance band",
           "Stand on band, hinge and stand tall.",
           "Hips back; feel hamstrings; lock hips.",
           "Pulling with arms; rounding.",
@@ -3473,7 +3466,7 @@ body::before {
           "Beginner",
           "Quads, glutes",
           "Core",
-          "Gympro resistance band",
+          "resistance resistance band",
           "Stand on band, hold handles at shoulders, squat.",
           "Push knees out; control bottom.",
           "Losing band position; heels lifting.",
@@ -3601,7 +3594,7 @@ body::before {
           "Beginner",
           "Anti-rotation core",
           "Glutes, shoulders",
-          "Gympro resistance band",
+          "resistance resistance band",
           "Anchor to side, press band straight out and resist rotation.",
           "Brace; hips square; slow press.",
           "Leaning; shoulders rising.",
@@ -3617,7 +3610,7 @@ body::before {
           "Beginner",
           "Obliques",
           "Shoulders, hips",
-          "Gympro resistance band",
+          "resistance resistance band",
           "Anchor high or low, rotate through trunk under control.",
           "Rotate ribs and hips together; control return.",
           "Pulling only with arms; twisting knees.",
@@ -3857,7 +3850,7 @@ body::before {
           "Beginner",
           "Shoulders",
           "Chest, upper back",
-          "Gympro resistance band",
+          "resistance resistance band",
           "Hold band wide and move overhead and behind if comfortable.",
           "Wide grip; pain-free range.",
           "Forcing range; bent wrists.",
@@ -3873,7 +3866,7 @@ body::before {
           "Beginner",
           "Glute medius",
           "Hips, core",
-          "Gympro resistance band",
+          "resistance resistance band",
           "Band around legs if possible, step side to side.",
           "Knees out; hips level.",
           "Feet dragging; knees caving.",
@@ -3962,7 +3955,7 @@ body::before {
         ["Suitcase March", "Core Weight", "Beginner", "Core", "Grip, hips", "Dumbbell or kettlebell", "Hold one weight at the side and march slowly without leaning.", "Stay tall and resist side bending.", "Leaning toward or away from the load; rushing.", "30-45s each", "3", "45s", "Heavier load or slower march.", "Shorter holds."],
         ["Dumbbell Thruster", "Full Body Dumbbell", "Intermediate", "Quads", "Shoulders, glutes", "Dumbbells", "Squat with dumbbells at the shoulders, then stand and press overhead.", "Drive smoothly from legs into the press.", "Pressing too early; arching; losing squat form.", "8-12", "3", "75s", "Heavier dumbbells.", "Goblet squat to press."],
         ["Kettlebell Clean and Press", "Full Body Kettlebell", "Intermediate", "Shoulders", "Glutes, core", "Kettlebell", "Clean the kettlebell to the rack and press overhead.", "Keep the bell close and brace before pressing.", "Bell crashing; overextending; loose wrist.", "6-10 each", "3", "75s", "Heavier bell.", "Kettlebell strict press."],
-        ["Band Squat to Press", "Full Body Band", "Beginner", "Quads", "Shoulders, glutes", "Gympro resistance band", "Stand on the band with handles at shoulder height, squat, then stand and press overhead.", "Keep knees tracking over toes and transfer smoothly from the squat into the press.", "Pressing before standing; leaning back; losing band control.", "8-12", "3", "75s", "Use a stronger band or slower tempo.", "Band squat without the press."],
+        ["Band Squat to Press", "Full Body Band", "Beginner", "Quads", "Shoulders, glutes", "resistance resistance band", "Stand on the band with handles at shoulder height, squat, then stand and press overhead.", "Keep knees tracking over toes and transfer smoothly from the squat into the press.", "Pressing before standing; leaning back; losing band control.", "8-12", "3", "75s", "Use a stronger band or slower tempo.", "Band squat without the press."],
       ];
       supplementalExercises.forEach((e) => exercises.push({
         id: exercises.length + 1,
@@ -3972,8 +3965,9 @@ body::before {
       }));
 
       const equipmentLabels = {
-        none: "No equipment",
-        bands: "Resistance bands",
+        none: "Bodyweight",
+        bandsFixed: "Resistance Bands (Fixed)",
+        bandsFree: "Resistance Bands (Free)",
         dumbbells: "Dumbbells",
         kettlebell: "Kettlebell",
         pullup: "Pull-up bar",
@@ -3983,36 +3977,36 @@ body::before {
         push: {
           warm: [
             { none: "March in Place" }, { none: "Arm Circles" }, { none: "Scapular Push-up" },
-            { bands: "Band Pull-apart", none: "Prone W Raise" },
+            { bandsFree: "Band Pull-apart", none: "Prone W Raise" },
           ],
           main: [
-            { bands: "Band Chest Press", dumbbells: "Dumbbell Floor Press", none: "Incline Push-up" },
-            { bands: "Band Overhead Press", dumbbells: "Dumbbell Shoulder Press", kettlebell: "Kettlebell Clean and Press", none: "Pike Push-up" },
-            { bands: "Band Lateral Raise", dumbbells: "Dumbbell Lateral Raise", none: "Scapular Push-up" },
-            { bands: "Band Triceps Pressdown", dumbbells: "Dumbbell Overhead Triceps Extension", none: "Diamond Push-up" },
-            { bands: "Band Chest Press", dumbbells: "Dumbbell Floor Press", none: "Push-up" },
+            { bandsFixed: "Band Chest Press", dumbbells: "Dumbbell Floor Press", none: "Incline Push-up" },
+            { bandsFree: "Band Overhead Press", dumbbells: "Dumbbell Shoulder Press", kettlebell: "Kettlebell Clean and Press", none: "Pike Push-up" },
+            { bandsFree: "Band Lateral Raise", dumbbells: "Dumbbell Lateral Raise", none: "Scapular Push-up" },
+            { bandsFixed: "Band Triceps Pressdown", dumbbells: "Dumbbell Overhead Triceps Extension", none: "Diamond Push-up" },
+            { bandsFixed: "Band Chest Press", dumbbells: "Dumbbell Floor Press", none: "Push-up" },
             { none: "Close Grip Push-up" },
           ],
         },
         pull: {
           warm: [
-            { none: "March in Place" }, { none: "Cat Cow" }, { bands: "Band Pull-apart", none: "Prone W Raise" }, { none: "Hip Hinge Drill" },
+            { none: "March in Place" }, { none: "Cat Cow" }, { bandsFree: "Band Pull-apart", none: "Prone W Raise" }, { none: "Hip Hinge Drill" },
           ],
           main: [
-            { pullup: "Pull-up", bands: "Band Row", dumbbells: "One-arm Dumbbell Row", none: "Doorframe Row" },
-            { pullup: "Chin-up", bands: "Band Lat Pulldown", dumbbells: "Dumbbell Pullover", none: "Prone Lat Pull" },
-            { bands: "Band Face Pull", dumbbells: "Dumbbell Reverse Fly", none: "Prone Reverse Fly" },
-            { bands: "Band Straight-arm Pulldown", dumbbells: "Dumbbell Pullover", none: "Reverse Snow Angel" },
-            { pullup: "Chin-up", bands: "Band Biceps Curl", dumbbells: "Dumbbell Biceps Curl", none: "Self-resisted Biceps Curl" },
+            { pullup: "Pull-up", bandsFixed: "Band Row", dumbbells: "One-arm Dumbbell Row", none: "Doorframe Row" },
+            { pullup: "Chin-up", bandsFixed: "Band Lat Pulldown", dumbbells: "Dumbbell Pullover", none: "Prone Lat Pull" },
+            { bandsFixed: "Band Face Pull", dumbbells: "Dumbbell Reverse Fly", none: "Prone Reverse Fly" },
+            { bandsFixed: "Band Straight-arm Pulldown", dumbbells: "Dumbbell Pullover", none: "Reverse Snow Angel" },
+            { pullup: "Chin-up", bandsFree: "Band Biceps Curl", dumbbells: "Dumbbell Biceps Curl", none: "Self-resisted Biceps Curl" },
             { none: "Prone W Raise" },
           ],
         },
         legs: {
           warm: [{ none: "March in Place" }, { none: "Ankle Rocks" }, { none: "Hamstring Sweep" }, { none: "Hip Hinge Drill" }],
           main: [
-            { kettlebell: "Kettlebell Goblet Squat", dumbbells: "Goblet Squat", bands: "Band Squat", none: "Bodyweight Squat" },
+            { kettlebell: "Kettlebell Goblet Squat", dumbbells: "Goblet Squat", bandsFree: "Band Squat", none: "Bodyweight Squat" },
             { dumbbells: "Dumbbell Reverse Lunge", none: "Reverse Lunge" },
-            { kettlebell: "Kettlebell Deadlift", dumbbells: "Dumbbell Romanian Deadlift", bands: "Band Romanian Deadlift", none: "Hip Hinge Drill" },
+            { kettlebell: "Kettlebell Deadlift", dumbbells: "Dumbbell Romanian Deadlift", bandsFree: "Band Romanian Deadlift", none: "Hip Hinge Drill" },
             { none: "Glute Bridge" }, { none: "Wall Sit" }, { none: "Calf Raise" },
           ],
         },
@@ -4020,9 +4014,9 @@ body::before {
           warm: [{ none: "Inchworm" }, { none: "World's Greatest Stretch" }, { none: "Bird Dog" }],
           main: [
             { none: "Dead Bug" }, { none: "Plank" }, { none: "Side Plank" },
-            { bands: "Band Pallof Press", dumbbells: "Suitcase March", kettlebell: "Suitcase March", none: "Bird Dog" },
+            { bandsFixed: "Band Pallof Press", dumbbells: "Suitcase March", kettlebell: "Suitcase March", none: "Bird Dog" },
             { none: "Mountain Climber" },
-            { dumbbells: "Dumbbell Thruster", kettlebell: "Kettlebell Clean and Press", bands: "Band Squat to Press", none: "Squat Thrust" },
+            { dumbbells: "Dumbbell Thruster", kettlebell: "Kettlebell Clean and Press", bandsFree: "Band Squat to Press", none: "Squat Thrust" },
           ],
         },
         conditioning: {
@@ -4030,7 +4024,7 @@ body::before {
           main: [
             { kettlebell: "Kettlebell Swing", dumbbells: "Dumbbell Thruster", none: "Step Jack" },
             { none: "Shadow Boxing" }, { none: "Bear Crawl Hold" },
-            { bands: "Band Hip Abduction", kettlebell: "Suitcase March", dumbbells: "Suitcase March", none: "Glute Bridge" },
+            { bandsFree: "Band Hip Abduction", kettlebell: "Suitcase March", dumbbells: "Suitcase March", none: "Glute Bridge" },
             { none: "World's Greatest Stretch" }, { none: "Box Breathing" },
           ],
         },
@@ -4042,7 +4036,7 @@ body::before {
           day: "Day 1",
           title: "Push",
           duration: 36,
-          equipment: "Gympro resistance band, bodyweight",
+          equipment: "resistance resistance band, bodyweight",
           warm: [
             "March in Place",
             "Arm Circles",
@@ -4063,7 +4057,7 @@ body::before {
           day: "Day 2",
           title: "Pull",
           duration: 38,
-          equipment: "Gympro resistance band, towel optional",
+          equipment: "resistance resistance band, towel optional",
           warm: [
             "March in Place",
             "Cat Cow",
@@ -4084,7 +4078,7 @@ body::before {
           day: "Day 3",
           title: "Legs",
           duration: 40,
-          equipment: "Gympro resistance band, bodyweight",
+          equipment: "resistance resistance band, bodyweight",
           warm: [
             "March in Place",
             "Ankle Rocks",
@@ -4105,7 +4099,7 @@ body::before {
           day: "Day 4",
           title: "Core & Full Body",
           duration: 35,
-          equipment: "Gympro resistance band, bodyweight",
+          equipment: "resistance resistance band, bodyweight",
           warm: ["Inchworm", "World's Greatest Stretch", "Bird Dog"],
           main: [
             "Dead Bug",
@@ -4121,7 +4115,7 @@ body::before {
           day: "Day 5",
           title: "Conditioning & Mobility",
           duration: 28,
-          equipment: "Gympro resistance band, bodyweight",
+          equipment: "resistance resistance band, bodyweight",
           warm: ["March in Place", "Arm Circles", "Cat Cow"],
           main: [
             "Step Jack",
@@ -4180,8 +4174,8 @@ body::before {
           sound: "on",
           reminderDays: "Mon, Tue, Thu, Sat",
           reminderTime: "07:30",
-          equipmentProfile: ["bands"],
-          workoutEquipmentEnabled: { push: true, pull: true, legs: true, core: true, conditioning: true },
+          equipmentProfile: ["none"],
+          workoutEquipmentEnabled: { push: false, pull: false, legs: false, core: false, conditioning: false },
         },
         stats: {
           streak: 0,
@@ -4264,13 +4258,19 @@ body::before {
 
           delete loaded.settings.theme;
           if (!Array.isArray(loaded.settings.equipmentProfile) || !loaded.settings.equipmentProfile.length) {
-            loaded.settings.equipmentProfile = ["bands"];
+            loaded.settings.equipmentProfile = ["none"];
+          }
+          if (loaded.settings.equipmentProfile.includes("bands")) {
+            loaded.settings.equipmentProfile = loaded.settings.equipmentProfile
+              .filter((x) => x !== "bands")
+              .concat(["bandsFixed", "bandsFree"]);
+            loaded.settings.equipmentProfile = [...new Set(loaded.settings.equipmentProfile)];
           }
           if (loaded.settings.equipmentProfile.includes("none") && loaded.settings.equipmentProfile.length > 1) {
             loaded.settings.equipmentProfile = loaded.settings.equipmentProfile.filter((x) => x !== "none");
           }
           loaded.settings.workoutEquipmentEnabled = Object.assign(
-            { push: true, pull: true, legs: true, core: true, conditioning: true },
+            { push: false, pull: false, legs: false, core: false, conditioning: false },
             loaded.settings.workoutEquipmentEnabled || {},
           );
           return loaded;
@@ -4318,7 +4318,7 @@ body::before {
         return !!state.settings.workoutEquipmentEnabled?.[workoutId] && selectedEquipment().length > 0;
       }
       function resolveSlot(slot, available) {
-        const priority = ["pullup", "bands", "dumbbells", "kettlebell"];
+        const priority = ["pullup", "bandsFixed", "bandsFree", "dumbbells", "kettlebell"];
         for (const type of priority) {
           if (available.includes(type) && slot[type] && byName(slot[type])) return slot[type];
         }
@@ -4336,7 +4336,7 @@ body::before {
       }
       function equipmentProfileLabel() {
         const selected = state.settings.equipmentProfile || ["none"];
-        if (selected.includes("none")) return "No equipment · bodyweight workouts";
+        if (selected.includes("none")) return "Bodyweight · bodyweight workouts";
         return selected.map((x) => equipmentLabels[x]).filter(Boolean).join(" • ");
       }
 
@@ -4698,11 +4698,11 @@ body::before {
         });
         $("equipmentProfileSummary").textContent = "Active profile: " + equipmentProfileLabel();
 
-        $("appVersion").textContent = APP_INFO.version;
-        $("appBuildDate").textContent = APP_INFO.buildDate;
-        $("appCreator").textContent = APP_INFO.creator;
-        $("appPoweredBy").textContent = APP_INFO.poweredBy;
-        $("appDescription").textContent = APP_INFO.description;
+        if ($("appVersion")) $("appVersion").textContent = APP_INFO.version;
+        if ($("appBuildDate")) $("appBuildDate").textContent = APP_INFO.buildDate;
+        if ($("appCreator")) $("appCreator").textContent = APP_INFO.creator;
+        if ($("appPoweredBy")) $("appPoweredBy").textContent = APP_INFO.poweredBy;
+        if ($("appDescription")) $("appDescription").textContent = APP_INFO.description;
       }
       function favouriteExercise() {
         const e = Object.entries(state.personalBests);
@@ -5157,7 +5157,6 @@ body::before {
         renderAll();
         toast("Settings saved");
       }
-      $("saveSettingsBtn").onclick = saveSettings;
       [
         "restDuration",
         "units",
@@ -5167,45 +5166,25 @@ body::before {
         "reminderDays",
         "reminderTime",
       ].forEach((id) => $(id).addEventListener("change", saveSettings));
-      $("exportBtn").onclick = () => {
-        const blob = new Blob([JSON.stringify(state, null, 2)], {
-            type: "application/json",
-          }),
-          a = document.createElement("a");
-        a.href = URL.createObjectURL(blob);
-        a.download = "HomeStrength-data.json";
-        a.click();
-        URL.revokeObjectURL(a.href);
-        toast("Export created");
+
+      $("aboutBtn").onclick = () => {
+        $("aboutAppVersion").textContent = APP_INFO.version;
+        $("aboutAppBuildDate").textContent = APP_INFO.buildDate;
+        $("aboutAppCreator").textContent = APP_INFO.creator;
+        $("aboutAppPoweredBy").textContent = APP_INFO.poweredBy;
+        $("aboutDialog").showModal();
       };
-      $("importBtn").onclick = () => $("importFile").click();
-      $("importFile").onchange = (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-        const r = new FileReader();
-        r.onload = () => {
-          try {
-            state = Object.assign(defaultState(), JSON.parse(r.result));
-            saveState();
-            renderAll();
-            toast("Data imported");
-          } catch (err) {
-            toast("Import failed: invalid JSON");
-          }
-        };
-        r.readAsText(file);
-      };
-      $("resetDataBtn").onclick = () =>
+      $("aboutCloseBtn").onclick = () => $("aboutDialog").close();
+
+      $("resetSettingsBtn").onclick = () =>
         askConfirm(
-          "Reset all data",
-          "This permanently removes local progress, history, settings and active workouts.",
+          "Reset all settings?",
+          "Appearance, timer, reminders and equipment preferences will return to defaults. Workout history, progress, notes and personal bests will be preserved.",
           () => {
-            localStorage.removeItem(STORAGE_KEY);
-            state = defaultState();
+            state.settings = JSON.parse(JSON.stringify(defaultState().settings));
             saveState();
             renderAll();
-            showPage("home");
-            toast("All data reset");
+            toast("All settings reset");
           },
         );
       function askConfirm(t, m, a) {
