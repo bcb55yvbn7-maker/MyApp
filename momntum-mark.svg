@@ -1,7 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 146 146" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 145 145"
+  role="img"
+  aria-labelledby="title desc">
   <title id="title">MOMNTUM mark</title>
-  <desc id="desc">The retraced MOMNTUM N and forward chevron mark.</desc>
-  <g fill="#C84E12" fill-rule="evenodd">
-    <path d="M 77 0 L 78 4 L 90 22 L 92 27 L 94 29 L 95 32 L 106 49 L 108 54 L 116 66 L 119 73 L 114 81 L 108 94 L 106 96 L 102 105 L 96 114 L 96 116 L 92 121 L 77 121 L 73 114 L 67 106 L 66 103 L 60 95 L 59 92 L 40 63 L 40 99 L 42 101 L 44 106 L 46 108 L 48 113 L 50 115 L 52 120 L 62 136 L 65 143 L 67 145 L 104 145 L 107 142 L 123 112 L 125 110 L 127 105 L 129 103 L 131 98 L 133 96 L 135 91 L 145 75 L 145 70 L 143 68 L 141 63 L 139 61 L 137 56 L 135 54 L 133 49 L 131 47 L 129 42 L 127 40 L 125 35 L 123 33 L 121 28 L 113 16 L 104 0 Z"/><path d="M 41 0 L 1 0 L 0 2 L 0 143 L 1 145 L 20 145 L 22 144 L 22 25 L 23 24 L 37 24 L 41 28 L 70 72 L 84 96 L 85 96 L 89 87 L 91 85 L 91 83 L 93 81 L 97 73 L 89 62 L 87 57 L 63 21 L 59 17 L 56 12 L 47 3 Z"/>
+  <desc id="desc">The approved MOMNTUM N and forward-chevron mark, faithfully traced from the source brand artwork.</desc>
+  <g fill="#C84E12">
+    <polygon points="42,0 0,1 1,145 22,144 23,24 40,27 84,96 96,75 63,21"/>
+    <polygon points="77,0 118,74 92,121 75,118 40,63 40,99 67,145 103,145 145,70 105,1"/>
   </g>
 </svg>

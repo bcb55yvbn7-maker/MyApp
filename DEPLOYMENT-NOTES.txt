@@ -1,5 +1,26 @@
-MOMNTUM retraced deployment — version 0.3.3.5
+MOMNTUM source-of-truth deployment
+Version: 0.3.3.7
 
-The HTML header now uses momntum-wordmark-dark.svg directly.
-The splash and standalone header icon use the retraced momntum-mark.svg.
-Upload all files together so the relative asset references continue to work.
+This package was rebuilt from the supplied approved brand sheet.
+
+The master icon geometry was traced from:
+ICON MARK (N + CHEVRON)
+
+The full wordmark was traced from:
+PRIMARY WORDMARK
+
+Included:
+- corrected SVG masters
+- full wordmarks for light and dark backgrounds
+- favicons
+- Apple Touch icon
+- PWA icons
+- maskable icons
+- site.webmanifest
+- updated index.html
+
+Upload all files together, replacing the existing deployment.
+
+iPhone note:
+An already-installed Home Screen app may retain its old cached icon.
+Remove the existing Home Screen app and add it again after deployment.
