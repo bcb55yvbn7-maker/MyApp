@@ -1,26 +1,23 @@
-MOMNTUM source-of-truth deployment
-Version: 0.3.3.7
+MOMNTUM 0.3.3.9
 
-This package was rebuilt from the supplied approved brand sheet.
+Fix:
+- Prevented both light and dark wordmark SVGs rendering simultaneously.
+- Dark mode now shows only momntum-wordmark-dark.svg.
+- Light mode now shows only momntum-wordmark.svg.
 
-The master icon geometry was traced from:
-ICON MARK (N + CHEVRON)
+MOMNTUM 0.3.3.8
 
-The full wordmark was traced from:
-PRIMARY WORDMARK
+Baseline: 0.3.3.7
 
-Included:
-- corrected SVG masters
-- full wordmarks for light and dark backgrounds
-- favicons
-- Apple Touch icon
-- PWA icons
-- maskable icons
-- site.webmanifest
-- updated index.html
+Changes:
+- Light-mode wordmark now uses the correct dark-letter SVG.
+- Removed card shadows across the app for a consistent flat appearance.
+- Removed the glow behind Suggested Workout while retaining accent shading.
+- Added a visible light-mode outline to the level indicator.
+- Removed Achievements from the Home page display.
+- Improved the light-mode weekly completion ring visibility.
+- Replaced Home Snapshot tiles with an Apple Health-inspired information card.
+- Replaced the Progress summary tiles with the same information-card pattern.
+- Removed Next Progression from the Home page.
 
-Upload all files together, replacing the existing deployment.
-
-iPhone note:
-An already-installed Home Screen app may retain its old cached icon.
-Remove the existing Home Screen app and add it again after deployment.
+Achievements remain in the data model and are not deleted.

@@ -1467,30 +1467,165 @@ body::before {
         object-position: left center;
       }
 
+
+      /* MOMNTUM 0.3.3.9 visual refinement */
+      .momntumWordmark .wordmarkLight {
+        display: none;
+      }
+
+      html[data-mode="light"] .momntumWordmark .wordmarkDark {
+        display: none;
+      }
+
+      html[data-mode="light"] .momntumWordmark .wordmarkLight {
+        display: block;
+      }
+
+      /* Flat card language across all pages */
+      .hero,
+      .card,
+      .exerciseItem,
+      .timerPanel,
+      .canvasCard {
+        box-shadow: none !important;
+      }
+
+      /* Keep the suggested-workout accent wash, remove the glow */
+      .hero::after {
+        display: none !important;
+      }
+
+      /* Stronger light-mode control outlines */
+      html[data-mode="light"] .level {
+        background: rgba(255, 255, 255, 0.72);
+        border-color: rgba(23, 32, 51, 0.22);
+      }
+
+      html[data-mode="light"] .ring {
+        background: conic-gradient(
+          var(--green) calc(var(--p) * 1%),
+          rgba(23, 32, 51, 0.16) 0
+        );
+        box-shadow: inset 0 0 0 1px rgba(23, 32, 51, 0.12);
+      }
+
+      html[data-mode="light"] .ring::before {
+        box-shadow: inset 0 0 0 1px rgba(23, 32, 51, 0.08);
+      }
+
+      /* Apple Health-inspired informational summaries */
+      .healthSummary {
+        padding: 0;
+        overflow: hidden;
+      }
+
+      .healthRow {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        min-height: 72px;
+        padding: 14px 16px;
+      }
+
+      .healthRow + .healthRow {
+        border-top: 1px solid var(--divider);
+      }
+
+      .healthRow > div:first-child {
+        min-width: 0;
+      }
+
+      .healthLabel {
+        font-size: 15px;
+        font-weight: 750;
+        color: var(--text);
+      }
+
+      .healthDescription {
+        margin-top: 3px;
+        font-size: 12px;
+        line-height: 1.35;
+        color: var(--muted);
+      }
+
+      .healthValue {
+        flex: 0 0 auto;
+        font-size: 22px;
+        line-height: 1;
+        font-weight: 850;
+        letter-spacing: -0.35px;
+        color: var(--accent);
+        text-align: right;
+      }
+
+      .healthValueText {
+        max-width: 42%;
+        font-size: 15px;
+        line-height: 1.2;
+        overflow-wrap: anywhere;
+      }
+
+      html[data-mode="light"] .healthSummary {
+        background: var(--card);
+        border-color: rgba(23, 32, 51, 0.12);
+      }
+
+      /* Library and Settings remain deliberately flat in light mode */
+      html[data-mode="light"] #page-library .exerciseItem,
+      html[data-mode="light"] #page-settings .card {
+        box-shadow: none !important;
+      }
+
+
+      /* 0.3.3.9: prevent duplicate wordmark rendering */
+      .title.momntumWordmark > img.wordmarkDark {
+        display: block !important;
+      }
+
+      .title.momntumWordmark > img.wordmarkLight {
+        display: none !important;
+      }
+
+      html[data-mode="light"] .title.momntumWordmark > img.wordmarkDark {
+        display: none !important;
+      }
+
+      html[data-mode="light"] .title.momntumWordmark > img.wordmarkLight {
+        display: block !important;
+      }
+
 </style>
-    <link rel="icon" href="favicon.ico?v=0.3.3.7" sizes="any" />
-    <link rel="icon" href="momntum-mark.svg?v=0.3.3.7" type="image/svg+xml" />
-    <link rel="icon" href="favicon-32x32.png?v=0.3.3.7" type="image/png" sizes="32x32" />
-    <link rel="icon" href="favicon-16x16.png?v=0.3.3.7" type="image/png" sizes="16x16" />
-    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=0.3.3.7" sizes="180x180" />
-    <link rel="manifest" href="site.webmanifest?v=0.3.3.7" />
+    <link rel="icon" href="favicon.ico?v=0.3.3.9" sizes="any" />
+    <link rel="icon" href="momntum-mark.svg?v=0.3.3.9" type="image/svg+xml" />
+    <link rel="icon" href="favicon-32x32.png?v=0.3.3.9" type="image/png" sizes="32x32" />
+    <link rel="icon" href="favicon-16x16.png?v=0.3.3.9" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=0.3.3.9" sizes="180x180" />
+    <link rel="manifest" href="site.webmanifest?v=0.3.3.9" />
   </head>
   <body class="launchPending">
     <div id="launchSplash" class="launchSplash" aria-hidden="true">
-      <div id="launchLogo" class="launchLogo"><img src="momntum-mark.svg?v=0.3.3.7" alt="" draggable="false" /></div>
-      <div class="launchVersion">v0.3.3.7</div>
+      <div id="launchLogo" class="launchLogo"><img src="momntum-mark.svg?v=0.3.3.9" alt="" draggable="false" /></div>
+      <div class="launchVersion">v0.3.3.9</div>
     </div>
 
     <div class="app" id="app">
       <header class="topbar">
         <div class="brand">
           <div class="logo momntumAppIcon" id="headerBrandLogo" aria-hidden="true">
-            <img src="momntum-mark.svg?v=0.3.3.7" alt="" draggable="false" />
+            <img src="momntum-mark.svg?v=0.3.3.9" alt="" draggable="false" />
           </div>
           <div>
             <div class="title momntumWordmark">
               <img
-                src="momntum-wordmark-dark.svg?v=0.3.3.7"
+                class="wordmarkDark"
+                src="momntum-wordmark-dark.svg?v=0.3.3.9"
+                alt="MOMNTUM"
+                draggable="false"
+              />
+              <img
+                class="wordmarkLight"
+                src="momntum-wordmark.svg?v=0.3.3.9"
                 alt="MOMNTUM"
                 draggable="false"
               />
@@ -1530,38 +1665,36 @@ body::before {
             </div>
           </div>
           <h2>Snapshot</h2>
-          <div class="grid two">
-            <div class="card compact">
-              <div class="statValue" id="statWeek">1</div>
-              <div class="statLabel">Training week</div>
+          <div class="healthSummary card" aria-label="Training snapshot">
+            <div class="healthRow">
+              <div>
+                <div class="healthLabel">Training week</div>
+                <div class="healthDescription">Current programme cycle</div>
+              </div>
+              <div class="healthValue" id="statWeek">1</div>
             </div>
-            <div class="card compact">
-              <div class="statValue" id="statStreak">0</div>
-              <div class="statLabel">Current streak</div>
+            <div class="healthRow">
+              <div>
+                <div class="healthLabel">Current streak</div>
+                <div class="healthDescription">Consecutive active days</div>
+              </div>
+              <div class="healthValue" id="statStreak">0</div>
             </div>
-            <div class="card compact">
-              <div class="statValue" id="statWorkouts">0</div>
-              <div class="statLabel">Completed workouts</div>
+            <div class="healthRow">
+              <div>
+                <div class="healthLabel">Completed workouts</div>
+                <div class="healthDescription">All recorded sessions</div>
+              </div>
+              <div class="healthValue" id="statWorkouts">0</div>
             </div>
-            <div class="card compact">
-              <div class="statValue" id="statExercises">0</div>
-              <div class="statLabel">Exercises completed</div>
+            <div class="healthRow">
+              <div>
+                <div class="healthLabel">Exercises completed</div>
+                <div class="healthDescription">Total completed movements</div>
+              </div>
+              <div class="healthValue" id="statExercises">0</div>
             </div>
           </div>
-          <h2>Next progression</h2>
-          <div class="card">
-            <div class="row">
-              <h3>Suggestion</h3>
-              <span class="pill" id="xpPill">0 XP</span>
-            </div>
-            <p
-              class="muted"
-              id="progressionSuggestion"
-              style="margin-top: 8px"
-            ></p>
-          </div>
-          <h2>Achievements</h2>
-          <div class="badgeRow" id="homeBadges"></div>
         </section>
         <section class="page" id="page-workouts">
           <h1>Workouts</h1>
@@ -1625,22 +1758,34 @@ body::before {
           <p class="muted" style="margin: 8px 0 14px">
             Your local training history, consistency and overload trends.
           </p>
-          <div class="grid two">
-            <div class="card compact">
-              <div class="statValue" id="pStreak">0</div>
-              <div class="statLabel">Streak</div>
+          <div class="healthSummary card" aria-label="Progress summary">
+            <div class="healthRow">
+              <div>
+                <div class="healthLabel">Streak</div>
+                <div class="healthDescription">Current training consistency</div>
+              </div>
+              <div class="healthValue" id="pStreak">0</div>
             </div>
-            <div class="card compact">
-              <div class="statValue" id="pTime">0m</div>
-              <div class="statLabel">Total training time</div>
+            <div class="healthRow">
+              <div>
+                <div class="healthLabel">Total training time</div>
+                <div class="healthDescription">Time recorded across all sessions</div>
+              </div>
+              <div class="healthValue" id="pTime">0m</div>
             </div>
-            <div class="card compact">
-              <div class="statValue" id="pReps">0</div>
-              <div class="statLabel">Total reps</div>
+            <div class="healthRow">
+              <div>
+                <div class="healthLabel">Total reps</div>
+                <div class="healthDescription">Cumulative completed repetitions</div>
+              </div>
+              <div class="healthValue" id="pReps">0</div>
             </div>
-            <div class="card compact">
-              <div class="statValue" id="pFavourite">None</div>
-              <div class="statLabel">Favourite exercise</div>
+            <div class="healthRow">
+              <div>
+                <div class="healthLabel">Favourite exercise</div>
+                <div class="healthDescription">Most frequently completed movement</div>
+              </div>
+              <div class="healthValue healthValueText" id="pFavourite">None</div>
             </div>
           </div>
           <h2>Charts</h2>
@@ -1926,7 +2071,7 @@ body::before {
       const STORAGE_KEY = "homeStrength.v1";
       const APP_INFO = {
         name: "MOMNTUM",
-        version: "0.3.3.7",
+        version: "0.3.3.9",
         buildDate: "29 July 2026",
         creator: "Mark Taylor",
         poweredBy: "Offline PWA • HTML • CSS • JavaScript",
@@ -3357,14 +3502,6 @@ body::before {
         $("statStreak").textContent = state.stats.streak;
         $("statWorkouts").textContent = state.history.length;
         $("statExercises").textContent = state.stats.totalExercises;
-        $("xpPill").textContent = state.stats.xp + " XP";
-        $("progressionSuggestion").textContent = progressionText();
-        $("homeBadges").innerHTML = achievements
-          .map(
-            (a) =>
-              `<div class="badge ${a.test(state) ? "earned" : ""}"><span>${a.icon}</span><span>${a.name}</span></div>`,
-          )
-          .join("");
       }
       function renderWorkouts() {
         if (!$("workoutTabs").children.length)
