@@ -629,6 +629,42 @@ body::before {
         flex: 1;
         min-width: 0;
       }
+      .exerciseSummaryActions {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        flex: 0 0 auto;
+      }
+      .exerciseChevron {
+        width: 22px;
+        height: 22px;
+        display: inline-grid;
+        place-items: center;
+        flex: 0 0 22px;
+        color: var(--muted);
+        transition:
+          transform 0.18s ease,
+          color 0.18s ease;
+        transform: rotate(0deg);
+        transform-origin: center;
+      }
+      .exerciseChevron svg {
+        width: 18px;
+        height: 18px;
+        display: block;
+        stroke: currentColor;
+      }
+      .exerciseItem.open .exerciseChevron {
+        color: var(--accent);
+        transform: rotate(180deg);
+      }
+      .exerciseItem[data-expandable="true"] {
+        cursor: pointer;
+      }
+      .exerciseItem[data-expandable="true"]:focus-visible {
+        outline: 3px solid color-mix(in srgb, var(--accent) 75%, transparent);
+        outline-offset: 2px;
+      }
       .setGrid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(54px, 1fr));
@@ -669,17 +705,126 @@ body::before {
         position: sticky;
         top: 0;
         z-index: 5;
-        margin: -4px -2px 14px;
-        border-radius: 22px;
-        background: rgba(8, 10, 16, 0.82);
+        margin: -4px -2px 16px;
+        border-radius: 24px;
+        background:
+          linear-gradient(145deg,
+            color-mix(in srgb, var(--accent) 16%, var(--card)) 0%,
+            var(--card) 54%,
+            color-mix(in srgb, var(--accent2) 10%, var(--card2)) 100%);
         backdrop-filter: blur(18px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        padding: 12px;
+        border: 1px solid color-mix(in srgb, var(--accent) 38%, var(--divider));
+        padding: 16px;
+        overflow: hidden;
+      }
+      .timerPanel::before {
+        content: "";
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 4px;
+        background: linear-gradient(180deg, var(--accent), var(--accent2));
+      }
+      .timerHeader,
+      .timerControls,
+      .timerSecondary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .timerHeader { align-items: flex-start; }
+      .timerEyebrow {
+        color: var(--accent2);
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+      }
+      .timerStatus {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        min-height: 28px;
+        padding: 5px 10px;
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--accent) 16%, transparent);
+        color: var(--heading);
+        border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+        font-size: 12px;
+        font-weight: 850;
+      }
+      .timerStatus::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
       }
       .timeBig {
-        font-weight: 900;
-        font-size: 30px;
-        letter-spacing: -0.8px;
+        margin-top: 2px;
+        color: var(--heading);
+        font-variant-numeric: tabular-nums;
+        font-weight: 950;
+        font-size: clamp(48px, 15vw, 72px);
+        line-height: .98;
+        letter-spacing: -3px;
+        text-shadow: 0 1px 0 color-mix(in srgb, var(--accent) 25%, transparent);
+      }
+      .timerProgress {
+        height: 7px;
+        margin: 14px 0;
+        overflow: hidden;
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--text) 12%, transparent);
+      }
+      .timerProgressFill {
+        width: 0%;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        transition: width .25s linear;
+      }
+      .timerSecondary {
+        padding-top: 12px;
+        border-top: 1px solid var(--divider);
+      }
+      .restTime {
+        color: var(--accent2);
+        font-size: 28px;
+        font-weight: 950;
+        font-variant-numeric: tabular-nums;
+        letter-spacing: -1px;
+      }
+      .timerControls { flex-wrap: wrap; justify-content: flex-end; }
+      .timerPanel .btn.ghost {
+        background: color-mix(in srgb, var(--card2) 78%, transparent);
+        border-color: color-mix(in srgb, var(--accent) 24%, var(--divider));
+        color: var(--heading);
+      }
+      .timerPanel .btn.primaryTimer {
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        color: var(--button-text);
+        border: 0;
+      }
+      html[data-mode="light"] .timerPanel {
+        background:
+          linear-gradient(145deg,
+            color-mix(in srgb, var(--accent) 10%, #fff) 0%,
+            #fff 58%,
+            color-mix(in srgb, var(--accent2) 8%, var(--card2)) 100%);
+        border-color: color-mix(in srgb, var(--accent) 42%, rgba(23, 32, 51, .16));
+      }
+      html[data-mode="light"] .timerPanel .btn.ghost {
+        background: rgba(255,255,255,.72);
+        border-color: color-mix(in srgb, var(--accent) 26%, rgba(23,32,51,.16));
+      }
+      @media (max-width: 520px) {
+        .timerHeader { gap: 8px; }
+        .timerControls { justify-content: flex-start; }
+        .timerSecondary { align-items: flex-end; }
+        .timerSecondary .timerControls { justify-content: flex-end; }
+        .timerPanel .btn.sm { min-height: 40px; padding: 9px 11px; }
       }
       .input,
       select,
@@ -1098,6 +1243,40 @@ body::before {
         background: var(--card);
         border-color: rgba(23, 32, 51, 0.16);
         box-shadow: 0 4px 14px rgba(28, 42, 68, 0.06);
+      }
+
+
+      /* Active workout focus mode */
+      body.workoutActive .nav {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      body.workoutActive .content {
+        padding-bottom: calc(20px + env(safe-area-inset-bottom));
+      }
+
+      body.workoutActive #backToWorkoutsBtn {
+        display: none;
+      }
+
+      /* Active workout exercise-card visibility in light mode */
+      html[data-mode="light"] #page-active .exerciseItem {
+        background: var(--card);
+        border-color: color-mix(in srgb, var(--accent) 24%, rgba(23, 32, 51, 0.22));
+        box-shadow: 0 1px 0 rgba(23, 32, 51, 0.04);
+      }
+
+      html[data-mode="light"] #page-active .check {
+        border-color: rgba(23, 32, 51, 0.28);
+        color: var(--text);
+      }
+
+      html[data-mode="light"] #page-active .setBtn {
+        background: var(--card2);
+        border-color: rgba(23, 32, 51, 0.16);
+        color: var(--muted);
       }
 
       html[data-mode="light"] #page-settings .card {
@@ -2086,7 +2265,7 @@ body::before {
 
     <div id="launchSplash" class="launchSplash" aria-hidden="true">
       <div id="launchLogo" class="launchLogo"><img src="momntum-mark.svg?v=0.3.3.10" alt="" draggable="false" /></div>
-      <div class="launchVersion">v0.3.3.10</div>
+      <div class="launchVersion">v0.4.0.1</div>
     </div>
 
     <div class="app" id="app">
@@ -2182,29 +2361,30 @@ body::before {
           <div id="workoutList" class="grid wideGrid"></div>
         </section>
         <section class="page" id="page-active">
-          <div class="timerPanel">
-            <div class="row">
+          <div class="timerPanel" aria-label="Workout timer">
+            <div class="timerHeader">
               <div>
-                <div class="small">Workout timer</div>
+                <div class="timerEyebrow">Workout time</div>
                 <div class="timeBig" id="workoutTimer">00:00</div>
               </div>
-              <div class="row">
-                <button class="btn sm ghost" id="pauseWorkoutBtn">Pause</button
-                ><button class="btn sm danger" id="resetWorkoutBtn">
-                  Reset
-                </button>
-              </div>
+              <div class="timerStatus" id="timerStatus" aria-live="polite">Training</div>
             </div>
-            <hr />
-            <div class="row">
+            <div class="timerProgress" aria-hidden="true">
+              <div class="timerProgressFill" id="timerProgressFill"></div>
+            </div>
+            <div class="timerControls">
+              <button class="btn sm primaryTimer" id="pauseWorkoutBtn">Pause</button>
+              <button class="btn sm danger" id="resetWorkoutBtn">End</button>
+            </div>
+            <div class="timerSecondary">
               <div>
-                <div class="small">Rest timer</div>
-                <div class="timeBig" id="restTimer">00:00</div>
+                <div class="timerEyebrow">Rest countdown</div>
+                <div class="restTime" id="restTimer">00:30</div>
               </div>
-              <div class="row">
-                <button class="btn sm ghost" id="restStartBtn">Start</button
-                ><button class="btn sm ghost" id="restPauseBtn">Pause</button
-                ><button class="btn sm ghost" id="restResetBtn">Reset</button>
+              <div class="timerControls">
+                <button class="btn sm ghost" id="restStartBtn">Start rest</button>
+                <button class="btn sm ghost" id="restPauseBtn">Pause</button>
+                <button class="btn sm ghost" id="restResetBtn">Reset</button>
               </div>
             </div>
           </div>
@@ -2572,13 +2752,18 @@ body::before {
       const STORAGE_KEY = "homeStrength.v1";
       const APP_INFO = {
         name: "MOMNTUM",
-        version: "0.3.3.10",
+        version: "0.4.0.1",
         buildDate: "29 July 2026",
         creator: "Mark Taylor",
         poweredBy: "Offline PWA • HTML • CSS • JavaScript",
         description: "Personal offline calisthenics training companion."
       };
       const CHANGELOG = [
+        "Added expandable exercise cards with animated accent-aware chevrons",
+        "Limited exercise details to one open card at a time",
+        "Introduced the redesigned accent-aware workout and rest timer",
+        "Improved timer accuracy when MOMNTUM is backgrounded",
+        "Added automatic rest countdowns after completed sets",
         "Renamed Home Strength to MOMNTUM",
         "Introduced the new burnt-copper N>> brand identity",
         "Updated app, browser and PWA identity",
@@ -3760,7 +3945,7 @@ body::before {
       ];
       const defaultState = () => ({
         settings: {
-          restDuration: 60,
+          restDuration: 30,
           themeMode: "system",
           themeHue: "midnight",
           units: "metric",
@@ -3786,7 +3971,9 @@ body::before {
         activePage = "home",
         workoutInterval = null,
         restInterval = null,
-        confirmAction = null;
+        confirmAction = null,
+        activeExpandedExerciseId = null,
+        libraryExpandedExerciseId = null;
       function $(id) {
         return document.getElementById(id);
       }
@@ -3923,6 +4110,10 @@ body::before {
           b.addEventListener("click", () => showPage(b.dataset.page)),
         );
       function showPage(p) {
+        if (state.active && p !== "active") {
+          toast("Finish or end the active workout before leaving");
+          p = "active";
+        }
         activePage = p;
         document
           .querySelectorAll(".page")
@@ -3974,6 +4165,7 @@ body::before {
 
       function renderAll() {
         applyAppearance();
+        document.body.classList.toggle("workoutActive", !!state.active);
         $("todayLine").textContent = new Date().toLocaleDateString("en-GB", {
           weekday: "long",
           day: "numeric",
@@ -4024,8 +4216,11 @@ body::before {
             (b) => (b.onclick = () => startWorkout(b.dataset.start, false)),
           );
       }
+      function exerciseChevronMarkup() {
+        return `<span class="exerciseChevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
+      }
       function exCard(ex) {
-        return `<div class="exerciseItem" data-exid="${ex.id}"><button class="check" aria-label="Mark ${ex.name} complete">✓</button><div class="exerciseText"><div class="row"><div><div class="exName">${ex.name}</div><div class="exMuscles">${ex.primary} · ${ex.equipment}</div></div><span class="pill">${ex.sets} x ${ex.reps}</span></div><div class="setGrid">${Array.from({ length: parseInt(ex.sets) || 1 }, (_, i) => `<button class="setBtn" data-set="${i}">Set ${i + 1}</button>`).join("")}</div><div class="detail"><p><strong>Description:</strong> ${ex.description}</p><p><strong>Tips:</strong> ${ex.tips}</p><p><strong>Common mistakes:</strong> ${ex.mistakes}</p><p><strong>Progression:</strong> ${ex.progression}</p><p><strong>Regression:</strong> ${ex.regression}</p></div></div></div>`;
+        return `<div class="exerciseItem" data-exid="${ex.id}" data-expandable="true" role="button" tabindex="0" aria-expanded="false"><button class="check" aria-label="Mark ${ex.name} complete">✓</button><div class="exerciseText"><div class="row"><div><div class="exName">${ex.name}</div><div class="exMuscles">${ex.primary} · ${ex.equipment}</div></div><span class="exerciseSummaryActions"><span class="pill">${ex.sets} x ${ex.reps}</span>${exerciseChevronMarkup()}</span></div><div class="setGrid">${Array.from({ length: parseInt(ex.sets) || 1 }, (_, i) => `<button class="setBtn" data-set="${i}">Set ${i + 1}</button>`).join("")}</div><div class="detail"><p><strong>Description:</strong> ${ex.description}</p><p><strong>Tips:</strong> ${ex.tips}</p><p><strong>Common mistakes:</strong> ${ex.mistakes}</p><p><strong>Progression:</strong> ${ex.progression}</p><p><strong>Regression:</strong> ${ex.regression}</p></div></div></div>`;
       }
       function renderActiveWorkout() {
         const a = state.active;
@@ -4034,8 +4229,16 @@ body::before {
         $("activeWorkoutTitle").textContent = w.day + " - " + w.title;
         $("activeMeta").textContent = w.duration + " min · " + w.equipment;
         $("workoutTimer").textContent = fmtTime(a.elapsed);
-        $("restTimer").textContent = fmtTime(a.restRemaining);
+        $("restTimer").textContent = fmtTime(Math.max(0, a.restRemaining));
         $("pauseWorkoutBtn").textContent = a.paused ? "Resume" : "Pause";
+        $("timerStatus").textContent = a.paused
+          ? "Paused"
+          : a.restRunning
+            ? "Resting"
+            : "Training";
+        const targetSeconds = Math.max(1, (w.duration || 30) * 60);
+        $("timerProgressFill").style.width = Math.min(100, (a.elapsed / targetSeconds) * 100) + "%";
+        $("restStartBtn").textContent = a.restRunning ? "Restart rest" : "Start rest";
         $("workoutNotes").value = a.notes || "";
         $("warmupContainer").innerHTML = w.warm
           .map((n) => exCard(byName(n)))
@@ -4060,7 +4263,34 @@ body::before {
               e.stopPropagation();
               toggleExercise(id);
             };
-            item.onclick = () => item.classList.toggle("open");
+
+            const setExpanded = (shouldOpen) => {
+              document
+                .querySelectorAll("#page-active .exerciseItem.open")
+                .forEach((other) => {
+                  if (other !== item) {
+                    other.classList.remove("open");
+                    other.setAttribute("aria-expanded", "false");
+                  }
+                });
+
+              item.classList.toggle("open", shouldOpen);
+              item.setAttribute("aria-expanded", String(shouldOpen));
+              activeExpandedExerciseId = shouldOpen ? id : null;
+            };
+
+            if (activeExpandedExerciseId === id) {
+              item.classList.add("open");
+              item.setAttribute("aria-expanded", "true");
+            }
+
+            item.onclick = () => setExpanded(!item.classList.contains("open"));
+            item.onkeydown = (event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                setExpanded(!item.classList.contains("open"));
+              }
+            };
           });
       }
       function renderLibrary() {
@@ -4119,12 +4349,45 @@ body::before {
         $("libraryList").innerHTML = rows
           .map(
             (e) =>
-              `<button class="exerciseItem" data-open="${e.id}" style="text-align:left;width:100%"><div class="check done" aria-hidden="true">${e.difficulty[0]}</div><div class="exerciseText"><div class="row"><div><div class="exName">${e.name}</div><div class="exMuscles">${e.primary} · ${e.category}</div></div><span class="pill">${e.equipment.includes("Gympro") ? "Band" : "Body"}</span></div></div></button>`,
+              `<div class="exerciseItem" data-library-exid="${e.id}" data-expandable="true" role="button" tabindex="0" aria-expanded="false" style="text-align:left;width:100%"><div class="check done" aria-hidden="true">${e.difficulty[0]}</div><div class="exerciseText"><div class="row"><div><div class="exName">${e.name}</div><div class="exMuscles">${e.primary} · ${e.category}</div></div><span class="exerciseSummaryActions"><span class="pill">${e.equipment.includes("Gympro") ? "Band" : "Body"}</span>${exerciseChevronMarkup()}</span></div><div class="detail"><p><strong>Description:</strong> ${e.description}</p><p><strong>Technique tips:</strong> ${e.tips}</p><p><strong>Common mistakes:</strong> ${e.mistakes}</p><p><strong>Rest period:</strong> ${e.rest}</p><p><strong>Progression:</strong> ${e.progression}</p><p><strong>Regression:</strong> ${e.regression}</p></div></div></div>`,
           )
           .join("");
+
         document
-          .querySelectorAll("[data-open]")
-          .forEach((b) => (b.onclick = () => openExercise(+b.dataset.open)));
+          .querySelectorAll("#libraryList [data-library-exid]")
+          .forEach((item) => {
+            const id = item.dataset.libraryExid;
+
+            const setExpanded = (shouldOpen) => {
+              document
+                .querySelectorAll("#libraryList .exerciseItem.open")
+                .forEach((other) => {
+                  if (other !== item) {
+                    other.classList.remove("open");
+                    other.setAttribute("aria-expanded", "false");
+                  }
+                });
+
+              item.classList.toggle("open", shouldOpen);
+              item.setAttribute("aria-expanded", String(shouldOpen));
+              libraryExpandedExerciseId = shouldOpen ? id : null;
+            };
+
+            if (libraryExpandedExerciseId === id) {
+              item.classList.add("open");
+              item.setAttribute("aria-expanded", "true");
+            }
+
+            item.addEventListener("click", () =>
+              setExpanded(!item.classList.contains("open")),
+            );
+            item.addEventListener("keydown", (event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                setExpanded(!item.classList.contains("open"));
+              }
+            });
+          });
       }
       function renderSettings() {
         $("restDuration").value = state.settings.restDuration;
@@ -4173,8 +4436,10 @@ body::before {
           startedAt: Date.now(),
           elapsed: 0,
           paused: false,
+          lastWorkoutTickAt: Date.now(),
           restRemaining: state.settings.restDuration,
           restRunning: false,
+          restEndsAt: null,
           notes: "",
           exercises: {},
         };
@@ -4188,13 +4453,50 @@ body::before {
       }
       function startClock() {
         clearInterval(workoutInterval);
-        workoutInterval = setInterval(() => {
-          if (state.active && !state.active.paused) {
-            state.active.elapsed++;
-            $("workoutTimer").textContent = fmtTime(state.active.elapsed);
-            saveState();
+        if (state.active && !state.active.lastWorkoutTickAt) {
+          state.active.lastWorkoutTickAt = Date.now();
+        }
+        const tick = () => {
+          const a = state.active;
+          if (!a) return;
+          const now = Date.now();
+          if (!a.paused) {
+            const previous = a.lastWorkoutTickAt || now;
+            const gained = Math.max(0, Math.floor((now - previous) / 1000));
+            if (gained > 0) {
+              a.elapsed += gained;
+              a.lastWorkoutTickAt = previous + gained * 1000;
+            }
+          } else {
+            a.lastWorkoutTickAt = now;
           }
-        }, 1000);
+          updateRestTimer(now);
+          if ($("workoutTimer")) {
+            $("workoutTimer").textContent = fmtTime(a.elapsed);
+            $("restTimer").textContent = fmtTime(Math.max(0, a.restRemaining));
+            const w = workouts.find((x) => x.id === a.workoutId);
+            const targetSeconds = Math.max(1, ((w && w.duration) || 30) * 60);
+            $("timerProgressFill").style.width = Math.min(100, (a.elapsed / targetSeconds) * 100) + "%";
+            $("timerStatus").textContent = a.paused ? "Paused" : a.restRunning ? "Resting" : "Training";
+          }
+          saveState();
+        };
+        tick();
+        workoutInterval = setInterval(tick, 500);
+      }
+      function updateRestTimer(now = Date.now()) {
+        const a = state.active;
+        if (!a || !a.restRunning) return;
+        if (!a.restEndsAt) a.restEndsAt = now + Math.max(0, a.restRemaining) * 1000;
+        a.restRemaining = Math.max(0, Math.ceil((a.restEndsAt - now) / 1000));
+        if (a.restRemaining <= 0) {
+          a.restRemaining = 0;
+          a.restRunning = false;
+          a.restEndsAt = null;
+          beep();
+          toast("Rest complete");
+          renderActiveWorkout();
+        }
       }
       function showChangelog() {
         alert(
@@ -4210,6 +4512,12 @@ body::before {
         const ex = exercises.find((e) => e.id == id);
         p.done = p.sets.filter(Boolean).length >= (parseInt(ex.sets) || 1);
         state.active.restRemaining = state.settings.restDuration;
+        if (p.sets[i]) {
+          startRest(true);
+        } else {
+          state.active.restRunning = false;
+          state.active.restEndsAt = null;
+        }
         saveState();
         renderActiveWorkout();
       }
@@ -4227,14 +4535,15 @@ body::before {
       $("pauseWorkoutBtn").onclick = () => {
         if (!state.active) return;
         state.active.paused = !state.active.paused;
+        state.active.lastWorkoutTickAt = Date.now();
         saveState();
         renderActiveWorkout();
         toast(state.active.paused ? "Workout paused" : "Workout resumed");
       };
       $("resetWorkoutBtn").onclick = () =>
         askConfirm(
-          "Reset workout",
-          "This clears the current workout progress.",
+          "End workout?",
+          "This clears the current workout progress without saving it.",
           () => {
             state.active = null;
             saveState();
@@ -4249,37 +4558,36 @@ body::before {
           saveState();
         }
       });
-      $("restStartBtn").onclick = () => startRest();
+      $("restStartBtn").onclick = () => startRest(false);
       $("restPauseBtn").onclick = () => {
         if (state.active) {
+          updateRestTimer();
           state.active.restRunning = false;
+          state.active.restEndsAt = null;
           saveState();
+          renderActiveWorkout();
         }
       };
       $("restResetBtn").onclick = () => {
         if (state.active) {
           state.active.restRemaining = state.settings.restDuration;
           state.active.restRunning = false;
+          state.active.restEndsAt = null;
           saveState();
           renderActiveWorkout();
         }
       };
-      function startRest() {
+      function startRest(automatic = false) {
         if (!state.active) return;
+        state.active.restRemaining = state.settings.restDuration;
         state.active.restRunning = true;
-        clearInterval(restInterval);
-        restInterval = setInterval(() => {
-          if (!state.active || !state.active.restRunning) return;
-          state.active.restRemaining--;
-          $("restTimer").textContent = fmtTime(state.active.restRemaining);
-          if (state.active.restRemaining <= 0) {
-            state.active.restRunning = false;
-            clearInterval(restInterval);
-            beep();
-            toast("Rest complete");
-          }
-          saveState();
-        }, 1000);
+        state.active.restEndsAt = Date.now() + state.active.restRemaining * 1000;
+        saveState();
+        renderActiveWorkout();
+        if (automatic) {
+          beep();
+          toast("Rest started");
+        }
       }
       $("finishWorkoutBtn").onclick = finishWorkout;
       function finishWorkout() {
@@ -4596,7 +4904,10 @@ body::before {
         if (activePage === "progress") drawCharts();
       });
       renderAll();
-      if (state.active) startClock();
+      if (state.active) {
+        showPage("active");
+        startClock();
+      }
       if ("serviceWorker" in navigator) {
 
   window.addEventListener("load", () => {
