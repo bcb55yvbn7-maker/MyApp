@@ -1761,6 +1761,20 @@ body::before {
         display: none !important;
       }
 
+
+      /* Unified light-mode card outline — version remains 0.3.3.10 */
+      html[data-mode="light"] #page-home .healthActivityCard,
+      html[data-mode="light"] #page-progress .healthActivityCard,
+      html[data-mode="light"] #page-workouts .card,
+      html[data-mode="light"] #page-progress .card,
+      html[data-mode="light"] #page-progress .canvasCard,
+      html[data-mode="light"] #page-progress #historyList .card {
+        background: #ffffff !important;
+        border: 1px solid rgba(23, 32, 51, 0.14) !important;
+        outline: none !important;
+        box-shadow: none !important;
+      }
+
 </style>
     <link rel="icon" href="favicon.ico?v=0.3.3.10" sizes="any" />
     <link rel="icon" href="momntum-mark.svg?v=0.3.3.10" type="image/svg+xml" />
