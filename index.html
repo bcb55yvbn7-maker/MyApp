@@ -2158,6 +2158,15 @@ body::before {
         display: block;
       }
 
+      .testerInstallVersion {
+        margin: 18px 0 0;
+        color: rgba(255, 255, 255, 0.32);
+        font-size: 11px;
+        font-weight: 650;
+        letter-spacing: 0.08em;
+        text-align: center;
+      }
+
       @media (max-width: 380px) {
         .testerInstallStep {
           grid-template-columns: 60px minmax(0, 1fr);
@@ -2332,6 +2341,16 @@ body::before {
       .onboardingSwatch.selected { border-color: var(--heading); outline: 3px solid color-mix(in srgb, var(--accent) 32%, transparent); }
       .onboardingFooter { display: grid; grid-template-columns: auto 1fr; gap: 10px; margin-top: 16px; }
       .onboardingFooter .btn:last-child { min-width: 0; }
+      .onboardingFooter.firstStep { grid-template-columns: 1fr; }
+      .onboardingFooter.firstStep #onboardingBackBtn { display: none; }
+      .onboardingFooter.firstStep #onboardingNextBtn {
+        width: min(100%, 260px);
+        justify-self: center;
+      }
+      #onboardingBackBtn {
+        background: transparent;
+        border: 1px solid color-mix(in srgb, var(--accent) 52%, var(--divider));
+      }
       .onboardingSkip { display: block; margin: 14px auto 0; background: transparent; color: var(--muted); font-weight: 800; }
       .onboardingEquipment { max-height: 48vh; overflow-y: auto; padding-right: 2px; }
       html[data-mode="light"] .onboardingCard { background: #fff; border-color: rgba(23,32,51,.14); }
@@ -2432,6 +2451,7 @@ body::before {
         <button id="testerBrowserPreview" class="testerBrowserPreview" type="button">
           Continue in browser
         </button>
+        <p class="testerInstallVersion">v0.5.2.1</p>
       </div>
     </section>
 
@@ -2464,14 +2484,13 @@ body::before {
             <div class="kicker">Accent</div><h2 style="margin:6px 0 0">Pick an accent</h2>
             
             <div class="onboardingSwatches" id="onboardingAccentChoices"></div>
-            <p class="small" id="onboardingAccentLabel" style="text-align:center;margin-top:14px"></p>
           </section>
           <section class="onboardingStep" data-onboarding-step="3">
             <div class="kicker">Equipment</div><h2 style="margin:6px 0 0">What do you have?</h2>
             <p class="muted" style="margin-top:8px">Bodyweight is selected by default. Equipment choices can be combined.</p>
             <div class="onboardingChoices onboardingEquipment" id="onboardingEquipmentChoices"></div>
           </section>
-          <div class="onboardingFooter">
+          <div class="onboardingFooter" id="onboardingFooter">
             <button class="btn ghost" id="onboardingBackBtn">Back</button>
             <button class="btn primary full" id="onboardingNextBtn">Continue</button>
           </div>
@@ -4361,9 +4380,7 @@ body::before {
         document.querySelectorAll("[data-onboarding-theme]").forEach((button) => button.classList.toggle("selected", button.dataset.onboardingTheme === state.settings.themeMode));
         document.querySelectorAll("[data-onboarding-accent]").forEach((button) => button.classList.toggle("selected", button.dataset.onboardingAccent === state.settings.themeHue));
         document.querySelectorAll("[data-onboarding-equipment]").forEach((button) => button.classList.toggle("selected", (state.settings.equipmentProfile || ["none"]).includes(button.dataset.onboardingEquipment)));
-        const accentNames = { midnight: "Midnight Blue", ember: "Ember", forest: "Forest", slate: "Slate", carbon: "Carbon" };
-        $("onboardingAccentLabel").textContent = accentNames[state.settings.themeHue] || "Midnight Blue";
-        $("onboardingBackBtn").style.visibility = onboardingStep === 0 ? "hidden" : "visible";
+        $("onboardingFooter").classList.toggle("firstStep", onboardingStep === 0);
         $("onboardingNextBtn").textContent = onboardingStep === 3 ? "Start using MOMNTUM" : "Continue";
       }
       function openOnboarding(force = false) {
