@@ -1468,7 +1468,7 @@ body::before {
       }
 
 
-      /* MOMNTUM 0.3.3.9 visual refinement */
+      /* MOMNTUM 0.3.3.10 visual refinement */
       .momntumWordmark .wordmarkLight {
         display: none;
       }
@@ -1578,7 +1578,7 @@ body::before {
       }
 
 
-      /* 0.3.3.9: prevent duplicate wordmark rendering */
+      /* 0.3.3.10: prevent duplicate wordmark rendering */
       .title.momntumWordmark > img.wordmarkDark {
         display: block !important;
       }
@@ -1595,37 +1595,188 @@ body::before {
         display: block !important;
       }
 
+
+      /* 0.3.3.10: Apple Health-style summary cards */
+      .healthActivityCard {
+        padding: 0;
+        overflow: hidden;
+        border-radius: 28px;
+      }
+
+      .healthCardHeader {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 18px 20px 10px;
+      }
+
+      .healthCardTitle {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 21px;
+        line-height: 1;
+        font-weight: 800;
+        color: var(--accent);
+      }
+
+      .healthCardIcon {
+        display: grid;
+        place-items: center;
+        width: 22px;
+        height: 22px;
+        font-size: 0;
+        border-radius: 50%;
+        background:
+          radial-gradient(circle at 50% 62%, var(--card) 0 24%, transparent 25%),
+          radial-gradient(circle at 50% 50%, var(--accent) 0 68%, transparent 69%);
+        position: relative;
+      }
+
+      .healthCardIcon::after {
+        content: "";
+        position: absolute;
+        width: 7px;
+        height: 11px;
+        border: 3px solid var(--card);
+        border-top-width: 0;
+        border-radius: 0 0 8px 8px;
+        transform: translateY(1px);
+      }
+
+      .healthCardChevron {
+        font-size: 34px;
+        line-height: 1;
+        font-weight: 300;
+        color: var(--muted);
+        opacity: 0.55;
+      }
+
+      .healthMetricGrid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        padding: 10px 18px 20px;
+      }
+
+      .healthMetric {
+        min-width: 0;
+        padding: 8px 16px;
+      }
+
+      .healthMetric + .healthMetric {
+        border-left: 1px solid var(--divider);
+      }
+
+      .healthMetricLabel {
+        margin-bottom: 7px;
+        font-size: 13px;
+        line-height: 1.2;
+        font-weight: 800;
+        color: var(--accent);
+      }
+
+      .healthMetricValue {
+        font-size: clamp(25px, 5vw, 36px);
+        line-height: 1;
+        font-weight: 850;
+        letter-spacing: -0.6px;
+        color: var(--text);
+        white-space: nowrap;
+      }
+
+      .healthMetricValue small {
+        font-size: 0.58em;
+        font-weight: 650;
+        letter-spacing: 0;
+        color: var(--muted);
+      }
+
+      .healthMetricText {
+        font-size: clamp(16px, 3.6vw, 24px);
+        line-height: 1.1;
+        white-space: normal;
+        overflow-wrap: anywhere;
+      }
+
+      html[data-mode="light"] .healthActivityCard {
+        background: #fff;
+        border-color: rgba(23, 32, 51, 0.07);
+      }
+
+      html[data-mode="light"] .healthCardChevron {
+        color: rgba(23, 32, 51, 0.35);
+      }
+
+      html[data-mode="light"] .healthMetric + .healthMetric {
+        border-left-color: rgba(23, 32, 51, 0.16);
+      }
+
+      @media (max-width: 620px) {
+        .healthMetricGrid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          row-gap: 12px;
+        }
+
+        .healthMetric:nth-child(3) {
+          border-left: 0;
+        }
+
+        .healthMetric:nth-child(n + 3) {
+          border-top: 1px solid var(--divider);
+          padding-top: 16px;
+        }
+      }
+
+
+      /* Light-mode visibility correction — version remains 0.3.3.10 */
+      html[data-mode="light"] #page-workouts .card,
+      html[data-mode="light"] #page-progress .card,
+      html[data-mode="light"] #page-progress .canvasCard,
+      html[data-mode="light"] #page-progress #historyList .card {
+        background: #ffffff !important;
+        border-color: rgba(23, 32, 51, 0.14) !important;
+      }
+
+      html[data-mode="light"] #page-workouts .card {
+        outline: 1px solid rgba(23, 32, 51, 0.035);
+      }
+
+      html[data-mode="light"] #page-progress .canvasCard {
+        outline: 1px solid rgba(23, 32, 51, 0.035);
+      }
+
 </style>
-    <link rel="icon" href="favicon.ico?v=0.3.3.9" sizes="any" />
-    <link rel="icon" href="momntum-mark.svg?v=0.3.3.9" type="image/svg+xml" />
-    <link rel="icon" href="favicon-32x32.png?v=0.3.3.9" type="image/png" sizes="32x32" />
-    <link rel="icon" href="favicon-16x16.png?v=0.3.3.9" type="image/png" sizes="16x16" />
-    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=0.3.3.9" sizes="180x180" />
-    <link rel="manifest" href="site.webmanifest?v=0.3.3.9" />
+    <link rel="icon" href="favicon.ico?v=0.3.3.10" sizes="any" />
+    <link rel="icon" href="momntum-mark.svg?v=0.3.3.10" type="image/svg+xml" />
+    <link rel="icon" href="favicon-32x32.png?v=0.3.3.10" type="image/png" sizes="32x32" />
+    <link rel="icon" href="favicon-16x16.png?v=0.3.3.10" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=0.3.3.10" sizes="180x180" />
+    <link rel="manifest" href="site.webmanifest?v=0.3.3.10" />
   </head>
   <body class="launchPending">
     <div id="launchSplash" class="launchSplash" aria-hidden="true">
-      <div id="launchLogo" class="launchLogo"><img src="momntum-mark.svg?v=0.3.3.9" alt="" draggable="false" /></div>
-      <div class="launchVersion">v0.3.3.9</div>
+      <div id="launchLogo" class="launchLogo"><img src="momntum-mark.svg?v=0.3.3.10" alt="" draggable="false" /></div>
+      <div class="launchVersion">v0.3.3.10</div>
     </div>
 
     <div class="app" id="app">
       <header class="topbar">
         <div class="brand">
           <div class="logo momntumAppIcon" id="headerBrandLogo" aria-hidden="true">
-            <img src="momntum-mark.svg?v=0.3.3.9" alt="" draggable="false" />
+            <img src="momntum-mark.svg?v=0.3.3.10" alt="" draggable="false" />
           </div>
           <div>
             <div class="title momntumWordmark">
               <img
                 class="wordmarkDark"
-                src="momntum-wordmark-dark.svg?v=0.3.3.9"
+                src="momntum-wordmark-dark.svg?v=0.3.3.10"
                 alt="MOMNTUM"
                 draggable="false"
               />
               <img
                 class="wordmarkLight"
-                src="momntum-wordmark.svg?v=0.3.3.9"
+                src="momntum-wordmark.svg?v=0.3.3.10"
                 alt="MOMNTUM"
                 draggable="false"
               />
@@ -1665,34 +1816,35 @@ body::before {
             </div>
           </div>
           <h2>Snapshot</h2>
-          <div class="healthSummary card" aria-label="Training snapshot">
-            <div class="healthRow">
-              <div>
-                <div class="healthLabel">Training week</div>
-                <div class="healthDescription">Current programme cycle</div>
+          <div class="healthSummary healthActivityCard card" aria-label="Training snapshot">
+            <div class="healthCardHeader">
+              <div class="healthCardTitle">
+                <span class="healthCardIcon" aria-hidden="true">●</span>
+                Activity
               </div>
-              <div class="healthValue" id="statWeek">1</div>
+              <span class="healthCardChevron" aria-hidden="true">›</span>
             </div>
-            <div class="healthRow">
-              <div>
-                <div class="healthLabel">Current streak</div>
-                <div class="healthDescription">Consecutive active days</div>
+
+            <div class="healthMetricGrid">
+              <div class="healthMetric">
+                <div class="healthMetricLabel">Week</div>
+                <div class="healthMetricValue"><span id="statWeek">1</span></div>
               </div>
-              <div class="healthValue" id="statStreak">0</div>
-            </div>
-            <div class="healthRow">
-              <div>
-                <div class="healthLabel">Completed workouts</div>
-                <div class="healthDescription">All recorded sessions</div>
+
+              <div class="healthMetric">
+                <div class="healthMetricLabel">Streak</div>
+                <div class="healthMetricValue"><span id="statStreak">0</span><small> days</small></div>
               </div>
-              <div class="healthValue" id="statWorkouts">0</div>
-            </div>
-            <div class="healthRow">
-              <div>
-                <div class="healthLabel">Exercises completed</div>
-                <div class="healthDescription">Total completed movements</div>
+
+              <div class="healthMetric">
+                <div class="healthMetricLabel">Workouts</div>
+                <div class="healthMetricValue"><span id="statWorkouts">0</span></div>
               </div>
-              <div class="healthValue" id="statExercises">0</div>
+
+              <div class="healthMetric">
+                <div class="healthMetricLabel">Exercises</div>
+                <div class="healthMetricValue"><span id="statExercises">0</span></div>
+              </div>
             </div>
           </div>
         </section>
@@ -1758,34 +1910,35 @@ body::before {
           <p class="muted" style="margin: 8px 0 14px">
             Your local training history, consistency and overload trends.
           </p>
-          <div class="healthSummary card" aria-label="Progress summary">
-            <div class="healthRow">
-              <div>
-                <div class="healthLabel">Streak</div>
-                <div class="healthDescription">Current training consistency</div>
+          <div class="healthSummary healthActivityCard card" aria-label="Progress summary">
+            <div class="healthCardHeader">
+              <div class="healthCardTitle">
+                <span class="healthCardIcon" aria-hidden="true">●</span>
+                Progress
               </div>
-              <div class="healthValue" id="pStreak">0</div>
+              <span class="healthCardChevron" aria-hidden="true">›</span>
             </div>
-            <div class="healthRow">
-              <div>
-                <div class="healthLabel">Total training time</div>
-                <div class="healthDescription">Time recorded across all sessions</div>
+
+            <div class="healthMetricGrid">
+              <div class="healthMetric">
+                <div class="healthMetricLabel">Streak</div>
+                <div class="healthMetricValue"><span id="pStreak">0</span><small> days</small></div>
               </div>
-              <div class="healthValue" id="pTime">0m</div>
-            </div>
-            <div class="healthRow">
-              <div>
-                <div class="healthLabel">Total reps</div>
-                <div class="healthDescription">Cumulative completed repetitions</div>
+
+              <div class="healthMetric">
+                <div class="healthMetricLabel">Training</div>
+                <div class="healthMetricValue"><span id="pTime">0m</span></div>
               </div>
-              <div class="healthValue" id="pReps">0</div>
-            </div>
-            <div class="healthRow">
-              <div>
-                <div class="healthLabel">Favourite exercise</div>
-                <div class="healthDescription">Most frequently completed movement</div>
+
+              <div class="healthMetric">
+                <div class="healthMetricLabel">Reps</div>
+                <div class="healthMetricValue"><span id="pReps">0</span></div>
               </div>
-              <div class="healthValue healthValueText" id="pFavourite">None</div>
+
+              <div class="healthMetric healthMetricWide">
+                <div class="healthMetricLabel">Favourite</div>
+                <div class="healthMetricValue healthMetricText"><span id="pFavourite">None</span></div>
+              </div>
             </div>
           </div>
           <h2>Charts</h2>
@@ -2071,7 +2224,7 @@ body::before {
       const STORAGE_KEY = "homeStrength.v1";
       const APP_INFO = {
         name: "MOMNTUM",
-        version: "0.3.3.9",
+        version: "0.3.3.10",
         buildDate: "29 July 2026",
         creator: "Mark Taylor",
         poweredBy: "Offline PWA • HTML • CSS • JavaScript",

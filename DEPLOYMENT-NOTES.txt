@@ -1,23 +1,8 @@
-MOMNTUM 0.3.3.9
+MOMNTUM 0.3.3.10 — repaired build
 
 Fix:
-- Prevented both light and dark wordmark SVGs rendering simultaneously.
-- Dark mode now shows only momntum-wordmark-dark.svg.
-- Light mode now shows only momntum-wordmark.svg.
-
-MOMNTUM 0.3.3.8
-
-Baseline: 0.3.3.7
-
-Changes:
-- Light-mode wordmark now uses the correct dark-letter SVG.
-- Removed card shadows across the app for a consistent flat appearance.
-- Removed the glow behind Suggested Workout while retaining accent shading.
-- Added a visible light-mode outline to the level indicator.
-- Removed Achievements from the Home page display.
-- Improved the light-mode weekly completion ring visibility.
-- Replaced Home Snapshot tiles with an Apple Health-inspired information card.
-- Replaced the Progress summary tiles with the same information-card pattern.
-- Removed Next Progression from the Home page.
-
-Achievements remain in the data model and are not deleted.
+- Removed stale HTML fragments from the previous Snapshot and Progress cards.
+- Restored valid page nesting inside the main content container.
+- Confirmed Home, Workouts, Active Workout, Progress, Library and Settings pages are present.
+- Retained the light-mode card visibility correction.
+- Version remains 0.3.3.10.
