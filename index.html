@@ -2007,12 +2007,17 @@ body::before {
       });
 
       (function initialiseTesterInstallGate() {
+        const config = window.TESTER_INSTALL_GATE;
+
         const standalone =
           window.matchMedia("(display-mode: standalone)").matches ||
           window.navigator.standalone === true;
-        const config = window.TESTER_INSTALL_GATE;
 
-        if (config.enabled && !standalone) {
+        const isIOS =
+          /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+        if (config.enabled && isIOS && !standalone) {
           document.body.classList.add("installGateActive");
           if (config.allowBrowserPreview) {
             document.body.classList.add("installGatePreviewAllowed");
