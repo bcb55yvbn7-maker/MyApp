@@ -4467,6 +4467,8 @@ body::before {
         if (markComplete) localStorage.setItem(ONBOARDING_KEY, "true");
         document.body.classList.remove("onboardingActive");
         renderAll();
+        if (typeof showPage === "function") showPage("home");
+        window.scrollTo({ top: 0, behavior: "instant" });
       }
 
       async function refreshApp() {
