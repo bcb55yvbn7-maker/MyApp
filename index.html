@@ -2246,6 +2246,20 @@ body::before {
         border-radius: 16px;
         background: var(--card2);
       }
+      .workoutEquipmentControl.compactOnly {
+        padding: 10px 0 0;
+        border-top: 1px solid var(--line);
+      }
+      .workoutEquipmentControl.compactOnly .workoutEquipmentCopy strong { font-size: 13px; }
+      .workoutExpandedEquipmentDetail {
+        margin-top: 12px;
+        padding: 11px 13px;
+        border-radius: 14px;
+        background: var(--card2);
+        border: 1px solid var(--line);
+      }
+      .workoutExpandedEquipmentDetail strong { display: block; }
+      .workoutExpandedEquipmentDetail small { display: block; color: var(--muted); margin-top: 3px; }
       .workoutEquipmentCopy { min-width: 0; }
       .workoutEquipmentCopy strong { display: block; }
       .workoutEquipmentCopy small { display: block; color: var(--muted); margin-top: 2px; }
@@ -2584,28 +2598,11 @@ body::before {
       </header>
       <main class="content" id="content">
         <section class="page active" id="page-home">
-          <div class="hero expandableWorkoutCard" id="suggestedWorkoutCard">
-            <div class="expandableCardHeader" id="suggestedWorkoutHeader" role="button" tabindex="0" aria-expanded="false">
-              <div>
-                <div class="kicker">Today</div>
-                <h1>Suggested workout</h1>
-              </div>
-              <span class="cardChevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div class="hero" id="suggestedWorkoutCard">
+            <div>
+              <div class="kicker">Today</div>
+              <h1>Suggested workout</h1>
             </div>
-            <div class="collapsedWorkoutOnly">
-              <div class="collapsedSuggestedName" id="suggestedNameCompact">Push</div>
-              <div class="collapsedWorkoutRow">
-                <div class="collapsedWorkoutPct" id="weeklyPctCompact">0%</div>
-                <div class="compactEquipmentToggle">
-                  <strong>Use equipment</strong>
-                  <label class="switchControl" aria-label="Use equipment for suggested workout">
-                    <input type="checkbox" id="homeEquipmentToggleCompact">
-                    <span class="switchTrack"></span>
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="expandableCardDetails">
             <p class="muted" id="suggestedMeta" style="margin-top: 8px"></p>
             <div class="ringWrap">
               <div class="ring" id="weeklyRing" aria-label="Weekly completion">
@@ -2629,7 +2626,6 @@ body::before {
                 <input type="checkbox" id="homeEquipmentToggle">
                 <span class="switchTrack"></span>
               </label>
-            </div>
             </div>
             <button class="btn primary full" id="quickStartBtn" style="margin-top: 12px">
               Quick Start
@@ -4730,7 +4726,6 @@ body::before {
           week = getWeek(),
           pct = Math.min(100, Math.round((weeklyCompleted() / 4) * 100));
         $("suggestedName").textContent = sw.day + " - " + sw.title;
-        if ($("suggestedNameCompact")) $("suggestedNameCompact").textContent = sw.title;
         $("suggestedMeta").textContent = sw.duration + " min · " + rw.activeEquipment;
         $("suggestedInfo").textContent = rw.main.slice(0, 3).join(" · ");
         const profileAvailable = selectedEquipment().length > 0;
@@ -4738,11 +4733,6 @@ body::before {
         if (homeEquipmentToggle) {
           homeEquipmentToggle.checked = equipmentEnabledFor(sw.id);
           homeEquipmentToggle.disabled = !profileAvailable;
-        }
-        const compactToggle = $("homeEquipmentToggleCompact");
-        if (compactToggle) {
-          compactToggle.checked = equipmentEnabledFor(sw.id);
-          compactToggle.disabled = !profileAvailable;
         }
         const homeEquipmentSummary = $("homeEquipmentSummary");
         if (homeEquipmentSummary) {
@@ -4755,7 +4745,6 @@ body::before {
           "🔥 " + state.stats.streak + " day streak";
         $("weeklyRing").style.setProperty("--p", pct);
         $("weeklyPct").textContent = pct + "%";
-        if ($("weeklyPctCompact")) $("weeklyPctCompact").textContent = pct + "%";
         $("statWeek").textContent = week;
         $("statStreak").textContent = state.stats.streak;
         $("statWorkouts").textContent = state.history.length;
@@ -4768,7 +4757,7 @@ body::before {
             const profileAvailable = selectedEquipment().length > 0;
             const enabled = equipmentEnabledFor(w.id);
             const switchLabel = enabled ? rw.activeEquipment : "Bodyweight only";
-            return `<article class="card expandableWorkoutCard" data-workout-card="${w.id}"><div class="workoutCardCollapsed"><div class="workoutCardCollapsedTop"><div class="workoutCardCollapsedTitle"><span class="kicker">${w.day}</span><h3>${w.title}</h3></div><button class="cardChevron" type="button" data-workout-expand="${w.id}" aria-label="Expand ${w.title}" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><div class="workoutEquipmentControl"><div class="workoutEquipmentCopy"><strong>Use equipment</strong><small>${switchLabel}${profileAvailable ? "" : " · Add equipment in Settings"}</small></div><label class="switchControl" aria-label="Use equipment for ${w.title}"><input type="checkbox" data-equipment-toggle="${w.id}" ${enabled ? "checked" : ""} ${profileAvailable ? "" : "disabled"}><span class="switchTrack"></span></label></div><div class="workoutCardExpanded"><div class="meta"><span class="pill">${w.duration} min</span><span class="pill">${rw.main.length} exercises</span><span class="pill">${rw.warm.length} warm-up</span></div><p class="muted resolvedExerciseList" style="margin-top:12px">${rw.main.slice(0, 4).join(", ")}${rw.main.length > 4 ? ", and more." : "."}</p></div><button class="btn primary full" data-start="${w.id}">Start ${w.title}</button></div></article>`;
+            return `<article class="card expandableWorkoutCard" data-workout-card="${w.id}"><div class="workoutCardCollapsed"><div class="workoutCardCollapsedTop"><div class="workoutCardCollapsedTitle"><span class="kicker">${w.day}</span><h3>${w.title}</h3></div><button class="cardChevron" type="button" data-workout-expand="${w.id}" aria-label="Expand ${w.title}" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><div class="workoutEquipmentControl compactOnly"><div class="workoutEquipmentCopy"><strong>Use equipment</strong></div><label class="switchControl" aria-label="Use equipment for ${w.title}"><input type="checkbox" data-equipment-toggle="${w.id}" ${enabled ? "checked" : ""} ${profileAvailable ? "" : "disabled"}><span class="switchTrack"></span></label></div><div class="workoutCardExpanded"><div class="meta"><span class="pill">${w.duration} min</span><span class="pill">${rw.main.length} exercises</span><span class="pill">${rw.warm.length} warm-up</span></div><div class="workoutExpandedEquipmentDetail"><strong>${enabled ? "Equipment enabled" : "Bodyweight mode"}</strong><small>${switchLabel}${profileAvailable ? "" : " · Add equipment in Settings"}</small></div><p class="muted resolvedExerciseList" style="margin-top:12px">${rw.main.slice(0, 4).join(", ")}${rw.main.length > 4 ? ", and more." : "."}</p></div><button class="btn primary full" data-start="${w.id}">Start ${w.title}</button></div></article>`;
           })
           .join("");
         document.querySelectorAll("[data-equipment-toggle]").forEach((toggle) => {
@@ -5254,27 +5243,6 @@ body::before {
         saveState();
         renderAll();
         toast(event.target.checked ? "Equipment enabled" : "Bodyweight only");
-      };
-      $("homeEquipmentToggleCompact").onchange = (event) => {
-        const workout = suggestedWorkout();
-        state.settings.workoutEquipmentEnabled[workout.id] = event.target.checked;
-        saveState();
-        renderAll();
-        toast(event.target.checked ? "Equipment enabled" : "Bodyweight only");
-      };
-      const suggestedWorkoutCard = $("suggestedWorkoutCard");
-      const suggestedWorkoutHeader = $("suggestedWorkoutHeader");
-      const toggleSuggestedWorkoutCard = () => {
-        const open = !suggestedWorkoutCard.classList.contains("open");
-        suggestedWorkoutCard.classList.toggle("open", open);
-        suggestedWorkoutHeader.setAttribute("aria-expanded", String(open));
-      };
-      suggestedWorkoutHeader.onclick = toggleSuggestedWorkoutCard;
-      suggestedWorkoutHeader.onkeydown = (event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          toggleSuggestedWorkoutCard();
-        }
       };
       function openExercise(id) {
         const e = exercises.find((x) => x.id === id);
