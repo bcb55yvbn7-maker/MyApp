@@ -2322,7 +2322,7 @@ body::before {
         color: #fff !important;
       }
 
-      /* v0.6.2.3 modular first-run onboarding */
+      /* v0.6.3.1 modular first-run onboarding */
       .onboardingOverlay {
         position: fixed;
         inset: 0;
@@ -2394,7 +2394,7 @@ body::before {
         .onboardingThemePreview { min-height: 58px; flex-direction: row; justify-content: space-between; }
       }
 
-      /* v0.6.2.3 UI/UX enhancements */
+      /* v0.6.3.1 UI/UX enhancements */
       .expandableWorkoutCard { overflow: hidden; }
       .expandableCardHeader {
         display: flex; align-items: center; justify-content: space-between; gap: 12px; cursor: pointer;
@@ -2595,7 +2595,7 @@ body::before {
         .collapsedWorkoutPct { grid-column: 1 / -1; }
       }
 
-      /* v0.6.2.3 home screen polish */
+      /* v0.6.3.1 home screen polish */
       #page-home {
         padding-bottom: 28px;
       }
@@ -2755,7 +2755,7 @@ body::before {
       }
 
 
-      /* Dark-mode tour prominence — v0.6.2.3 */
+      /* Dark-mode tour prominence — v0.6.3.1 */
       html[data-mode="dark"] .appTourSpotlight {
         border-color: color-mix(in srgb, var(--accent) 92%, white 8%);
         box-shadow:
@@ -2803,7 +2803,7 @@ body::before {
 
 
 
-      /* v0.6.2.3 active workout focus */
+      /* v0.6.3.1 active workout focus */
       #page-active .timerPanel {
         position: sticky;
         top: 8px;
@@ -2829,7 +2829,7 @@ body::before {
         display: none;
       }
 
-      /* v0.6.2.3 continuously traced active-workout outline */
+      /* v0.6.3.1 continuously traced active-workout outline */
       @property --active-trace-angle {
         syntax: "<angle>";
         inherits: false;
@@ -2958,13 +2958,75 @@ body::before {
         }
       }
 
+      /* v0.6.3.1 workout start countdown */
+      #page-active .timerPanel > .workoutCountdownOverlay {
+        position: absolute !important;
+        inset: 0 !important;
+        z-index: 50 !important;
+        display: grid !important;
+        place-items: center;
+        width: 100%;
+        height: 100%;
+        min-height: 100%;
+        border-radius: inherit;
+        overflow: hidden;
+        isolation: isolate;
+        background: rgba(0, 0, 0, 0.84);
+        -webkit-backdrop-filter: blur(4px) saturate(80%);
+        backdrop-filter: blur(4px) saturate(80%);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.16s ease, visibility 0.16s ease;
+      }
+      #page-active .timerPanel.countdownActive > :not(.workoutCountdownOverlay) {
+        filter: brightness(0.34) saturate(0.6);
+      }
+      .workoutCountdownOverlay.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+      .workoutCountdownNumber {
+        color: #fff;
+        font-size: clamp(112px, 34vw, 220px);
+        line-height: 0.82;
+        font-weight: 950;
+        letter-spacing: -0.08em;
+        font-variant-numeric: tabular-nums;
+        text-shadow: 0 0 30px rgba(255, 69, 58, 0.42);
+        transform: scale(0.82);
+        opacity: 0;
+      }
+      .workoutCountdownOverlay.active .workoutCountdownNumber {
+        animation: workoutCountdownBeat 0.82s cubic-bezier(.2,.78,.24,1) both;
+      }
+      .workoutCountdownNumber.go {
+        font-size: clamp(72px, 22vw, 136px);
+        letter-spacing: 0.02em;
+        color: #ff5147;
+      }
+      @keyframes workoutCountdownBeat {
+        0% { opacity: 0; transform: scale(0.72); }
+        20% { opacity: 1; transform: scale(1.04); }
+        72% { opacity: 1; transform: scale(1); }
+        100% { opacity: 0; transform: scale(1.12); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .workoutCountdownOverlay.active .workoutCountdownNumber {
+          animation: none;
+          opacity: 1;
+          transform: none;
+        }
+      }
+
     </style>
-    <link rel="icon" href="favicon.ico?v=0.6.2.3" sizes="any" />
-    <link rel="icon" href="momntum-mark.svg?v=0.6.2.3" type="image/svg+xml" />
-    <link rel="icon" href="favicon-32x32.png?v=0.6.2.3" type="image/png" sizes="32x32" />
-    <link rel="icon" href="favicon-16x16.png?v=0.6.2.3" type="image/png" sizes="16x16" />
-    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=0.6.2.3" sizes="180x180" />
-    <link rel="manifest" href="site.webmanifest?v=0.6.2.3" />
+    <link rel="icon" href="favicon.ico?v=0.6.3.1" sizes="any" />
+    <link rel="icon" href="momntum-mark.svg?v=0.6.3.1" type="image/svg+xml" />
+    <link rel="icon" href="favicon-32x32.png?v=0.6.3.1" type="image/png" sizes="32x32" />
+    <link rel="icon" href="favicon-16x16.png?v=0.6.3.1" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=0.6.3.1" sizes="180x180" />
+    <link rel="manifest" href="site.webmanifest?v=0.6.3.1" />
   </head>
 
   <body class="launchPending">
@@ -2999,11 +3061,11 @@ body::before {
     <section id="testerInstallGate" class="testerInstallGate" aria-labelledby="testerInstallTitle">
       <div class="testerInstallCard">
         <div class="testerInstallMark" aria-hidden="true">
-          <img src="momntum-mark.svg?v=0.6.2.3" alt="" draggable="false" />
+          <img src="momntum-mark.svg?v=0.6.3.1" alt="" draggable="false" />
         </div>
         <img
           class="testerInstallWordmark"
-          src="momntum-wordmark-dark.svg?v=0.6.2.3"
+          src="momntum-wordmark-dark.svg?v=0.6.3.1"
           alt="MOMNTUM"
           draggable="false"
         />
@@ -3040,7 +3102,7 @@ body::before {
         <p class="testerInstallInstalled">MOMNTUM will now be installed to your device.</p>
 
         <p class="testerInstallOpenPrompt">
-          <img src="momntum-mark.svg?v=0.6.2.3" alt="" draggable="false" />
+          <img src="momntum-mark.svg?v=0.6.3.1" alt="" draggable="false" />
           <span>Now open MOMNTUM from your home screen</span>
         </p>
 
@@ -3051,19 +3113,19 @@ body::before {
         <button id="testerBrowserPreview" class="testerBrowserPreview" type="button">
           Continue in browser
         </button>
-        <p class="testerInstallVersion">v0.6.2.3</p>
+        <p class="testerInstallVersion">v0.6.3.1</p>
       </div>
     </section>
 
     <div id="launchSplash" class="launchSplash" aria-hidden="true">
-      <div id="launchLogo" class="launchLogo"><img src="momntum-mark.svg?v=0.6.2.3" alt="" draggable="false" /></div>
-      <div class="launchVersion">v0.6.2.3</div>
+      <div id="launchLogo" class="launchLogo"><img src="momntum-mark.svg?v=0.6.3.1" alt="" draggable="false" /></div>
+      <div class="launchVersion">v0.6.3.1</div>
     </div>
 
     <section id="onboardingOverlay" class="onboardingOverlay" aria-modal="true" role="dialog" aria-labelledby="onboardingTitle">
       <div class="onboardingShell">
         <div class="onboardingHeader">
-          <div class="onboardingMark"><img src="momntum-mark.svg?v=0.6.2.3" alt="" draggable="false" /></div>
+          <div class="onboardingMark"><img src="momntum-mark.svg?v=0.6.3.1" alt="" draggable="false" /></div>
           <div class="kicker">First-time setup</div>
           <h1 id="onboardingTitle" style="margin-top:6px">Make MOMNTUM yours</h1>
           <p class="muted" style="margin-top:8px">Choose a few preferences now. You can change everything later in Settings.</p>
@@ -3108,19 +3170,19 @@ body::before {
       <header class="topbar">
         <div class="brand">
           <div class="logo momntumAppIcon" id="headerBrandLogo" aria-hidden="true">
-            <img src="momntum-mark.svg?v=0.6.2.3" alt="" draggable="false" />
+            <img src="momntum-mark.svg?v=0.6.3.1" alt="" draggable="false" />
           </div>
           <div>
             <div class="title momntumWordmark">
               <img
                 class="wordmarkDark"
-                src="momntum-wordmark-dark.svg?v=0.6.2.3"
+                src="momntum-wordmark-dark.svg?v=0.6.3.1"
                 alt="MOMNTUM"
                 draggable="false"
               />
               <img
                 class="wordmarkLight"
-                src="momntum-wordmark.svg?v=0.6.2.3"
+                src="momntum-wordmark.svg?v=0.6.3.1"
                 alt="MOMNTUM"
                 draggable="false"
               />
@@ -3204,6 +3266,9 @@ body::before {
         </section>
         <section class="page" id="page-active">
           <div class="timerPanel" aria-label="Workout timer">
+            <div class="workoutCountdownOverlay" id="workoutCountdownOverlay" aria-live="assertive" aria-hidden="true">
+              <div class="workoutCountdownNumber" id="workoutCountdownNumber">3</div>
+            </div>
             <div class="timerHeader">
               <div>
                 <div class="timerEyebrow">Workout time</div>
@@ -3624,13 +3689,14 @@ body::before {
       const STORAGE_KEY = "homeStrength.v1";
       const APP_INFO = {
         name: "MOMNTUM",
-        version: "0.6.2.3",
+        version: "0.6.3.1",
         buildDate: "31 July 2026",
         creator: "Mark Taylor",
         poweredBy: "Offline PWA • HTML • CSS • JavaScript",
         description: "Personal offline calisthenics training companion."
       };
       const CHANGELOG = [
+        "Fixed the workout-start visual countdown overlay and synchronised it with the sound sequence",
         "Changed the Training status dot to an always-red glowing recording indicator",
         "Made the Suggested Workout accent outline clearly visible in light mode",
         "Added a subtle continuously tracing red outline to the active workout card",
@@ -4972,6 +5038,7 @@ body::before {
         activePage = "home",
         workoutInterval = null,
         restInterval = null,
+        workoutCountdownTimer = null,
         confirmAction = null,
         activeExpandedExerciseId = null,
         libraryExpandedExerciseId = null,
@@ -5397,23 +5464,72 @@ body::before {
         clearTimeout(t._to);
         t._to = setTimeout(() => t.classList.remove("show"), 2200);
       }
-      function beep() {
+      let momntumAudioContext = null;
+      function getMomntumAudioContext() {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) return null;
+        if (!momntumAudioContext) momntumAudioContext = new AudioContextClass();
+        if (momntumAudioContext.state === "suspended") momntumAudioContext.resume();
+        return momntumAudioContext;
+      }
+      function playTone({ frequency = 440, endFrequency = frequency, duration = 0.16, gain = 0.045, type = "sine", delay = 0 }) {
+        if (state.settings.sound !== "on") return;
+        const context = getMomntumAudioContext();
+        if (!context) return;
+        const startAt = context.currentTime + delay;
+        const oscillator = context.createOscillator();
+        const envelope = context.createGain();
+        oscillator.type = type;
+        oscillator.frequency.setValueAtTime(frequency, startAt);
+        oscillator.frequency.exponentialRampToValueAtTime(Math.max(20, endFrequency), startAt + duration);
+        envelope.gain.setValueAtTime(0.0001, startAt);
+        envelope.gain.exponentialRampToValueAtTime(gain, startAt + Math.min(0.025, duration * 0.2));
+        envelope.gain.exponentialRampToValueAtTime(0.0001, startAt + duration);
+        oscillator.connect(envelope);
+        envelope.connect(context.destination);
+        oscillator.start(startAt);
+        oscillator.stop(startAt + duration + 0.03);
+      }
+      function playSound(name) {
         if (state.settings.sound !== "on") return;
         try {
-          const c = new (window.AudioContext || window.webkitAudioContext)(),
-            o = c.createOscillator(),
-            g = c.createGain();
-          o.frequency.value = 880;
-          g.gain.value = 0.05;
-          o.connect(g);
-          g.connect(c.destination);
-          o.start();
-          setTimeout(() => {
-            o.stop();
-            c.close();
-          }, 180);
-        } catch (e) {}
+          switch (name) {
+            case "countdown":
+              playTone({ frequency: 520, endFrequency: 460, duration: 0.13, gain: 0.055, type: "sine" });
+              playTone({ frequency: 1040, endFrequency: 920, duration: 0.08, gain: 0.018, type: "sine", delay: 0.015 });
+              break;
+            case "go":
+              playTone({ frequency: 620, endFrequency: 930, duration: 0.24, gain: 0.06, type: "sine" });
+              playTone({ frequency: 930, endFrequency: 1240, duration: 0.20, gain: 0.035, type: "triangle", delay: 0.08 });
+              break;
+            case "setComplete":
+              playTone({ frequency: 720, endFrequency: 860, duration: 0.16, gain: 0.045, type: "sine" });
+              break;
+            case "restStart":
+              playTone({ frequency: 430, endFrequency: 360, duration: 0.20, gain: 0.042, type: "sine" });
+              break;
+            case "restComplete":
+              playTone({ frequency: 660, endFrequency: 880, duration: 0.19, gain: 0.05, type: "sine" });
+              playTone({ frequency: 880, endFrequency: 990, duration: 0.16, gain: 0.035, type: "triangle", delay: 0.11 });
+              break;
+            case "pause":
+              playTone({ frequency: 440, endFrequency: 390, duration: 0.13, gain: 0.032, type: "triangle" });
+              break;
+            case "resume":
+              playTone({ frequency: 500, endFrequency: 680, duration: 0.15, gain: 0.04, type: "triangle" });
+              break;
+            case "workoutComplete":
+              playTone({ frequency: 523, endFrequency: 523, duration: 0.22, gain: 0.05, type: "sine" });
+              playTone({ frequency: 659, endFrequency: 659, duration: 0.22, gain: 0.05, type: "sine", delay: 0.15 });
+              playTone({ frequency: 784, endFrequency: 880, duration: 0.34, gain: 0.06, type: "sine", delay: 0.30 });
+              break;
+          }
+        } catch (error) {
+          console.warn("MOMNTUM audio unavailable", error);
+        }
       }
+      function beep() { playSound("restComplete"); }
+
       document
         .querySelectorAll(".navBtn")
         .forEach((b) =>
@@ -5813,6 +5929,94 @@ body::before {
               .join("")
           : `<div class="card"><p class="muted">No completed workouts yet. Start a session to build your history.</p></div>`;
       }
+      function runWorkoutStartCountdown() {
+        clearTimeout(workoutCountdownTimer);
+
+        const panel = document.querySelector("#page-active .timerPanel");
+        if (!panel || !state.active) return;
+
+        let overlay = $("workoutCountdownOverlay");
+        let number = $("workoutCountdownNumber");
+
+        // Defensive creation keeps the visual sequence working even if markup is
+        // changed or an older cached document omits the overlay element.
+        if (!overlay) {
+          overlay = document.createElement("div");
+          overlay.id = "workoutCountdownOverlay";
+          overlay.className = "workoutCountdownOverlay";
+          overlay.setAttribute("aria-live", "assertive");
+          overlay.setAttribute("aria-hidden", "true");
+          overlay.innerHTML = '<div class="workoutCountdownNumber" id="workoutCountdownNumber">3</div>';
+          panel.appendChild(overlay);
+          number = $("workoutCountdownNumber");
+        }
+
+        const sequence = ["3", "2", "1", "GO"];
+        let index = 0;
+
+        panel.classList.add("countdownActive");
+        overlay.classList.add("active");
+        overlay.setAttribute("aria-hidden", "false");
+
+        // Force the overlay above the timer card in WebKit/iOS PWAs.
+        Object.assign(overlay.style, {
+          position: "absolute",
+          inset: "0",
+          zIndex: "50",
+          display: "grid",
+          opacity: "1",
+          visibility: "visible"
+        });
+
+        const finishCountdown = () => {
+          overlay.classList.remove("active");
+          overlay.setAttribute("aria-hidden", "true");
+          panel.classList.remove("countdownActive");
+          overlay.style.opacity = "0";
+          overlay.style.visibility = "hidden";
+
+          if (!state.active) return;
+          state.active.paused = false;
+          state.active.lastWorkoutTickAt = Date.now();
+          saveState();
+          renderActiveWorkout();
+          startClock();
+          toast("Workout started");
+        };
+
+        const showNext = () => {
+          if (!state.active) {
+            overlay.classList.remove("active");
+            overlay.setAttribute("aria-hidden", "true");
+            panel.classList.remove("countdownActive");
+            overlay.style.opacity = "0";
+            overlay.style.visibility = "hidden";
+            return;
+          }
+
+          const value = sequence[index];
+          number.textContent = value;
+          number.classList.toggle("go", value === "GO");
+
+          // Re-trigger the beat animation for every number, including Safari.
+          number.style.animation = "none";
+          void number.getBoundingClientRect();
+          number.style.animation = "workoutCountdownBeat 0.82s cubic-bezier(.2,.78,.24,1) both";
+
+          playSound(value === "GO" ? "go" : "countdown");
+          index += 1;
+
+          if (index < sequence.length) {
+            workoutCountdownTimer = window.setTimeout(showNext, 900);
+          } else {
+            workoutCountdownTimer = window.setTimeout(finishCountdown, 760);
+          }
+        };
+
+        requestAnimationFrame(() => requestAnimationFrame(showNext));
+      }
+
+
       function startWorkout(id, cont) {
         if (cont && state.active) {
           showPage("active");
@@ -5827,7 +6031,7 @@ body::before {
           resolvedWorkout: w,
           startedAt: Date.now(),
           elapsed: 0,
-          paused: false,
+          paused: true,
           lastWorkoutTickAt: Date.now(),
           restRemaining: state.settings.restDuration,
           restRunning: false,
@@ -5840,8 +6044,8 @@ body::before {
         );
         saveState();
         showPage("active");
-        startClock();
-        toast("Workout started");
+        renderActiveWorkout();
+        runWorkoutStartCountdown();
       }
       function startClock() {
         clearInterval(workoutInterval);
@@ -5885,7 +6089,7 @@ body::before {
           a.restRemaining = 0;
           a.restRunning = false;
           a.restEndsAt = null;
-          beep();
+          playSound("restComplete");
           toast("Rest complete");
           renderActiveWorkout();
         }
@@ -5905,6 +6109,7 @@ body::before {
         p.done = p.sets.filter(Boolean).length >= (parseInt(ex.sets) || 1);
         state.active.restRemaining = state.settings.restDuration;
         if (p.sets[i]) {
+          playSound("setComplete");
           startRest(true);
         } else {
           state.active.restRunning = false;
@@ -5931,6 +6136,7 @@ body::before {
         state.active.restEndsAt = null;
         saveState();
         renderActiveWorkout();
+        playSound("resume");
         toast("Workout resumed");
       };
       $("pauseWorkoutBtn").onclick = () => {
@@ -5939,6 +6145,7 @@ body::before {
         state.active.lastWorkoutTickAt = Date.now();
         saveState();
         renderActiveWorkout();
+        playSound(state.active.paused ? "pause" : "resume");
         toast(state.active.paused ? "Workout paused" : "Workout resumed");
       };
       $("resetWorkoutBtn").onclick = () =>
@@ -5946,6 +6153,9 @@ body::before {
           "End workout?",
           "This clears the current workout progress without saving it.",
           () => {
+            clearTimeout(workoutCountdownTimer);
+            document.querySelector("#page-active .timerPanel")?.classList.remove("countdownActive");
+            $("workoutCountdownOverlay")?.classList.remove("active");
             state.active = null;
             saveState();
             showPage("workouts");
@@ -5976,7 +6186,7 @@ body::before {
         saveState();
         renderActiveWorkout();
         if (automatic) {
-          beep();
+          playSound("restStart");
           toast("Rest started");
         }
       }
@@ -6035,6 +6245,7 @@ body::before {
         clearInterval(workoutInterval);
         clearInterval(restInterval);
         showPage("progress");
+        playSound("workoutComplete");
         toast("Workout complete");
       }
       function updateStreak(date) {
