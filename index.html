@@ -2301,7 +2301,7 @@ body::before {
         color: #fff !important;
       }
 
-      /* v0.5.2.2 modular first-run onboarding */
+      /* v0.5.3 modular first-run onboarding */
       .onboardingOverlay {
         position: fixed;
         inset: 0;
@@ -2373,7 +2373,7 @@ body::before {
         .onboardingThemePreview { min-height: 58px; flex-direction: row; justify-content: space-between; }
       }
 
-      /* v0.5.2.2 UI/UX enhancements */
+      /* v0.5.3 UI/UX enhancements */
       .expandableWorkoutCard { overflow: hidden; }
       .expandableCardHeader {
         display: flex; align-items: center; justify-content: space-between; gap: 12px; cursor: pointer;
@@ -2395,55 +2395,98 @@ body::before {
       .expandableWorkoutCard.open .expandableCardDetails { max-height: 760px; opacity: 1; }
       .expandableWorkoutCard.open .collapsedWorkoutOnly { display: none; }
       .collapsedSuggestedName { margin-top: 8px; font-size: 1.05rem; font-weight: 750; }
-      .workoutCardCollapsed { display: grid; gap: 14px; }
+      .workoutCardCollapsed { display: grid; gap: 10px; }
       .expandableWorkoutCard { cursor: pointer; }
       .expandableWorkoutCard button,
       .expandableWorkoutCard input,
       .expandableWorkoutCard label { cursor: pointer; }
-      .workoutCardCollapsedTop { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-      .workoutCardCollapsedTitle { min-width: 0; }
+      .workoutCardCollapsedTop {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+      }
+      .workoutCardCollapsedTitle {
+        min-width: 0;
+        flex: 1 1 auto;
+      }
       .workoutCardCollapsedTitle h3 { margin-top: 2px; }
       .workoutCardSummaryMeta {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
+        display: inline-flex;
+        flex: 0 0 auto;
+        gap: 5px;
         align-items: center;
       }
       .workoutCardSummaryMeta .pill {
-        min-height: 32px;
+        min-height: 27px;
         display: inline-flex;
         align-items: center;
-        padding: 6px 10px;
+        padding: 4px 7px;
         border-radius: 999px;
         border: 1px solid var(--divider);
         background: color-mix(in srgb, var(--card2) 88%, transparent);
         color: var(--text);
-        font-size: 12px;
+        font-size: 10.5px;
         font-weight: 800;
+        white-space: nowrap;
+      }
+      .workoutCardActions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+      }
+      .workoutCardActions .btn {
+        flex: 1 1 auto;
+        width: auto;
+        min-width: 0;
+      }
+      .expandableWorkoutCard.open .workoutCardActions .workoutEquipmentInline {
+        display: none;
+      }
+      .expandableWorkoutCard.open .workoutCardActions .btn {
+        flex: 1 1 100%;
+        width: 100%;
       }
       .workoutEquipmentInline {
-        margin-left: auto;
+        flex: 0 0 auto;
         display: inline-flex;
         align-items: center;
         justify-content: flex-end;
         gap: 8px;
-        min-height: 32px;
         color: var(--muted);
         font-size: 12px;
         font-weight: 800;
         white-space: nowrap;
       }
       .workoutEquipmentInline .switchControl {
-        transform: scale(.82);
-        transform-origin: right center;
-        margin-right: -3px;
+        transform: none;
+        margin: 0;
+      }
+      .workoutExpandedEquipmentHeader {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .workoutExpandedEquipmentHeader > div { min-width: 0; }
+      .workoutExpandedEquipmentToggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        flex: 0 0 auto;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 800;
+        white-space: nowrap;
       }
       html[data-mode="light"] .workoutCardSummaryMeta .pill {
         border-color: rgba(23, 32, 51, .18);
         background: rgba(255, 255, 255, .72);
         color: #172033;
       }
-      html[data-mode="light"] .workoutEquipmentInline {
+      html[data-mode="light"] .workoutEquipmentInline,
+      html[data-mode="light"] .workoutExpandedEquipmentToggle {
         color: rgba(23, 32, 51, .68);
       }
       html[data-mode="dark"] .workoutCardSummaryMeta .pill {
@@ -2451,35 +2494,21 @@ body::before {
         background: rgba(255, 255, 255, .04);
         color: var(--text);
       }
-      html[data-mode="dark"] .workoutEquipmentInline {
+      html[data-mode="dark"] .workoutEquipmentInline,
+      html[data-mode="dark"] .workoutExpandedEquipmentToggle {
         color: var(--muted);
       }
       @media (max-width: 430px) {
-        .workoutCardSummaryMeta {
-          flex-wrap: nowrap;
-          gap: 5px;
-          width: 100%;
-        }
+        .workoutCardCollapsedTop { gap: 6px; }
+        .workoutCardSummaryMeta { gap: 4px; }
         .workoutCardSummaryMeta .pill {
-          min-height: 28px;
-          padding: 4px 7px;
-          font-size: 10.5px;
-          white-space: nowrap;
+          min-height: 25px;
+          padding: 3px 6px;
+          font-size: 10px;
         }
-        .workoutEquipmentInline {
-          flex: 0 0 auto;
-          margin-left: auto;
-          min-height: 28px;
-          gap: 4px;
-          font-size: 10.5px;
-          white-space: nowrap;
-        }
-        .workoutEquipmentInline .switchControl {
-          transform: scale(.7);
-          transform-origin: right center;
-          margin-left: -3px;
-          margin-right: -7px;
-        }
+        .workoutCardActions { gap: 8px; }
+        .workoutEquipmentInline { gap: 5px; font-size: 10.5px; }
+        .workoutCardActions .btn { padding-left: 10px; padding-right: 10px; }
       }
       .workoutCardExpanded { max-height: 0; overflow: hidden; opacity: 0; transition: max-height .28s ease, opacity .18s ease, margin .28s ease; }
       .expandableWorkoutCard.open .workoutCardExpanded { max-height: 680px; opacity: 1; margin-top: 14px; }
@@ -2504,13 +2533,66 @@ body::before {
         .collapsedWorkoutPct { grid-column: 1 / -1; }
       }
 
+      /* v0.5.3 home screen polish */
+      #page-home {
+        padding-bottom: 28px;
+      }
+
+      #page-home .hero {
+        background: var(--card);
+        border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--divider));
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.10) !important;
+      }
+
+      html[data-mode="light"] #page-home .hero {
+        background: rgba(255, 255, 255, 0.96);
+        border-color: rgba(23, 32, 51, 0.16);
+        box-shadow: 0 10px 28px rgba(28, 42, 68, 0.10) !important;
+      }
+
+      html[data-mode="dark"] #page-home .hero {
+        background: color-mix(in srgb, var(--card) 94%, #ffffff 6%);
+        border-color: color-mix(in srgb, var(--accent) 32%, rgba(255,255,255,.10));
+      }
+
+      #page-home .healthActivityCard {
+        margin-top: 22px;
+        margin-bottom: 30px;
+      }
+
+      #page-home .healthCardHeader {
+        padding-top: 18px;
+      }
+
+      .nav {
+        border-top-width: 1.5px !important;
+        box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.08);
+      }
+
+      html[data-mode="light"] .nav {
+        box-shadow: 0 -8px 24px rgba(28, 42, 68, 0.08);
+      }
+
+      @media (max-height: 760px) {
+        #page-home .hero {
+          padding: 18px;
+        }
+        #page-home .ringWrap {
+          margin-top: 14px;
+        }
+        #page-home .healthActivityCard {
+          margin-top: 18px;
+          margin-bottom: 22px;
+        }
+      }
+
 </style>
-    <link rel="icon" href="favicon.ico?v=0.3.3.10" sizes="any" />
-    <link rel="icon" href="momntum-mark.svg?v=0.3.3.10" type="image/svg+xml" />
-    <link rel="icon" href="favicon-32x32.png?v=0.3.3.10" type="image/png" sizes="32x32" />
-    <link rel="icon" href="favicon-16x16.png?v=0.3.3.10" type="image/png" sizes="16x16" />
-    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=0.3.3.10" sizes="180x180" />
-    <link rel="manifest" href="site.webmanifest?v=0.3.3.10" />
+    <link rel="icon" href="favicon.ico?v=0.5.3" sizes="any" />
+    <link rel="icon" href="momntum-mark.svg?v=0.5.3" type="image/svg+xml" />
+    <link rel="icon" href="favicon-32x32.png?v=0.5.3" type="image/png" sizes="32x32" />
+    <link rel="icon" href="favicon-16x16.png?v=0.5.3" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=0.5.3" sizes="180x180" />
+    <link rel="manifest" href="site.webmanifest?v=0.5.3" />
   </head>
 
   <body class="launchPending">
@@ -2545,11 +2627,11 @@ body::before {
     <section id="testerInstallGate" class="testerInstallGate" aria-labelledby="testerInstallTitle">
       <div class="testerInstallCard">
         <div class="testerInstallMark" aria-hidden="true">
-          <img src="momntum-mark.svg?v=0.3.3.10" alt="" draggable="false" />
+          <img src="momntum-mark.svg?v=0.5.3" alt="" draggable="false" />
         </div>
         <img
           class="testerInstallWordmark"
-          src="momntum-wordmark-dark.svg?v=0.3.3.10"
+          src="momntum-wordmark-dark.svg?v=0.5.3"
           alt="MOMNTUM"
           draggable="false"
         />
@@ -2586,7 +2668,7 @@ body::before {
         <p class="testerInstallInstalled">MOMNTUM will now be installed to your device.</p>
 
         <p class="testerInstallOpenPrompt">
-          <img src="momntum-mark.svg?v=0.3.3.10" alt="" draggable="false" />
+          <img src="momntum-mark.svg?v=0.5.3" alt="" draggable="false" />
           <span>Now open MOMNTUM from your home screen</span>
         </p>
 
@@ -2597,19 +2679,19 @@ body::before {
         <button id="testerBrowserPreview" class="testerBrowserPreview" type="button">
           Continue in browser
         </button>
-        <p class="testerInstallVersion">v0.5.2.2</p>
+        <p class="testerInstallVersion">v0.5.3</p>
       </div>
     </section>
 
     <div id="launchSplash" class="launchSplash" aria-hidden="true">
-      <div id="launchLogo" class="launchLogo"><img src="momntum-mark.svg?v=0.3.3.10" alt="" draggable="false" /></div>
-      <div class="launchVersion">v0.5.2.2</div>
+      <div id="launchLogo" class="launchLogo"><img src="momntum-mark.svg?v=0.5.3" alt="" draggable="false" /></div>
+      <div class="launchVersion">v0.5.3</div>
     </div>
 
     <section id="onboardingOverlay" class="onboardingOverlay" aria-modal="true" role="dialog" aria-labelledby="onboardingTitle">
       <div class="onboardingShell">
         <div class="onboardingHeader">
-          <div class="onboardingMark"><img src="momntum-mark.svg?v=0.3.3.10" alt="" draggable="false" /></div>
+          <div class="onboardingMark"><img src="momntum-mark.svg?v=0.5.3" alt="" draggable="false" /></div>
           <div class="kicker">First-time setup</div>
           <h1 id="onboardingTitle" style="margin-top:6px">Make MOMNTUM yours</h1>
           <p class="muted" style="margin-top:8px">Choose a few preferences now. You can change everything later in Settings.</p>
@@ -2654,19 +2736,19 @@ body::before {
       <header class="topbar">
         <div class="brand">
           <div class="logo momntumAppIcon" id="headerBrandLogo" aria-hidden="true">
-            <img src="momntum-mark.svg?v=0.3.3.10" alt="" draggable="false" />
+            <img src="momntum-mark.svg?v=0.5.3" alt="" draggable="false" />
           </div>
           <div>
             <div class="title momntumWordmark">
               <img
                 class="wordmarkDark"
-                src="momntum-wordmark-dark.svg?v=0.3.3.10"
+                src="momntum-wordmark-dark.svg?v=0.5.3"
                 alt="MOMNTUM"
                 draggable="false"
               />
               <img
                 class="wordmarkLight"
-                src="momntum-wordmark.svg?v=0.3.3.10"
+                src="momntum-wordmark.svg?v=0.5.3"
                 alt="MOMNTUM"
                 draggable="false"
               />
@@ -2713,10 +2795,9 @@ body::before {
               Quick Start
             </button>
           </div>
-          <h2>Snapshot</h2>
-          <div class="healthSummary healthActivityCard card" aria-label="Training snapshot">
+          <div class="healthSummary healthActivityCard card" aria-label="Progress summary">
             <div class="healthCardHeader">
-              <div class="healthCardTitle">Activity</div>
+              <div class="healthCardTitle">Progress</div>
             </div>
 
             <div class="healthMetricGrid">
@@ -3143,13 +3224,18 @@ body::before {
       const STORAGE_KEY = "homeStrength.v1";
       const APP_INFO = {
         name: "MOMNTUM",
-        version: "0.5.2.2",
-        buildDate: "30 July 2026",
+        version: "0.5.3",
+        buildDate: "31 July 2026",
         creator: "Mark Taylor",
         poweredBy: "Offline PWA • HTML • CSS • JavaScript",
         description: "Personal offline calisthenics training companion."
       };
       const CHANGELOG = [
+        "Refined workout cards with compact inline metrics and equipment controls",
+        "Removed the Suggested Workout accent line",
+        "Redesigned the Suggested Workout card with a clean Frosted Titanium surface",
+        "Removed the Snapshot heading and renamed Activity to Progress",
+        "Improved Home page spacing and navigation separation",
         "Added collapsible suggested workout and workout-day cards",
         "Added a welcome page to first-run setup",
         "Refined Settings actions and navigation spacing",
@@ -4841,15 +4927,28 @@ body::before {
             const profileAvailable = selectedEquipment().length > 0;
             const enabled = equipmentEnabledFor(w.id);
             const switchLabel = enabled ? rw.activeEquipment : "Bodyweight only";
-            return `<article class="card expandableWorkoutCard" data-workout-card="${w.id}" role="button" tabindex="0" aria-expanded="false"><div class="workoutCardCollapsed"><div class="workoutCardCollapsedTop"><div class="workoutCardCollapsedTitle"><span class="kicker">${w.day}</span><h3>${w.title}</h3></div><button class="cardChevron" type="button" data-workout-expand="${w.id}" aria-label="Expand ${w.title}" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><div class="workoutCardSummaryMeta"><span class="pill">${w.duration} min</span><span class="pill">${rw.main.length} exercises</span><span class="pill">${rw.warm.length} warm-up</span><span class="workoutEquipmentInline"><span>Equipment</span><label class="switchControl" aria-label="Use equipment for ${w.title}"><input type="checkbox" data-equipment-toggle="${w.id}" ${enabled ? "checked" : ""} ${profileAvailable ? "" : "disabled"}><span class="switchTrack"></span></label></span></div><div class="workoutCardExpanded"><div class="workoutExpandedEquipmentDetail"><strong>${enabled ? "Equipment enabled" : "Bodyweight mode"}</strong><small>${switchLabel}${profileAvailable ? "" : " · Add equipment in Settings"}</small></div><p class="muted resolvedExerciseList" style="margin-top:12px">${rw.main.slice(0, 4).join(", ")}${rw.main.length > 4 ? ", and more." : "."}</p></div><button class="btn primary full" data-start="${w.id}">Start ${w.title}</button></div></article>`;
+            return `<article class="card expandableWorkoutCard" data-workout-card="${w.id}" role="button" tabindex="0" aria-expanded="false"><div class="workoutCardCollapsed"><div class="workoutCardCollapsedTop"><div class="workoutCardCollapsedTitle"><span class="kicker">${w.day}</span><h3>${w.title}</h3></div><div class="workoutCardSummaryMeta"><span class="pill">${w.duration} min</span><span class="pill">${rw.main.length} exercises</span></div><button class="cardChevron" type="button" data-workout-expand="${w.id}" aria-label="Expand ${w.title}" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><div class="workoutCardExpanded"><div class="workoutExpandedEquipmentDetail"><div class="workoutExpandedEquipmentHeader"><div><strong>${enabled ? "Equipment selected" : "Bodyweight"}</strong><small>${switchLabel}${profileAvailable ? "" : " · Add equipment in Settings"}</small></div><label class="workoutExpandedEquipmentToggle" aria-label="Use equipment for ${w.title}"><span>Equipment</span><span class="switchControl"><input type="checkbox" data-equipment-toggle="${w.id}" ${enabled ? "checked" : ""} ${profileAvailable ? "" : "disabled"}><span class="switchTrack"></span></span></label></div></div><p class="muted resolvedExerciseList" style="margin-top:12px">${rw.main.slice(0, 4).join(", ")}${rw.main.length > 4 ? ", and more." : "."}</p></div><div class="workoutCardActions"><button class="btn primary" data-start="${w.id}">Start ${w.title}</button><label class="workoutEquipmentInline" aria-label="Use equipment for ${w.title}"><span>Equipment</span><span class="switchControl"><input type="checkbox" data-equipment-toggle="${w.id}" ${enabled ? "checked" : ""} ${profileAvailable ? "" : "disabled"}><span class="switchTrack"></span></span></label></div></div></article>`;
           })
           .join("");
         document.querySelectorAll("[data-equipment-toggle]").forEach((toggle) => {
           toggle.onclick = (event) => event.stopPropagation();
           toggle.onchange = () => {
+            const currentCard = toggle.closest("[data-workout-card]");
+            const openCardId = currentCard?.classList.contains("open")
+              ? currentCard.dataset.workoutCard
+              : null;
             state.settings.workoutEquipmentEnabled[toggle.dataset.equipmentToggle] = toggle.checked;
             saveState();
             renderAll();
+            if (openCardId) {
+              const reopenedCard = document.querySelector(`[data-workout-card="${openCardId}"]`);
+              if (reopenedCard) {
+                reopenedCard.classList.add("open");
+                reopenedCard.setAttribute("aria-expanded", "true");
+                const chevron = reopenedCard.querySelector("[data-workout-expand]");
+                if (chevron) chevron.setAttribute("aria-expanded", "true");
+              }
+            }
           };
         });
         const setWorkoutCardOpen = (card, open) => {
@@ -5350,7 +5449,7 @@ body::before {
         state.settings.workoutEquipmentEnabled[workout.id] = event.target.checked;
         saveState();
         renderAll();
-        toast(event.target.checked ? "Equipment enabled" : "Bodyweight only");
+        toast(event.target.checked ? "Equipment selected" : "Bodyweight");
       };
       function openExercise(id) {
         const e = exercises.find((x) => x.id === id);
