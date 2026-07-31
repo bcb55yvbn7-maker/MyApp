@@ -2301,7 +2301,7 @@ body::before {
         color: #fff !important;
       }
 
-      /* v0.5.3 modular first-run onboarding */
+      /* v0.5.4 modular first-run onboarding */
       .onboardingOverlay {
         position: fixed;
         inset: 0;
@@ -2373,7 +2373,7 @@ body::before {
         .onboardingThemePreview { min-height: 58px; flex-direction: row; justify-content: space-between; }
       }
 
-      /* v0.5.3 UI/UX enhancements */
+      /* v0.5.4 UI/UX enhancements */
       .expandableWorkoutCard { overflow: hidden; }
       .expandableCardHeader {
         display: flex; align-items: center; justify-content: space-between; gap: 12px; cursor: pointer;
@@ -2533,7 +2533,7 @@ body::before {
         .collapsedWorkoutPct { grid-column: 1 / -1; }
       }
 
-      /* v0.5.3 home screen polish */
+      /* v0.5.4 home screen polish */
       #page-home {
         padding-bottom: 28px;
       }
@@ -2586,13 +2586,119 @@ body::before {
         }
       }
 
+
+
+      /* App tour overlay */
+      .appTourOverlay {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        display: none;
+        pointer-events: none;
+      }
+      body.appTourActive .appTourOverlay {
+        display: block;
+        pointer-events: auto;
+      }
+      .appTourSpotlight {
+        position: fixed;
+        z-index: 1;
+        border-radius: 18px;
+        box-shadow: 0 0 0 9999px rgba(4, 8, 14, 0.72);
+        border: 2px solid rgba(var(--accent-rgb), 0.95);
+        pointer-events: none;
+        transition: left 0.22s ease, top 0.22s ease, width 0.22s ease, height 0.22s ease;
+      }
+      .appTourBubble {
+        --tour-arrow-left: 40px;
+        position: fixed;
+        z-index: 2;
+        width: min(340px, calc(100vw - 28px));
+        margin: 0;
+        padding: 17px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: var(--card);
+        color: var(--text);
+        box-shadow: 0 22px 55px rgba(0, 0, 0, 0.34);
+      }
+      .appTourBubble::before {
+        content: "";
+        position: absolute;
+        left: var(--tour-arrow-left);
+        width: 14px;
+        height: 14px;
+        background: var(--card);
+        border-left: 1px solid var(--line);
+        border-top: 1px solid var(--line);
+        transform: rotate(45deg);
+      }
+      .appTourBubble[data-placement="below"]::before { top: -8px; }
+      .appTourBubble[data-placement="above"]::before {
+        bottom: -8px;
+        transform: rotate(225deg);
+      }
+      .appTourKicker {
+        margin-bottom: 5px;
+        color: var(--accent);
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+      .appTourTitle {
+        margin: 0;
+        font-size: 1.18rem;
+        line-height: 1.2;
+      }
+      .appTourText {
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: 0.93rem;
+        line-height: 1.45;
+      }
+      .appTourFooter {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        align-items: center;
+        gap: 9px;
+        margin-top: 15px;
+      }
+      .appTourCounter {
+        color: var(--muted);
+        font-size: 0.78rem;
+      }
+      .appTourSkip {
+        appearance: none;
+        border: 0;
+        background: transparent;
+        color: var(--muted);
+        font: inherit;
+        font-size: 0.84rem;
+        font-weight: 700;
+        padding: 9px 4px;
+      }
+      .appTourNext {
+        width: auto;
+        min-width: 76px;
+        padding-inline: 15px;
+      }
+      .appTourTargetInteractive { cursor: pointer; }
+      @media (max-width: 390px) {
+        .appTourBubble { padding: 15px; }
+        .appTourFooter { grid-template-columns: 1fr auto; }
+        .appTourCounter { grid-column: 1; }
+        .appTourSkip { grid-column: 1; grid-row: 2; justify-self: start; }
+        .appTourNext { grid-column: 2; grid-row: 1 / span 2; }
+      }
+
 </style>
-    <link rel="icon" href="favicon.ico?v=0.5.3" sizes="any" />
-    <link rel="icon" href="momntum-mark.svg?v=0.5.3" type="image/svg+xml" />
-    <link rel="icon" href="favicon-32x32.png?v=0.5.3" type="image/png" sizes="32x32" />
-    <link rel="icon" href="favicon-16x16.png?v=0.5.3" type="image/png" sizes="16x16" />
-    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=0.5.3" sizes="180x180" />
-    <link rel="manifest" href="site.webmanifest?v=0.5.3" />
+    <link rel="icon" href="favicon.ico?v=0.5.4" sizes="any" />
+    <link rel="icon" href="momntum-mark.svg?v=0.5.4" type="image/svg+xml" />
+    <link rel="icon" href="favicon-32x32.png?v=0.5.4" type="image/png" sizes="32x32" />
+    <link rel="icon" href="favicon-16x16.png?v=0.5.4" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=0.5.4" sizes="180x180" />
+    <link rel="manifest" href="site.webmanifest?v=0.5.4" />
   </head>
 
   <body class="launchPending">
@@ -2627,11 +2733,11 @@ body::before {
     <section id="testerInstallGate" class="testerInstallGate" aria-labelledby="testerInstallTitle">
       <div class="testerInstallCard">
         <div class="testerInstallMark" aria-hidden="true">
-          <img src="momntum-mark.svg?v=0.5.3" alt="" draggable="false" />
+          <img src="momntum-mark.svg?v=0.5.4" alt="" draggable="false" />
         </div>
         <img
           class="testerInstallWordmark"
-          src="momntum-wordmark-dark.svg?v=0.5.3"
+          src="momntum-wordmark-dark.svg?v=0.5.4"
           alt="MOMNTUM"
           draggable="false"
         />
@@ -2668,7 +2774,7 @@ body::before {
         <p class="testerInstallInstalled">MOMNTUM will now be installed to your device.</p>
 
         <p class="testerInstallOpenPrompt">
-          <img src="momntum-mark.svg?v=0.5.3" alt="" draggable="false" />
+          <img src="momntum-mark.svg?v=0.5.4" alt="" draggable="false" />
           <span>Now open MOMNTUM from your home screen</span>
         </p>
 
@@ -2679,19 +2785,19 @@ body::before {
         <button id="testerBrowserPreview" class="testerBrowserPreview" type="button">
           Continue in browser
         </button>
-        <p class="testerInstallVersion">v0.5.3</p>
+        <p class="testerInstallVersion">v0.5.4</p>
       </div>
     </section>
 
     <div id="launchSplash" class="launchSplash" aria-hidden="true">
-      <div id="launchLogo" class="launchLogo"><img src="momntum-mark.svg?v=0.5.3" alt="" draggable="false" /></div>
-      <div class="launchVersion">v0.5.3</div>
+      <div id="launchLogo" class="launchLogo"><img src="momntum-mark.svg?v=0.5.4" alt="" draggable="false" /></div>
+      <div class="launchVersion">v0.5.4</div>
     </div>
 
     <section id="onboardingOverlay" class="onboardingOverlay" aria-modal="true" role="dialog" aria-labelledby="onboardingTitle">
       <div class="onboardingShell">
         <div class="onboardingHeader">
-          <div class="onboardingMark"><img src="momntum-mark.svg?v=0.5.3" alt="" draggable="false" /></div>
+          <div class="onboardingMark"><img src="momntum-mark.svg?v=0.5.4" alt="" draggable="false" /></div>
           <div class="kicker">First-time setup</div>
           <h1 id="onboardingTitle" style="margin-top:6px">Make MOMNTUM yours</h1>
           <p class="muted" style="margin-top:8px">Choose a few preferences now. You can change everything later in Settings.</p>
@@ -2736,19 +2842,19 @@ body::before {
       <header class="topbar">
         <div class="brand">
           <div class="logo momntumAppIcon" id="headerBrandLogo" aria-hidden="true">
-            <img src="momntum-mark.svg?v=0.5.3" alt="" draggable="false" />
+            <img src="momntum-mark.svg?v=0.5.4" alt="" draggable="false" />
           </div>
           <div>
             <div class="title momntumWordmark">
               <img
                 class="wordmarkDark"
-                src="momntum-wordmark-dark.svg?v=0.5.3"
+                src="momntum-wordmark-dark.svg?v=0.5.4"
                 alt="MOMNTUM"
                 draggable="false"
               />
               <img
                 class="wordmarkLight"
-                src="momntum-wordmark.svg?v=0.5.3"
+                src="momntum-wordmark.svg?v=0.5.4"
                 alt="MOMNTUM"
                 draggable="false"
               />
@@ -2756,7 +2862,7 @@ body::before {
             <div class="sub" id="todayLine">Personal offline calisthenics training companion.</div>
           </div>
         </div>
-        <div class="level" aria-label="Current level">
+        <div class="level appTourTargetInteractive" id="levelIndicator" aria-label="Current level" role="button" tabindex="0">
           <span class="dot"></span><span id="levelText">Level 1</span>
         </div>
       </header>
@@ -2769,7 +2875,7 @@ body::before {
             </div>
             <p class="muted" id="suggestedMeta" style="margin-top: 8px"></p>
             <div class="ringWrap">
-              <div class="ring" id="weeklyRing" aria-label="Weekly completion">
+              <div class="ring appTourTargetInteractive" id="weeklyRing" aria-label="Weekly completion" role="button" tabindex="0">
                 <span id="weeklyPct">0%</span>
               </div>
               <div>
@@ -3048,6 +3154,9 @@ body::before {
                 <button class="btn setupRerun full" id="runOnboardingBtn">
                   Rerun Setup
                 </button>
+                <button class="btn secondary full" id="replayTourBtn">
+                  Replay App Tour
+                </button>
                 <button class="btn danger full resetSettingsWide" id="resetSettingsBtn">
                   Reset all settings
                 </button>
@@ -3057,6 +3166,20 @@ body::before {
           </div>
         </section>
       </main>
+
+      <div class="appTourOverlay" id="appTourOverlay" aria-hidden="true">
+        <div class="appTourSpotlight" id="appTourSpotlight"></div>
+        <section class="appTourBubble" id="appTourBubble" role="dialog" aria-modal="true" aria-labelledby="appTourTitle" aria-describedby="appTourText" data-placement="below">
+          <div class="appTourKicker" id="appTourKicker">App tour</div>
+          <h2 class="appTourTitle" id="appTourTitle"></h2>
+          <p class="appTourText" id="appTourText"></p>
+          <div class="appTourFooter">
+            <span class="appTourCounter" id="appTourCounter"></span>
+            <button class="appTourSkip" id="appTourSkipBtn" type="button">Skip tour</button>
+            <button class="btn primary appTourNext" id="appTourNextBtn" type="button">Next</button>
+          </div>
+        </section>
+      </div>
       <nav class="nav" aria-label="Main navigation">
         <button class="navBtn active" data-page="home">
           <svg viewBox="0 0 24 24" fill="none">
@@ -3224,13 +3347,14 @@ body::before {
       const STORAGE_KEY = "homeStrength.v1";
       const APP_INFO = {
         name: "MOMNTUM",
-        version: "0.5.3",
+        version: "0.5.4",
         buildDate: "31 July 2026",
         creator: "Mark Taylor",
         poweredBy: "Offline PWA • HTML • CSS • JavaScript",
         description: "Personal offline calisthenics training companion."
       };
       const CHANGELOG = [
+        "Added a first-run guided app tour with contextual progress and level explanations",
         "Refined workout cards with compact inline metrics and equipment controls",
         "Removed the Suggested Workout accent line",
         "Redesigned the Suggested Workout card with a clean Frosted Titanium surface",
@@ -4565,7 +4689,11 @@ body::before {
         confirmAction = null,
         activeExpandedExerciseId = null,
         libraryExpandedExerciseId = null,
-        onboardingStep = 0;
+        onboardingStep = 0,
+        appTourStep = 0,
+        appTourContextOnly = false,
+        appTourStepsActive = [];
+      const TOUR_KEY = "momntum.appTourComplete.v1";
       const ONBOARDING_KEY = "momntum.onboardingComplete.v1";
       function $(id) {
         return document.getElementById(id);
@@ -4626,7 +4754,7 @@ body::before {
         $("onboardingNextBtn").textContent = onboardingStep === 4 ? "Start using MOMNTUM" : "Continue";
       }
       function openOnboarding(force = false) {
-        if (!force && (!isStandalonePWA() || onboardingIsComplete())) return;
+        if (!force && (!isStandalonePWA() || onboardingIsComplete())) { scheduleAppTour(); return; }
         onboardingStep = 0;
         buildOnboardingControls(); renderOnboarding();
         document.body.classList.add("onboardingActive");
@@ -4637,6 +4765,93 @@ body::before {
         renderAll();
         if (typeof showPage === "function") showPage("home");
         window.scrollTo({ top: 0, behavior: "instant" });
+        window.setTimeout(() => startAppTour(), 450);
+      }
+
+      const APP_TOUR_STEPS = [
+        { page: "home", target: "#suggestedWorkoutCard", title: "Suggested Workout", text: "Your recommended workout appears here. Tap Quick Start to begin immediately." },
+        { page: "home", target: "#weeklyRing", title: "Weekly progress", text: "This percentage shows how much of your planned training week you have completed." },
+        { page: "home", target: "#levelIndicator", title: "Your level", text: "Your level reflects your overall training progress. Complete workouts and build consistency to level up." },
+        { page: "home", target: ".healthActivityCard", title: "Progress at a glance", text: "See your recent activity, completed workouts and current streak." },
+        { page: "workouts", target: '.navBtn[data-page="workouts"]', title: "Workouts", text: "View your plan, preview each workout and choose whether to use equipment." },
+        { page: "progress", target: '.navBtn[data-page="progress"]', title: "Progress", text: "Review your workout history, streaks and longer-term progress." },
+        { page: "library", target: '.navBtn[data-page="library"]', title: "Exercise Library", text: "Browse every exercise and open a card for instructions, equipment options and alternatives." },
+        { page: "settings", target: '.navBtn[data-page="settings"]', title: "Settings", text: "Change your timer, theme, accent colour and available equipment here. You can also replay this tour later." }
+      ];
+      function tourIsComplete() { return localStorage.getItem(TOUR_KEY) === "true"; }
+      function scheduleAppTour() {
+        if (tourIsComplete() || document.body.classList.contains("onboardingActive")) return;
+        window.setTimeout(() => startAppTour(), 450);
+      }
+      function positionAppTour() {
+        const step = appTourStepsActive[appTourStep];
+        if (!step) return;
+        const target = document.querySelector(step.target);
+        const bubble = $("appTourBubble");
+        const spot = $("appTourSpotlight");
+        if (!target || !bubble || !spot) { nextAppTourStep(); return; }
+        const rect = target.getBoundingClientRect();
+        const pad = step.target.includes("navBtn") ? 5 : 7;
+        spot.style.left = Math.max(5, rect.left - pad) + "px";
+        spot.style.top = Math.max(5, rect.top - pad) + "px";
+        spot.style.width = Math.min(window.innerWidth - 10, rect.width + pad * 2) + "px";
+        spot.style.height = Math.min(window.innerHeight - 10, rect.height + pad * 2) + "px";
+        const bubbleWidth = Math.min(340, window.innerWidth - 28);
+        const belowSpace = window.innerHeight - rect.bottom;
+        const estimatedHeight = bubble.offsetHeight || 190;
+        const placeBelow = belowSpace >= estimatedHeight + 24 || rect.top < estimatedHeight + 24;
+        bubble.dataset.placement = placeBelow ? "below" : "above";
+        let top = placeBelow ? rect.bottom + 17 : rect.top - estimatedHeight - 17;
+        top = Math.max(12, Math.min(top, window.innerHeight - estimatedHeight - 12));
+        let left = Math.max(14, Math.min(rect.left + rect.width / 2 - bubbleWidth / 2, window.innerWidth - bubbleWidth - 14));
+        bubble.style.left = left + "px";
+        bubble.style.top = top + "px";
+        bubble.style.setProperty("--tour-arrow-left", Math.max(22, Math.min(bubbleWidth - 34, rect.left + rect.width / 2 - left - 7)) + "px");
+      }
+      function renderAppTourStep() {
+        const step = appTourStepsActive[appTourStep];
+        if (!step) return finishAppTour();
+        if (typeof showPage === "function" && step.page) showPage(step.page);
+        window.scrollTo({ top: 0, behavior: "instant" });
+        $("appTourKicker").textContent = appTourContextOnly ? "Quick explanation" : "App tour";
+        $("appTourTitle").textContent = step.title;
+        $("appTourText").textContent = step.text;
+        $("appTourCounter").textContent = appTourContextOnly ? "" : `${appTourStep + 1} of ${appTourStepsActive.length}`;
+        $("appTourSkipBtn").style.display = appTourContextOnly ? "none" : "inline-block";
+        $("appTourNextBtn").textContent = appTourContextOnly || appTourStep === appTourStepsActive.length - 1 ? "Done" : "Next";
+        requestAnimationFrame(() => requestAnimationFrame(positionAppTour));
+      }
+      function startAppTour(force = false) {
+        if (!force && tourIsComplete()) return;
+        appTourContextOnly = false;
+        appTourStepsActive = APP_TOUR_STEPS;
+        appTourStep = 0;
+        document.body.classList.add("appTourActive");
+        $("appTourOverlay").setAttribute("aria-hidden", "false");
+        renderAppTourStep();
+        $("appTourNextBtn").focus();
+      }
+      function showIndicatorExplanation(target, title, text) {
+        if (document.body.classList.contains("appTourActive") || document.body.classList.contains("onboardingActive")) return;
+        appTourContextOnly = true;
+        appTourStepsActive = [{ page: activePage, target, title, text }];
+        appTourStep = 0;
+        document.body.classList.add("appTourActive");
+        $("appTourOverlay").setAttribute("aria-hidden", "false");
+        renderAppTourStep();
+        $("appTourNextBtn").focus();
+      }
+      function nextAppTourStep() {
+        if (appTourStep >= appTourStepsActive.length - 1) finishAppTour();
+        else { appTourStep += 1; renderAppTourStep(); }
+      }
+      function finishAppTour(skipped = false) {
+        if (!appTourContextOnly) localStorage.setItem(TOUR_KEY, "true");
+        document.body.classList.remove("appTourActive");
+        $("appTourOverlay").setAttribute("aria-hidden", "true");
+        if (!appTourContextOnly && typeof showPage === "function") showPage("home");
+        appTourContextOnly = false;
+        appTourStepsActive = [];
       }
 
       async function refreshApp() {
@@ -5667,6 +5882,15 @@ body::before {
       };
       $("onboardingSkipBtn").onclick = () => closeOnboarding(true);
       $("runOnboardingBtn").onclick = () => openOnboarding(true);
+      $("replayTourBtn").onclick = () => startAppTour(true);
+      $("appTourNextBtn").onclick = nextAppTourStep;
+      $("appTourSkipBtn").onclick = () => finishAppTour(true);
+      window.addEventListener("resize", () => { if (document.body.classList.contains("appTourActive")) positionAppTour(); });
+      $("weeklyRing").addEventListener("click", () => showIndicatorExplanation("#weeklyRing", "Weekly progress", "This percentage shows how much of your planned training week you have completed."));
+      $("levelIndicator").addEventListener("click", () => showIndicatorExplanation("#levelIndicator", "Your level", "Your level reflects your overall training progress. Complete workouts and build consistency to level up."));
+      [$("weeklyRing"), $("levelIndicator")].forEach((element) => element.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") { event.preventDefault(); element.click(); }
+      }));
 
       $("resetSettingsBtn").onclick = () =>
         askConfirm(
