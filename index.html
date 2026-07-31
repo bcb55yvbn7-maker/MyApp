@@ -2301,7 +2301,7 @@ body::before {
         color: #fff !important;
       }
 
-      /* v0.5.4 modular first-run onboarding */
+      /* v0.5.5.1 modular first-run onboarding */
       .onboardingOverlay {
         position: fixed;
         inset: 0;
@@ -2373,7 +2373,7 @@ body::before {
         .onboardingThemePreview { min-height: 58px; flex-direction: row; justify-content: space-between; }
       }
 
-      /* v0.5.4 UI/UX enhancements */
+      /* v0.5.5.1 UI/UX enhancements */
       .expandableWorkoutCard { overflow: hidden; }
       .expandableCardHeader {
         display: flex; align-items: center; justify-content: space-between; gap: 12px; cursor: pointer;
@@ -2533,7 +2533,7 @@ body::before {
         .collapsedWorkoutPct { grid-column: 1 / -1; }
       }
 
-      /* v0.5.4 home screen polish */
+      /* v0.5.5.1 home screen polish */
       #page-home {
         padding-bottom: 28px;
       }
@@ -2692,13 +2692,60 @@ body::before {
         .appTourNext { grid-column: 2; grid-row: 1 / span 2; }
       }
 
+
+      /* Dark-mode tour prominence — v0.5.5.1.1 */
+      html[data-mode="dark"] .appTourSpotlight {
+        border-color: color-mix(in srgb, var(--accent) 92%, white 8%);
+        box-shadow:
+          0 0 0 9999px rgba(1, 4, 10, 0.84),
+          0 0 0 4px color-mix(in srgb, var(--accent) 28%, transparent),
+          0 0 30px color-mix(in srgb, var(--accent) 48%, transparent);
+      }
+      html[data-mode="dark"] .appTourBubble {
+        border: 2px solid color-mix(in srgb, var(--accent) 78%, white 22%);
+        background: linear-gradient(
+          180deg,
+          color-mix(in srgb, var(--card2) 88%, white 12%),
+          color-mix(in srgb, var(--card) 94%, white 6%)
+        );
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.14),
+          0 26px 70px rgba(0, 0, 0, 0.72),
+          0 0 34px color-mix(in srgb, var(--accent) 30%, transparent);
+      }
+      html[data-mode="dark"] .appTourBubble::before {
+        background: color-mix(in srgb, var(--card2) 88%, white 12%);
+        border-color: color-mix(in srgb, var(--accent) 78%, white 22%);
+      }
+      html[data-mode="dark"] .appTourKicker {
+        display: inline-flex;
+        align-items: center;
+        min-height: 25px;
+        margin-bottom: 9px;
+        padding: 4px 9px;
+        border: 1px solid color-mix(in srgb, var(--accent) 68%, white 32%);
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--accent) 22%, transparent);
+        color: color-mix(in srgb, var(--accent) 62%, white 38%);
+      }
+      html[data-mode="dark"] .appTourTitle {
+        color: #ffffff;
+      }
+      html[data-mode="dark"] .appTourText,
+      html[data-mode="dark"] .appTourCounter {
+        color: #cbd5e5;
+      }
+      html[data-mode="dark"] .appTourSkip {
+        color: #d7deea;
+      }
+
 </style>
-    <link rel="icon" href="favicon.ico?v=0.5.4" sizes="any" />
-    <link rel="icon" href="momntum-mark.svg?v=0.5.4" type="image/svg+xml" />
-    <link rel="icon" href="favicon-32x32.png?v=0.5.4" type="image/png" sizes="32x32" />
-    <link rel="icon" href="favicon-16x16.png?v=0.5.4" type="image/png" sizes="16x16" />
-    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=0.5.4" sizes="180x180" />
-    <link rel="manifest" href="site.webmanifest?v=0.5.4" />
+    <link rel="icon" href="favicon.ico?v=0.5.5.1" sizes="any" />
+    <link rel="icon" href="momntum-mark.svg?v=0.5.5.1" type="image/svg+xml" />
+    <link rel="icon" href="favicon-32x32.png?v=0.5.5.1" type="image/png" sizes="32x32" />
+    <link rel="icon" href="favicon-16x16.png?v=0.5.5.1" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=0.5.5.1" sizes="180x180" />
+    <link rel="manifest" href="site.webmanifest?v=0.5.5.1" />
   </head>
 
   <body class="launchPending">
@@ -2733,11 +2780,11 @@ body::before {
     <section id="testerInstallGate" class="testerInstallGate" aria-labelledby="testerInstallTitle">
       <div class="testerInstallCard">
         <div class="testerInstallMark" aria-hidden="true">
-          <img src="momntum-mark.svg?v=0.5.4" alt="" draggable="false" />
+          <img src="momntum-mark.svg?v=0.5.5.1" alt="" draggable="false" />
         </div>
         <img
           class="testerInstallWordmark"
-          src="momntum-wordmark-dark.svg?v=0.5.4"
+          src="momntum-wordmark-dark.svg?v=0.5.5.1"
           alt="MOMNTUM"
           draggable="false"
         />
@@ -2774,7 +2821,7 @@ body::before {
         <p class="testerInstallInstalled">MOMNTUM will now be installed to your device.</p>
 
         <p class="testerInstallOpenPrompt">
-          <img src="momntum-mark.svg?v=0.5.4" alt="" draggable="false" />
+          <img src="momntum-mark.svg?v=0.5.5.1" alt="" draggable="false" />
           <span>Now open MOMNTUM from your home screen</span>
         </p>
 
@@ -2785,19 +2832,19 @@ body::before {
         <button id="testerBrowserPreview" class="testerBrowserPreview" type="button">
           Continue in browser
         </button>
-        <p class="testerInstallVersion">v0.5.4</p>
+        <p class="testerInstallVersion">v0.5.5.1</p>
       </div>
     </section>
 
     <div id="launchSplash" class="launchSplash" aria-hidden="true">
-      <div id="launchLogo" class="launchLogo"><img src="momntum-mark.svg?v=0.5.4" alt="" draggable="false" /></div>
-      <div class="launchVersion">v0.5.4</div>
+      <div id="launchLogo" class="launchLogo"><img src="momntum-mark.svg?v=0.5.5.1" alt="" draggable="false" /></div>
+      <div class="launchVersion">v0.5.5.1</div>
     </div>
 
     <section id="onboardingOverlay" class="onboardingOverlay" aria-modal="true" role="dialog" aria-labelledby="onboardingTitle">
       <div class="onboardingShell">
         <div class="onboardingHeader">
-          <div class="onboardingMark"><img src="momntum-mark.svg?v=0.5.4" alt="" draggable="false" /></div>
+          <div class="onboardingMark"><img src="momntum-mark.svg?v=0.5.5.1" alt="" draggable="false" /></div>
           <div class="kicker">First-time setup</div>
           <h1 id="onboardingTitle" style="margin-top:6px">Make MOMNTUM yours</h1>
           <p class="muted" style="margin-top:8px">Choose a few preferences now. You can change everything later in Settings.</p>
@@ -2842,19 +2889,19 @@ body::before {
       <header class="topbar">
         <div class="brand">
           <div class="logo momntumAppIcon" id="headerBrandLogo" aria-hidden="true">
-            <img src="momntum-mark.svg?v=0.5.4" alt="" draggable="false" />
+            <img src="momntum-mark.svg?v=0.5.5.1" alt="" draggable="false" />
           </div>
           <div>
             <div class="title momntumWordmark">
               <img
                 class="wordmarkDark"
-                src="momntum-wordmark-dark.svg?v=0.5.4"
+                src="momntum-wordmark-dark.svg?v=0.5.5.1"
                 alt="MOMNTUM"
                 draggable="false"
               />
               <img
                 class="wordmarkLight"
-                src="momntum-wordmark.svg?v=0.5.4"
+                src="momntum-wordmark.svg?v=0.5.5.1"
                 alt="MOMNTUM"
                 draggable="false"
               />
@@ -3245,6 +3292,20 @@ body::before {
       <div id="panelBody" style="margin-top: 14px"></div>
     </section>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <!-- PWA UPDATE MODULE: remove/replace this dialog when App Store updating takes over. -->
+    <dialog id="updateReadyDialog" aria-labelledby="updateReadyTitle" aria-describedby="updateReadyText">
+      <div class="dialogInner updateReadyInner">
+        <div class="kicker">MOMNTUM UPDATE</div>
+        <h3 id="updateReadyTitle" style="margin:6px 0 8px">Update ready</h3>
+        <p id="updateReadyText" class="muted" style="margin:0">
+          A newer version of MOMNTUM has been downloaded and is ready to use.
+        </p>
+        <button class="btn primary" id="relaunchUpdateBtn" style="width:100%;margin-top:18px">
+          Relaunch MOMNTUM
+        </button>
+      </div>
+    </dialog>
+
     <dialog id="aboutDialog">
       <div class="dialogInner">
         <div class="row">
@@ -3347,7 +3408,7 @@ body::before {
       const STORAGE_KEY = "homeStrength.v1";
       const APP_INFO = {
         name: "MOMNTUM",
-        version: "0.5.4",
+        version: "0.5.5.1",
         buildDate: "31 July 2026",
         creator: "Mark Taylor",
         poweredBy: "Offline PWA • HTML • CSS • JavaScript",
@@ -4854,42 +4915,140 @@ body::before {
         appTourStepsActive = [];
       }
 
-      async function refreshApp() {
-        const status = document.getElementById("updateStatus");
+      /*
+       * MOMNTUM PWA UPDATE MODULE
+       * -------------------------
+       * Launch-only update checking for the web/PWA build.
+       * This block is intentionally self-contained so it can be removed and
+       * replaced by App Store / Capacitor update logic later.
+       */
+      const MomntumUpdater = (() => {
+        const CURRENT_VERSION = APP_INFO.version;
+        const VERSION_URL = `version.json?check=${Date.now()}`;
+        const SERVICE_WORKER_URL = "service-worker.js";
+        const CHECK_TIMEOUT_MS = 3000;
+        let checkedThisSession = false;
+        let registration = null;
+        let waitingWorker = null;
+
+        const statusElement = () => document.getElementById("updateStatus");
         const setStatus = (text) => {
-            if (status) status.textContent = text;
+          const status = statusElement();
+          if (status) status.textContent = text;
         };
-        setStatus("Checking for updates...");
-        try {
-            if (!("serviceWorker" in navigator)) {
+
+        const compareVersions = (a, b) => {
+          const left = String(a).split(".").map(Number);
+          const right = String(b).split(".").map(Number);
+          const length = Math.max(left.length, right.length);
+          for (let i = 0; i < length; i += 1) {
+            const difference = (left[i] || 0) - (right[i] || 0);
+            if (difference !== 0) return difference;
+          }
+          return 0;
+        };
+
+        const waitForInstalledWorker = (reg, timeoutMs = CHECK_TIMEOUT_MS) =>
+          new Promise((resolve) => {
+            if (reg.waiting) return resolve(reg.waiting);
+            const worker = reg.installing;
+            if (!worker) return resolve(null);
+            const timer = setTimeout(() => resolve(null), timeoutMs);
+            worker.addEventListener("statechange", () => {
+              if (worker.state === "installed") {
+                clearTimeout(timer);
+                resolve(worker);
+              }
+            });
+          });
+
+        const showReadyPrompt = (version, worker) => {
+          waitingWorker = worker;
+          const text = document.getElementById("updateReadyText");
+          if (text) {
+            text.textContent = `MOMNTUM ${version} has been downloaded and is ready to use.`;
+          }
+          const dialog = document.getElementById("updateReadyDialog");
+          if (dialog && !dialog.open) dialog.showModal();
+          setStatus(`Version ${version} ready`);
+        };
+
+        const relaunch = () => {
+          const button = document.getElementById("relaunchUpdateBtn");
+          if (button) {
+            button.disabled = true;
+            button.textContent = "Relaunching…";
+          }
+          if (waitingWorker) {
+            waitingWorker.postMessage({ action: "skipWaiting" });
+          } else {
+            window.location.reload();
+          }
+        };
+
+        const check = async ({ manual = false } = {}) => {
+          if (!manual && checkedThisSession) return { status: "already-checked" };
+          checkedThisSession = true;
+          setStatus("Checking for updates...");
+
+          if (!("serviceWorker" in navigator)) {
             setStatus("Updates not supported");
-            return;
+            return { status: "unsupported" };
+          }
+
+          try {
+            registration = registration || await navigator.serviceWorker.register(
+              SERVICE_WORKER_URL,
+              { updateViaCache: "none" }
+            );
+
+            const controllerChanged = new Promise((resolve) => {
+              navigator.serviceWorker.addEventListener("controllerchange", () => resolve(), { once: true });
+            });
+
+            const response = await fetch(VERSION_URL, { cache: "no-store" });
+            if (!response.ok) throw new Error(`Version check failed: ${response.status}`);
+            const manifest = await response.json();
+            const latestVersion = String(manifest.version || CURRENT_VERSION);
+
+            if (compareVersions(latestVersion, CURRENT_VERSION) <= 0) {
+              await registration.update();
+              setStatus("App is already up to date");
+              if (manual) setTimeout(() => setStatus(""), 3000);
+              return { status: "current", version: latestVersion };
             }
-            const registration = await navigator.serviceWorker.getRegistration();
-            if (!registration) {
-            setStatus("No update service installed");
-            return;
-            }
+
             setStatus("Downloading latest version...");
             await registration.update();
-            if (registration.waiting) {
-            setStatus("Installing update...");
-            registration.waiting.postMessage({
-                action: "skipWaiting"
-            });
-            setTimeout(() => {
-                window.location.reload();
-            }, 1000);
-            } else {
-            setStatus("App is already up to date");
-            setTimeout(() => {
-                setStatus("");
-            }, 3000);
+            const worker = registration.waiting || await waitForInstalledWorker(registration);
+
+            if (!worker) {
+              throw new Error("The update was found but did not finish downloading.");
             }
-        } catch (err) {
-            console.error(err);
-            setStatus("Update failed");
-        }
+
+            showReadyPrompt(latestVersion, worker);
+            controllerChanged.then(() => window.location.reload());
+            return { status: "ready", version: latestVersion };
+          } catch (error) {
+            console.error("MOMNTUM update check failed:", error);
+            setStatus(manual ? "Update check failed" : "");
+            return { status: "failed", error };
+          }
+        };
+
+        const init = async () => {
+          document.getElementById("relaunchUpdateBtn")?.addEventListener("click", relaunch);
+          await Promise.race([
+            check({ manual: false }),
+            new Promise((resolve) => setTimeout(() => resolve({ status: "timeout" }), CHECK_TIMEOUT_MS))
+          ]);
+        };
+
+        return { init, check, relaunch };
+      })();
+
+      async function refreshApp() {
+        await MomntumUpdater.check({ manual: true });
       }
 
       function loadState() {
@@ -5928,23 +6087,10 @@ body::before {
         showPage("active");
         startClock();
       }
-      if ("serviceWorker" in navigator) {
-
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register(
-      "service-worker.js"
-    )
-    .then(() => {
-      console.log("Service worker active");
-    })
-    .catch(err => {
-      console.error(
-        "Service worker error:",
-        err
-      );
-    });
-  });
-  }
+      // PWA UPDATE MODULE: one automatic check per launched page session.
+      window.addEventListener("load", () => {
+        MomntumUpdater.init();
+      });
     
       const systemThemeQuery = window.matchMedia("(prefers-color-scheme: light)");
       const handleSystemThemeChange = () => {
