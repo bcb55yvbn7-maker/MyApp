@@ -2301,7 +2301,7 @@ body::before {
         color: #fff !important;
       }
 
-      /* v0.5.5.6 modular first-run onboarding */
+      /* v0.5.5.7 modular first-run onboarding */
       .onboardingOverlay {
         position: fixed;
         inset: 0;
@@ -2373,7 +2373,7 @@ body::before {
         .onboardingThemePreview { min-height: 58px; flex-direction: row; justify-content: space-between; }
       }
 
-      /* v0.5.5.6 UI/UX enhancements */
+      /* v0.5.5.7 UI/UX enhancements */
       .expandableWorkoutCard { overflow: hidden; }
       .expandableCardHeader {
         display: flex; align-items: center; justify-content: space-between; gap: 12px; cursor: pointer;
@@ -2417,7 +2417,12 @@ body::before {
       }
       .workoutCardCollapsedTitle .kicker {
         flex: 0 0 auto;
-        color: var(--muted);
+        color: var(--accent);
+        font-size: inherit;
+        font-weight: 800;
+        letter-spacing: normal;
+        text-transform: none;
+        line-height: inherit;
       }
       .workoutTitleSeparator {
         flex: 0 0 auto;
@@ -2569,7 +2574,7 @@ body::before {
         .collapsedWorkoutPct { grid-column: 1 / -1; }
       }
 
-      /* v0.5.5.6 home screen polish */
+      /* v0.5.5.7 home screen polish */
       #page-home {
         padding-bottom: 28px;
       }
@@ -2729,7 +2734,7 @@ body::before {
       }
 
 
-      /* Dark-mode tour prominence — v0.5.5.6.1 */
+      /* Dark-mode tour prominence — v0.5.5.7.1 */
       html[data-mode="dark"] .appTourSpotlight {
         border-color: color-mix(in srgb, var(--accent) 92%, white 8%);
         box-shadow:
@@ -2776,12 +2781,12 @@ body::before {
       }
 
 </style>
-    <link rel="icon" href="favicon.ico?v=0.5.5.6" sizes="any" />
-    <link rel="icon" href="momntum-mark.svg?v=0.5.5.6" type="image/svg+xml" />
-    <link rel="icon" href="favicon-32x32.png?v=0.5.5.6" type="image/png" sizes="32x32" />
-    <link rel="icon" href="favicon-16x16.png?v=0.5.5.6" type="image/png" sizes="16x16" />
-    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=0.5.5.6" sizes="180x180" />
-    <link rel="manifest" href="site.webmanifest?v=0.5.5.6" />
+    <link rel="icon" href="favicon.ico?v=0.5.5.7" sizes="any" />
+    <link rel="icon" href="momntum-mark.svg?v=0.5.5.7" type="image/svg+xml" />
+    <link rel="icon" href="favicon-32x32.png?v=0.5.5.7" type="image/png" sizes="32x32" />
+    <link rel="icon" href="favicon-16x16.png?v=0.5.5.7" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=0.5.5.7" sizes="180x180" />
+    <link rel="manifest" href="site.webmanifest?v=0.5.5.7" />
   </head>
 
   <body class="launchPending">
@@ -2816,11 +2821,11 @@ body::before {
     <section id="testerInstallGate" class="testerInstallGate" aria-labelledby="testerInstallTitle">
       <div class="testerInstallCard">
         <div class="testerInstallMark" aria-hidden="true">
-          <img src="momntum-mark.svg?v=0.5.5.6" alt="" draggable="false" />
+          <img src="momntum-mark.svg?v=0.5.5.7" alt="" draggable="false" />
         </div>
         <img
           class="testerInstallWordmark"
-          src="momntum-wordmark-dark.svg?v=0.5.5.6"
+          src="momntum-wordmark-dark.svg?v=0.5.5.7"
           alt="MOMNTUM"
           draggable="false"
         />
@@ -2857,7 +2862,7 @@ body::before {
         <p class="testerInstallInstalled">MOMNTUM will now be installed to your device.</p>
 
         <p class="testerInstallOpenPrompt">
-          <img src="momntum-mark.svg?v=0.5.5.6" alt="" draggable="false" />
+          <img src="momntum-mark.svg?v=0.5.5.7" alt="" draggable="false" />
           <span>Now open MOMNTUM from your home screen</span>
         </p>
 
@@ -2868,19 +2873,19 @@ body::before {
         <button id="testerBrowserPreview" class="testerBrowserPreview" type="button">
           Continue in browser
         </button>
-        <p class="testerInstallVersion">v0.5.5.6</p>
+        <p class="testerInstallVersion">v0.5.5.7</p>
       </div>
     </section>
 
     <div id="launchSplash" class="launchSplash" aria-hidden="true">
-      <div id="launchLogo" class="launchLogo"><img src="momntum-mark.svg?v=0.5.5.6" alt="" draggable="false" /></div>
-      <div class="launchVersion">v0.5.5.6</div>
+      <div id="launchLogo" class="launchLogo"><img src="momntum-mark.svg?v=0.5.5.7" alt="" draggable="false" /></div>
+      <div class="launchVersion">v0.5.5.7</div>
     </div>
 
     <section id="onboardingOverlay" class="onboardingOverlay" aria-modal="true" role="dialog" aria-labelledby="onboardingTitle">
       <div class="onboardingShell">
         <div class="onboardingHeader">
-          <div class="onboardingMark"><img src="momntum-mark.svg?v=0.5.5.6" alt="" draggable="false" /></div>
+          <div class="onboardingMark"><img src="momntum-mark.svg?v=0.5.5.7" alt="" draggable="false" /></div>
           <div class="kicker">First-time setup</div>
           <h1 id="onboardingTitle" style="margin-top:6px">Make MOMNTUM yours</h1>
           <p class="muted" style="margin-top:8px">Choose a few preferences now. You can change everything later in Settings.</p>
@@ -2925,19 +2930,19 @@ body::before {
       <header class="topbar">
         <div class="brand">
           <div class="logo momntumAppIcon" id="headerBrandLogo" aria-hidden="true">
-            <img src="momntum-mark.svg?v=0.5.5.6" alt="" draggable="false" />
+            <img src="momntum-mark.svg?v=0.5.5.7" alt="" draggable="false" />
           </div>
           <div>
             <div class="title momntumWordmark">
               <img
                 class="wordmarkDark"
-                src="momntum-wordmark-dark.svg?v=0.5.5.6"
+                src="momntum-wordmark-dark.svg?v=0.5.5.7"
                 alt="MOMNTUM"
                 draggable="false"
               />
               <img
                 class="wordmarkLight"
-                src="momntum-wordmark.svg?v=0.5.5.6"
+                src="momntum-wordmark.svg?v=0.5.5.7"
                 alt="MOMNTUM"
                 draggable="false"
               />
@@ -3444,7 +3449,7 @@ body::before {
       const STORAGE_KEY = "homeStrength.v1";
       const APP_INFO = {
         name: "MOMNTUM",
-        version: "0.5.5.6",
+        version: "0.5.5.7",
         buildDate: "31 July 2026",
         creator: "Mark Taylor",
         poweredBy: "Offline PWA • HTML • CSS • JavaScript",
