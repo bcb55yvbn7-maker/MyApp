@@ -755,11 +755,32 @@ body::before {
       }
       .timerStatus::before {
         content: "";
-        width: 7px;
-        height: 7px;
+        width: 8px;
+        height: 8px;
         border-radius: 50%;
-        background: var(--accent);
-        box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+        background: #ff3b30;
+        box-shadow:
+          0 0 0 3px rgba(255, 59, 48, 0.16),
+          0 0 8px rgba(255, 59, 48, 0.92),
+          0 0 16px rgba(255, 59, 48, 0.52);
+        animation: trainingRecordingGlow 2.8s ease-in-out infinite;
+      }
+
+      @keyframes trainingRecordingGlow {
+        0%, 100% {
+          opacity: 0.82;
+          box-shadow:
+            0 0 0 3px rgba(255, 59, 48, 0.13),
+            0 0 7px rgba(255, 59, 48, 0.78),
+            0 0 13px rgba(255, 59, 48, 0.38);
+        }
+        50% {
+          opacity: 1;
+          box-shadow:
+            0 0 0 4px rgba(255, 59, 48, 0.20),
+            0 0 10px rgba(255, 59, 48, 1),
+            0 0 20px rgba(255, 59, 48, 0.62);
+        }
       }
       .timeBig {
         margin-top: 2px;
@@ -2301,7 +2322,7 @@ body::before {
         color: #fff !important;
       }
 
-      /* v0.5.5.7 modular first-run onboarding */
+      /* v0.6.2.3 modular first-run onboarding */
       .onboardingOverlay {
         position: fixed;
         inset: 0;
@@ -2373,7 +2394,7 @@ body::before {
         .onboardingThemePreview { min-height: 58px; flex-direction: row; justify-content: space-between; }
       }
 
-      /* v0.5.5.7 UI/UX enhancements */
+      /* v0.6.2.3 UI/UX enhancements */
       .expandableWorkoutCard { overflow: hidden; }
       .expandableCardHeader {
         display: flex; align-items: center; justify-content: space-between; gap: 12px; cursor: pointer;
@@ -2574,7 +2595,7 @@ body::before {
         .collapsedWorkoutPct { grid-column: 1 / -1; }
       }
 
-      /* v0.5.5.7 home screen polish */
+      /* v0.6.2.3 home screen polish */
       #page-home {
         padding-bottom: 28px;
       }
@@ -2587,7 +2608,7 @@ body::before {
 
       html[data-mode="light"] #page-home .hero {
         background: rgba(255, 255, 255, 0.96);
-        border-color: rgba(23, 32, 51, 0.16);
+        border-color: color-mix(in srgb, var(--accent) 42%, rgba(23, 32, 51, 0.16));
         box-shadow: 0 10px 28px rgba(28, 42, 68, 0.10) !important;
       }
 
@@ -2734,7 +2755,7 @@ body::before {
       }
 
 
-      /* Dark-mode tour prominence — v0.5.5.7.1 */
+      /* Dark-mode tour prominence — v0.6.2.3 */
       html[data-mode="dark"] .appTourSpotlight {
         border-color: color-mix(in srgb, var(--accent) 92%, white 8%);
         box-shadow:
@@ -2780,13 +2801,170 @@ body::before {
         color: #d7deea;
       }
 
-</style>
-    <link rel="icon" href="favicon.ico?v=0.5.5.7" sizes="any" />
-    <link rel="icon" href="momntum-mark.svg?v=0.5.5.7" type="image/svg+xml" />
-    <link rel="icon" href="favicon-32x32.png?v=0.5.5.7" type="image/png" sizes="32x32" />
-    <link rel="icon" href="favicon-16x16.png?v=0.5.5.7" type="image/png" sizes="16x16" />
-    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=0.5.5.7" sizes="180x180" />
-    <link rel="manifest" href="site.webmanifest?v=0.5.5.7" />
+
+
+      /* v0.6.2.3 active workout focus */
+      #page-active .timerPanel {
+        position: sticky;
+        top: 8px;
+        z-index: 12;
+        margin: 0 -4px 22px;
+        border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--divider));
+        border-radius: 26px;
+        background:
+          linear-gradient(145deg,
+            color-mix(in srgb, var(--accent) 13%, var(--card)) 0%,
+            color-mix(in srgb, var(--card) 94%, transparent) 55%,
+            color-mix(in srgb, var(--accent2) 9%, var(--card2)) 100%);
+        -webkit-backdrop-filter: blur(24px) saturate(150%);
+        backdrop-filter: blur(24px) saturate(150%);
+        box-shadow:
+          0 18px 38px rgba(0, 0, 0, 0.30),
+          0 4px 12px rgba(0, 0, 0, 0.18),
+          inset 0 1px 0 color-mix(in srgb, #fff 10%, transparent) !important;
+        transform: translateZ(0);
+      }
+
+      #page-active .timerPanel::before {
+        display: none;
+      }
+
+      /* v0.6.2.3 continuously traced active-workout outline */
+      @property --active-trace-angle {
+        syntax: "<angle>";
+        inherits: false;
+        initial-value: 0deg;
+      }
+
+      #page-active .timerPanel::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        padding: 2px;
+        border-radius: inherit;
+        pointer-events: none;
+        background: conic-gradient(
+          from var(--active-trace-angle),
+          transparent 0deg 212deg,
+          rgba(255, 69, 58, 0.08) 224deg,
+          rgba(255, 69, 58, 0.34) 250deg,
+          rgba(255, 69, 58, 0.88) 294deg,
+          rgba(255, 128, 120, 0.98) 326deg,
+          rgba(255, 69, 58, 0.42) 350deg,
+          transparent 360deg
+        );
+        -webkit-mask:
+          linear-gradient(#000 0 0) content-box,
+          linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        filter: drop-shadow(0 0 4px rgba(255, 69, 58, 0.22));
+        animation: activeWorkoutTraceA 7s linear infinite;
+      }
+
+      #page-active .timerPanel[data-trace-cycle="b"]::after {
+        animation-name: activeWorkoutTraceB;
+      }
+
+      #page-active .timerPanel > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      @keyframes activeWorkoutTraceA {
+        to { --active-trace-angle: 360deg; }
+      }
+
+      @keyframes activeWorkoutTraceB {
+        to { --active-trace-angle: 360deg; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #page-active .timerPanel::after {
+          animation: none;
+          background: rgba(255, 69, 58, 0.58);
+        }
+      }
+
+      #page-active .timerPrimaryActions {
+        display: grid;
+        grid-template-columns: 1fr 1fr auto;
+        gap: 10px;
+        margin-top: 2px;
+      }
+
+      #page-active .timerPrimaryActions .btn {
+        min-height: 48px;
+        padding: 11px 16px;
+        font-size: 14px;
+        font-weight: 900;
+        border-radius: 15px;
+      }
+
+      #page-active .timerPrimaryActions .primaryTimer {
+        box-shadow: 0 7px 18px color-mix(in srgb, var(--accent) 28%, transparent);
+      }
+
+      #page-active .timerPrimaryActions .resumeWorkoutBtn {
+        grid-column: 1 / -1;
+        min-height: 52px;
+        font-size: 15px;
+      }
+
+      #page-active .timerPrimaryActions .endWorkoutBtn {
+        background: linear-gradient(135deg, #ff5a5f, #d92f3a);
+        color: #fff;
+        border: 0;
+        box-shadow: 0 7px 18px rgba(217, 47, 58, 0.24);
+      }
+
+      #page-active .timerPrimaryActions .resetTimerBtn {
+        background: color-mix(in srgb, var(--card2) 88%, transparent);
+        color: var(--heading);
+        border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+      }
+
+      #page-active .timerSecondary {
+        justify-content: flex-start;
+        padding-top: 13px;
+      }
+
+      html[data-mode="light"] #page-active .timerPanel {
+        background:
+          linear-gradient(145deg,
+            color-mix(in srgb, var(--accent) 10%, #fff) 0%,
+            rgba(255, 255, 255, 0.96) 58%,
+            color-mix(in srgb, var(--accent2) 7%, #f4f7fb) 100%);
+        border-color: color-mix(in srgb, var(--accent) 34%, rgba(23, 32, 51, 0.16));
+        box-shadow:
+          0 18px 38px rgba(28, 42, 68, 0.18),
+          0 4px 12px rgba(28, 42, 68, 0.10),
+          inset 0 1px 0 rgba(255, 255, 255, 0.92) !important;
+      }
+
+      html[data-mode="light"] #page-active .timerPrimaryActions .resetTimerBtn {
+        background: rgba(255, 255, 255, 0.78);
+        border-color: rgba(23, 32, 51, 0.16);
+      }
+
+      @media (max-width: 420px) {
+        #page-active .timerPrimaryActions {
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+          gap: 8px;
+        }
+        #page-active .timerPrimaryActions .btn {
+          padding-inline: 11px;
+        }
+      }
+
+    </style>
+    <link rel="icon" href="favicon.ico?v=0.6.2.3" sizes="any" />
+    <link rel="icon" href="momntum-mark.svg?v=0.6.2.3" type="image/svg+xml" />
+    <link rel="icon" href="favicon-32x32.png?v=0.6.2.3" type="image/png" sizes="32x32" />
+    <link rel="icon" href="favicon-16x16.png?v=0.6.2.3" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=0.6.2.3" sizes="180x180" />
+    <link rel="manifest" href="site.webmanifest?v=0.6.2.3" />
   </head>
 
   <body class="launchPending">
@@ -2821,11 +2999,11 @@ body::before {
     <section id="testerInstallGate" class="testerInstallGate" aria-labelledby="testerInstallTitle">
       <div class="testerInstallCard">
         <div class="testerInstallMark" aria-hidden="true">
-          <img src="momntum-mark.svg?v=0.5.5.7" alt="" draggable="false" />
+          <img src="momntum-mark.svg?v=0.6.2.3" alt="" draggable="false" />
         </div>
         <img
           class="testerInstallWordmark"
-          src="momntum-wordmark-dark.svg?v=0.5.5.7"
+          src="momntum-wordmark-dark.svg?v=0.6.2.3"
           alt="MOMNTUM"
           draggable="false"
         />
@@ -2862,7 +3040,7 @@ body::before {
         <p class="testerInstallInstalled">MOMNTUM will now be installed to your device.</p>
 
         <p class="testerInstallOpenPrompt">
-          <img src="momntum-mark.svg?v=0.5.5.7" alt="" draggable="false" />
+          <img src="momntum-mark.svg?v=0.6.2.3" alt="" draggable="false" />
           <span>Now open MOMNTUM from your home screen</span>
         </p>
 
@@ -2873,19 +3051,19 @@ body::before {
         <button id="testerBrowserPreview" class="testerBrowserPreview" type="button">
           Continue in browser
         </button>
-        <p class="testerInstallVersion">v0.5.5.7</p>
+        <p class="testerInstallVersion">v0.6.2.3</p>
       </div>
     </section>
 
     <div id="launchSplash" class="launchSplash" aria-hidden="true">
-      <div id="launchLogo" class="launchLogo"><img src="momntum-mark.svg?v=0.5.5.7" alt="" draggable="false" /></div>
-      <div class="launchVersion">v0.5.5.7</div>
+      <div id="launchLogo" class="launchLogo"><img src="momntum-mark.svg?v=0.6.2.3" alt="" draggable="false" /></div>
+      <div class="launchVersion">v0.6.2.3</div>
     </div>
 
     <section id="onboardingOverlay" class="onboardingOverlay" aria-modal="true" role="dialog" aria-labelledby="onboardingTitle">
       <div class="onboardingShell">
         <div class="onboardingHeader">
-          <div class="onboardingMark"><img src="momntum-mark.svg?v=0.5.5.7" alt="" draggable="false" /></div>
+          <div class="onboardingMark"><img src="momntum-mark.svg?v=0.6.2.3" alt="" draggable="false" /></div>
           <div class="kicker">First-time setup</div>
           <h1 id="onboardingTitle" style="margin-top:6px">Make MOMNTUM yours</h1>
           <p class="muted" style="margin-top:8px">Choose a few preferences now. You can change everything later in Settings.</p>
@@ -2930,19 +3108,19 @@ body::before {
       <header class="topbar">
         <div class="brand">
           <div class="logo momntumAppIcon" id="headerBrandLogo" aria-hidden="true">
-            <img src="momntum-mark.svg?v=0.5.5.7" alt="" draggable="false" />
+            <img src="momntum-mark.svg?v=0.6.2.3" alt="" draggable="false" />
           </div>
           <div>
             <div class="title momntumWordmark">
               <img
                 class="wordmarkDark"
-                src="momntum-wordmark-dark.svg?v=0.5.5.7"
+                src="momntum-wordmark-dark.svg?v=0.6.2.3"
                 alt="MOMNTUM"
                 draggable="false"
               />
               <img
                 class="wordmarkLight"
-                src="momntum-wordmark.svg?v=0.5.5.7"
+                src="momntum-wordmark.svg?v=0.6.2.3"
                 alt="MOMNTUM"
                 draggable="false"
               />
@@ -3036,19 +3214,16 @@ body::before {
             <div class="timerProgress" aria-hidden="true">
               <div class="timerProgressFill" id="timerProgressFill"></div>
             </div>
-            <div class="timerControls">
+            <div class="timerControls timerPrimaryActions">
+              <button class="btn sm primaryTimer resumeWorkoutBtn hidden" id="resumeWorkoutBtn">Resume Workout</button>
               <button class="btn sm primaryTimer" id="pauseWorkoutBtn">Pause</button>
-              <button class="btn sm danger" id="resetWorkoutBtn">End</button>
+              <button class="btn sm danger endWorkoutBtn" id="resetWorkoutBtn">End</button>
+              <button class="btn sm resetTimerBtn" id="restResetBtn">Reset</button>
             </div>
             <div class="timerSecondary">
               <div>
                 <div class="timerEyebrow">Rest countdown</div>
                 <div class="restTime" id="restTimer">00:30</div>
-              </div>
-              <div class="timerControls">
-                <button class="btn sm ghost" id="restStartBtn">Start rest</button>
-                <button class="btn sm ghost" id="restPauseBtn">Pause</button>
-                <button class="btn sm ghost" id="restResetBtn">Reset</button>
               </div>
             </div>
           </div>
@@ -3449,13 +3624,17 @@ body::before {
       const STORAGE_KEY = "homeStrength.v1";
       const APP_INFO = {
         name: "MOMNTUM",
-        version: "0.5.5.7",
+        version: "0.6.2.3",
         buildDate: "31 July 2026",
         creator: "Mark Taylor",
         poweredBy: "Offline PWA • HTML • CSS • JavaScript",
         description: "Personal offline calisthenics training companion."
       };
       const CHANGELOG = [
+        "Changed the Training status dot to an always-red glowing recording indicator",
+        "Made the Suggested Workout accent outline clearly visible in light mode",
+        "Added a subtle continuously tracing red outline to the active workout card",
+        "Added automatic rest after tapping a set and a contextual Resume Workout button",
         "Added a first-run guided app tour with contextual progress and level explanations",
         "Refined workout cards with compact inline metrics and equipment controls",
         "Removed the Suggested Workout accent line",
@@ -5275,6 +5454,12 @@ body::before {
           : "dark";
       }
 
+      function restartActiveWorkoutTrace() {
+        const panel = document.querySelector("#page-active .timerPanel");
+        if (!panel) return;
+        panel.dataset.traceCycle = panel.dataset.traceCycle === "b" ? "a" : "b";
+      }
+
       function applyAppearance() {
         const mode = resolvedThemeMode();
         const hue = ["midnight", "ember", "forest", "slate", "carbon"].includes(
@@ -5285,6 +5470,7 @@ body::before {
 
         document.documentElement.dataset.mode = mode;
         document.documentElement.dataset.hue = hue;
+        restartActiveWorkoutTrace();
 
         const themeColours = {
           dark: "#020814",
@@ -5423,6 +5609,7 @@ body::before {
         $("workoutTimer").textContent = fmtTime(a.elapsed);
         $("restTimer").textContent = fmtTime(Math.max(0, a.restRemaining));
         $("pauseWorkoutBtn").textContent = a.paused ? "Resume" : "Pause";
+        $("resumeWorkoutBtn").classList.toggle("hidden", !a.restRunning);
         $("timerStatus").textContent = a.paused
           ? "Paused"
           : a.restRunning
@@ -5430,7 +5617,6 @@ body::before {
             : "Training";
         const targetSeconds = Math.max(1, (w.duration || 30) * 60);
         $("timerProgressFill").style.width = Math.min(100, (a.elapsed / targetSeconds) * 100) + "%";
-        $("restStartBtn").textContent = a.restRunning ? "Restart rest" : "Start rest";
         $("workoutNotes").value = a.notes || "";
         $("warmupContainer").innerHTML = w.warm
           .map((n) => exCard(byName(n)))
@@ -5738,6 +5924,15 @@ body::before {
         saveState();
         renderActiveWorkout();
       }
+      $("resumeWorkoutBtn").onclick = () => {
+        if (!state.active || !state.active.restRunning) return;
+        state.active.restRunning = false;
+        state.active.restRemaining = 0;
+        state.active.restEndsAt = null;
+        saveState();
+        renderActiveWorkout();
+        toast("Workout resumed");
+      };
       $("pauseWorkoutBtn").onclick = () => {
         if (!state.active) return;
         state.active.paused = !state.active.paused;
@@ -5764,16 +5959,6 @@ body::before {
           saveState();
         }
       });
-      $("restStartBtn").onclick = () => startRest(false);
-      $("restPauseBtn").onclick = () => {
-        if (state.active) {
-          updateRestTimer();
-          state.active.restRunning = false;
-          state.active.restEndsAt = null;
-          saveState();
-          renderActiveWorkout();
-        }
-      };
       $("restResetBtn").onclick = () => {
         if (state.active) {
           state.active.restRemaining = state.settings.restDuration;
